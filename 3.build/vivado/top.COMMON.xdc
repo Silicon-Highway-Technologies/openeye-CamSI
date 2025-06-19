@@ -11,8 +11,8 @@ set_property CFGBVS VCCO [current_design]
 #-------------------------------------------------------------------------
 # Clocks
 
-# 100MHz external clock
-create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_ports clk_ext]  
+# 200MHz external clock
+create_clock -period 5.000 -name sys_clk_pin -waveform {0.000 2.500} -add [get_ports sys_clk_p]  
 
 # 720MHz CSI 4-lane clock
 #create_clock -period 1.388 -name cam_dphy_clk -waveform {0.000 0.694} -add [get_ports {cam_dphy_clk[1]}]

@@ -52,8 +52,14 @@ module top
    import top_pkg::*;
    import hdmi_pkg::*;
 (
+`ifdef PUZHI
+   input logic   sys_rst_n,   // external active-1 asynchronous reset
+   input logic   sys_clk_p,   // external 200MHz clock source
+   input logic   sys_clk_n,
+`else
    input logic   areset,   // external active-1 asynchronous reset
    input logic   clk_ext,  // external 100MHz clock source
+`endif
 
   //I2C_Master to Camera
 `ifdef COCOTB_SIM
@@ -74,16 +80,37 @@ module top
    output logic  hdmi_clk_p,
    output logic  hdmi_clk_n,
    output bus3_t hdmi_dat_p,
-   output bus3_t hdmi_dat_n,
+   output bus3_t hdmi_dat_n
    
-  //Misc/Debug
-   output bus3_t led,
-   output bus8_t debug_pins
+//   //Misc/Debug
+//    output bus3_t led,
+//    output bus8_t debug_pins
 );
 
 `ifdef COCOTB_SIM
 glbl glbl();
 `endif
+
+`ifdef PUZHI
+
+logic areset;
+assign areset = ~sys_rst_n;
+
+// generate clk using IBUFDS //
+logic clk_ext;
+
+IBUFDS #(
+    .DIFF_TERM("FALSE"),
+    .IBUF_LOW_PWR("TRUE"),
+    .IOSTANDARD("DEFAULT")
+) IBUFDS_inst(
+    .O(clk_ext),
+    .I(sys_clk_p),
+    .IB(sys_clk_n)
+);
+
+`endif 
+
 //--------------------------------
 // Clock and reset gen
 //--------------------------------
@@ -246,21 +273,21 @@ glbl glbl();
    );
    
 
-//--------------------------------
-// Misc and Debug
-//--------------------------------
-   assign led[0] = cam_en;
-   assign led[1] = clk_1hz;
-   assign led[2] = csi_in_frame; 
+// //--------------------------------
+// // Misc and Debug
+// //--------------------------------
+//    assign led[0] = cam_en;
+//    assign led[1] = clk_1hz;
+//    assign led[2] = csi_in_frame; 
 
-//   assign debug_pins = { 
-//       hdmi_blank, 
-//       rgb_reading, 
-//       hdmi_reset_n, 
-//       debug_csi[2:0]
-//   };
+// //   assign debug_pins = { 
+// //       hdmi_blank, 
+// //       rgb_reading, 
+// //       hdmi_reset_n, 
+// //       debug_csi[2:0]
+// //   };
 
-assign debug_pins = {hdmi_reset_n, hdmi_hsync, hdmi_vsync, hdmi_frame, rgb_reading,  hdmi_blank, csi_in_line, csi_in_frame};
+// assign debug_pins = {hdmi_reset_n, hdmi_hsync, hdmi_vsync, hdmi_frame, rgb_reading,  hdmi_blank, csi_in_line, csi_in_frame};
 
 endmodule: top
 

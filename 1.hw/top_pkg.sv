@@ -48,20 +48,20 @@
 //`define OV2740
 
 //----------------Include (or not) Ethernet?
-`define ETHERNET
-//`undef ETHERNET
+// `define ETHERNET
+`undef ETHERNET
 
 //----------------Trenz or Puzhitech board?
 `define PUZHI
 //`undef PUZHI
 
 //----------------Select monitor connection, directly HDMI to HMDI or HDMI to VGA 
-`define HDMI2VGA
-//`undef HDMI2VGA
+// `define HDMI2VGA
+`undef HDMI2VGA
 
 //----------------Select monitor resolution
-`define HDMI_720p60
-//`define HDMI_1080p30
+//`define HDMI_720p60
+`define HDMI_1080p30
 //`define HDMI_1080p60 /*Artix-7 nominally cannot do this, but we push it*/ 
 
 
@@ -151,7 +151,11 @@ package top_pkg;
 `elsif IMX219
    localparam bus7_t I2C_SLAVE_ADDR    = 7'd16;
    localparam int    NUM_REGISTERS     = 65;
-   localparam string I2C_INIT_MEM_FILE = "i2c_init_IMX219.mem";
+   `ifdef HDMI_720p60
+      localparam string I2C_INIT_MEM_FILE = "i2c_init_IMX219_720p60.mem";
+   `else // HDMI_1080p30
+      localparam string I2C_INIT_MEM_FILE = "i2c_init_IMX219_1080p30.mem";
+   `endif
 
 // - - - - - - - - - - - - - - - - - - - -
 //OV2740

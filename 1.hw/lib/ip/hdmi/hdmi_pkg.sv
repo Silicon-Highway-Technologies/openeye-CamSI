@@ -106,24 +106,39 @@ package hdmi_pkg;
       localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
       localparam bit VSYNC_POLARITY = HI;    // '+'   
     `endif
-//-----------------------------
+//----------------------------- 
 // 1920x1080Px30Hz CVT-RBv2
 //-----------------------------
 `elsif HDMI_1080p30
-   localparam int HFRAME         = 2065;  // complete frame X
-   localparam int HSCREEN        = 1920;  // visible X
-   localparam int HSYNC_START    = HSCREEN;
-   localparam int HSYNC_SIZE     = 145;
-   localparam int HSYNC_END      = HSYNC_START + HSYNC_SIZE;
-   localparam bit HSYNC_POLARITY = HI;     // '+'
- 
-   localparam int VFRAME         = 1765;  // complete frame Y
-   localparam int VSCREEN        = 1080;  // visible Y
-   localparam int VSYNC_START    = VSCREEN;
-   localparam int VSYNC_SIZE     = 685;
-   localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
-   localparam bit VSYNC_POLARITY = HI;     // '+'
+   `ifdef IMX219
+      localparam int HFRAME         = 2553; // complete frame X //1650 //1456 //1500 // change in i2c as well? //
+      localparam int HSCREEN        = 1920; // visible X
+      localparam int HSYNC_START    = HSCREEN; 
+      localparam int HSYNC_SIZE     = 633;
+      localparam int HSYNC_END      = HSYNC_START + HSYNC_SIZE;
+      localparam bit HSYNC_POLARITY = HI;    // '+'
 
+      localparam int VFRAME         = 1125;  // complete frame Y //750 //850
+      localparam int VSCREEN        = 1080;  // visible Y
+      localparam int VSYNC_START    = VSCREEN;
+      localparam int VSYNC_SIZE     = 45;
+      localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
+      localparam bit VSYNC_POLARITY = HI;    // '+'   
+   `else
+      localparam int HFRAME         = 2065;  // complete frame X
+      localparam int HSCREEN        = 1920;  // visible X
+      localparam int HSYNC_START    = HSCREEN;
+      localparam int HSYNC_SIZE     = 145;
+      localparam int HSYNC_END      = HSYNC_START + HSYNC_SIZE;
+      localparam bit HSYNC_POLARITY = HI;     // '+'
+   
+      localparam int VFRAME         = 1765;  // complete frame Y
+      localparam int VSCREEN        = 1080;  // visible Y
+      localparam int VSYNC_START    = VSCREEN;
+      localparam int VSYNC_SIZE     = 685;
+      localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
+      localparam bit VSYNC_POLARITY = HI;     // '+'
+   `endif
 //-----------------------------
 // 1920x1080Px60Hz CVT-RBv2
 //-----------------------------
