@@ -39,6 +39,8 @@
 // Description: Top-level interconnect for all ISP functions
 //========================================================================
 
+`define SCB
+
 module isp_top
   import top_pkg::*;
   import hdmi_pkg::*;
@@ -52,6 +54,8 @@ module isp_top
    input  lane_raw_data_t  data_in,
    input  logic            data_valid,    
    input  logic            rgb_valid,
+
+   input  logic            csi_in_frame,
                         
    output logic            reading,
    output logic         
@@ -61,6 +65,10 @@ module isp_top
 //---------------------------------
 // Debayer ISP function
 //---------------------------------
+
+logic [RGB_WIDTH - 1 : 0] rgb_out_temp;
+logic reading_temp;
+
 
 `ifdef RAW8
    raw2rgb_8 
@@ -81,15 +89,68 @@ module isp_top
       .data_in    (data_in),           //i'lane_raw_data_t
       .data_valid (data_valid),        //i  
       .rgb_valid  (rgb_valid),         //i
-                                        
+
+`ifdef SCB
+      .reading    (reading_temp),           //o
+      .rgb_out    (rgb_out_temp)            //o[RGB_WIDTH-1:0]
+`else
       .reading    (reading),           //o
       .rgb_out    (rgb_out)            //o[RGB_WIDTH-1:0]
+`endif
    );
 
 
-//---------------------------------
-// More ISP functions to follow
-//---------------------------------
+`ifdef SCB
+
+// stall reading for one cycle //
+always @(posedge clk) begin
+
+ if (rst) begin
+   reading <= 1'b0;
+ end
+ else begin
+   reading <= reading_temp;
+ end
+
+end
+
+logic [7:0] red_out;
+logic [7:0] blue_out;
+logic [7:0] green_out;
+
+// raise signals line_valid_in and frame_valid_in accordingly //
+line_frame_signal_generator line_frame_signal_generator_inst(
+   .clk(clk),
+   .rst(rst),
+   .reading(reading),
+   .csi_in_frame(csi_in_frame),
+   .line_valid_in(line_valid_in),
+   .frame_valid_in(frame_valid_in)
+);
+
+simplecolorbalance simplecolorbalance_inst(
+   .clk(clk),
+   .reset_async(rst),
+
+   .red_data_in(rgb_out_temp[23:16]),
+   .green_data_in(rgb_out_temp[15:8]),
+   .blue_data_in(rgb_out_temp[7:0]),
+
+   .line_valid_in(line_valid_in),
+   .frame_valid_in(frame_valid_in),
+
+   // .line_valid_out(line_valid_out), // currently unused //
+   // .frame_valid_out(frame_valid_out), // currently unused //
+
+   .red_data_out(red_out),
+   .green_data_out(green_out),
+   .blue_data_out(blue_out)
+);
+
+assign rgb_out = {red_out, green_out, blue_out};
+
+`endif
+
    
 endmodule: isp_top
 

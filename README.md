@@ -190,9 +190,90 @@ We experienced no problems with the MIPI bandwidth, as our data rate was measure
 
 ---
 
-### Upcoming:
+## Objective II 
+### Implement and Validate ISP (Image Signal Processing) Block
+**Simple Color Balance** IP Block available software code was available from https://www.ipol.im/pub/art/2011/llmps-scb/?utm_source=doi. 
 
-   - [ ] Implement and Validate ISP (Image Signal Processing) Block 
+#### Algorithm Overview
+
+A hardware implementation must work with “live” images, i.e. groups of pixels per frame, flowing through an image pipeline. The hardware implementation of the *SCB* thus works on a frame by frame basis, correcting the colours of frame `n` in frame `(n + 1)`. The gap between frames is sufficient to compute the colour balance frame ratios, i.e. 
+`frameratio = 255/(max RGB – min RGB)` per RGB channel, using dividers. Then, colours are balanced “live”, during frame `(n + 1`), by multiplying the input pixel colour `i` by `(i – min) x frameratio`.
+
+#### Behavioral Experiments
+
+The pixel clock frequency of `86.11MHz` is sufficient to perform multiplications “live”, as pixels come in and go out through the SCB IP Block. This was checked using post-PNR simulations in **Vivado** as both timing was closed for the design and entire images were validated to be balanced correctly.
+
+In the following two figures which were used during behavioral testing, the effect of the *SCB* algorithm can be seen. On the left is the original image, which appears to be faded out, and on the right is the balanced image, which appears brighter and livelier, due to the color balancing:
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/aec2abe9-594f-43c7-a6d0-f2eaaf4e6a84">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="https://github.com/user-attachments/assets/7f9973be-c9e4-400e-8ff4-6cfb03cb38a5">
+</p>
+
+Similarly, an artificial sequence of frames that represents a video, can be displayed in the following figures. The range of the RGB values changes from frame to frame, and the *SCB* algorithm tries to balance them, based on each previous frame.
+- Input Frames:
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/527ff207-5331-4c40-a34b-1ed341b4690a" width="18%" />
+  <img src="https://github.com/user-attachments/assets/bc37ffe4-7ace-45fb-bc02-e044579ede9a" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/a91d4c1c-d96a-48ae-99c4-b38b54a1ba86" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/c8fb4cc7-178d-423f-b505-2e0584a19056" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/16fd01d7-9381-43c8-a354-a948236908f8" width="18%" /> 
+</p>
+
+- Output Frames:
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/0a874c4d-f052-4829-a3da-9bc904bac58f" width="18%" />
+  <img src="https://github.com/user-attachments/assets/712e3aa3-fe47-4a54-9038-d62fdeaebd5a" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/1839e3b2-f9a4-472e-8f36-52422991797e" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/165a87a1-581e-4ee9-afe6-ae1686fefdc7" width="18%" /> 
+  <img src="https://github.com/user-attachments/assets/7a8be7f0-7643-400a-bfc1-416880abc9df" width="18%" /> 
+</p>
+
+In the screenshot below, the processing of one of the frame lines is shown. Previously, one identical frame has already been loaded, to configure the min-max ranges. In the input frame, all RGB values are within the range `[64, 196]`, so the SCB algorithm translates them to the range `[0, 255]`, with minor precision inaccuracies that do not have a large visible impact. The balancing is performed using multipliers which have a single cycle delay, thus this algorithm converts each frame with a single-cycle delay.
+<p align="left">
+  <img width="70%" src="https://github.com/user-attachments/assets/14ace642-50b9-4f24-9c23-7e8b3e501cb5">
+</p>
+
+#### Experiments on FPGA
+
+The testcases examined in the above section, albeit properly functional, do not accurately reflect the image processing of a video stream captured by a sensor such as IMX219. Due to the way that the sensor captures each frame, the color ranges may not always range in `[0, 255]`, which is the reason why the HDMI output shown in **Objective I** had a visible shade of green. This is also shown clearly in the video below:
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=z4zpcXpZTCA">
+    <img src="0.doc\pictures_sihi\thumbnail_withoutisp.png" alt="withoutisp">
+  </a>
+</p>
+
+The **Simple Color Balance** algorithm manages to remove this green shade and restore the pixels to a value that is much closer to their real color, as shown in the video below:
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=m1KUGW67iG4">
+    <img src="0.doc\pictures_sihi\thumbnail_withisp.png" alt="withoutisp">
+  </a>
+</p>
+
+The difference in brightness and color scaling is evident in the frame comparison below:
+
+<p align="left">
+  <img width="50%" src="0.doc\pictures_sihi\withoutisp.jpg">
+  <img width="50%" src="0.doc\pictures_sihi\withisp.jpg">
+</p>
+
+#### Advantages of the Simple Color Balance Algorithm
+- It is **easy to implement**, as the mathematical equations used are rather simple and easy to be expressed in hardware.
+- It **does not require a different (faster) clock** than the pixel clock already used (`86.11MHz`). This is really important because other parts of the MIPI to HDMI flow require clocks of different frequencies, causing CDCs to rise as a potential concern.
+- It **does not consume many LUTs** or many FPGA resources in general. Only `1.31%` of our PUZHI board were required, and no instance of more crucial resources such as BRAMs
+- It is a "straight-through" module, meaning that **no frames are lost** and **no structure such as a FIFO is required** to forward the related signals.
+
+#### Disdvantages of the Simple Color Balance Algorithm
+- It is **sensitive to light**, meaning that the balancing is suboptimal when a source of light appears in the capture.
+- As it performs color balance on a frame-by-frame level, subtle differences between the frames can have a negative impact on the visual outcome.
+
+### Upcoming:
+   - [X] Validate Basic Development Hardware Setup
+
+   - [X] Implement and Validate ISP (Image Signal Processing) Block 
 
    - [ ] Implement and Validate JPEG Module and Audio core 
 

@@ -97,11 +97,7 @@ module hdmi_backend
 
    always_ff @(posedge clk_pix) begin: _tbase_gen
       if (&{internal_srst_n, hdmi_reset_n} == LO) begin
-         `ifdef HDMI_720p60
-            hcount     <= 12'd1000; // needed, otherwise a vertical line separates the screen
-          `else
-            hcount     <= 12'd1280;
-          `endif
+          hcount     <= 12'd1280; // needed, otherwise a vertical line separates the screen
           vcount     <= '0;
           hsync      <= ~HSYNC_POLARITY;
           vsync      <= ~VSYNC_POLARITY;

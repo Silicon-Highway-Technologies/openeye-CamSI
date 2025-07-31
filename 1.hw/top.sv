@@ -84,7 +84,7 @@ module top
    
 //   //Misc/Debug
 //    output bus3_t led,
-//    output bus8_t debug_pins
+   // output bus8_t debug_pins
 );
 
 `ifdef COCOTB_SIM
@@ -199,10 +199,12 @@ IBUFDS #(
       .clk        (csi_byte_clk),   //i           
       .rst        (reset),          //i
 
-      .data_in    (csi_word_data),  //i'lane_raw_data_t
       .data_valid (csi_word_valid), //i  
       .rgb_valid  (rgb_valid),      //i
+      .data_in    (csi_word_data),  //i'lane_raw_data_t
 
+      .csi_in_frame(csi_in_frame),  //i
+      
       .reading    (rgb_reading),    //o
       .rgb_out    (rgb_pix)         //o[RGB_WIDTH-1:0]
    );

@@ -158,7 +158,8 @@ module synchronizer(clk, reset, reset_sync);
      
 endmodule 
 
-module simplecolorbalance(clk, reset_async, red_data_in, green_data_in, blue_data_in, line_valid_in, frame_valid_in, line_valid_out, frame_valid_out, red_data_out, green_data_out, blue_data_out, clock_out);
+module simplecolorbalance(clk, reset_async, red_data_in, green_data_in, blue_data_in, line_valid_in, frame_valid_in, line_valid_out, frame_valid_out, red_data_out, green_data_out, blue_data_out);
+
   input clk, reset_async;
   input [7:0] red_data_in;
   input [7:0] green_data_in;
@@ -176,8 +177,6 @@ module simplecolorbalance(clk, reset_async, red_data_in, green_data_in, blue_dat
   output [7:0] red_data_out;
   output [7:0] green_data_out;
   output [7:0] blue_data_out;
-
-  output clock_out;
 
   wire reset; // synchronized reset signal //
   
@@ -202,7 +201,8 @@ module simplecolorbalance(clk, reset_async, red_data_in, green_data_in, blue_dat
   synchronizer twoffsyncinst (.clk(clk), .reset(reset_async), .reset_sync(reset));
 
   // clockout module, used to output the clock //
-  clockoutgenerator clockoutgeninst (.clk(clk), .reset(reset), .clock_out(clock_out));
+  // currently unused //
+  // clockoutgenerator clockoutgeninst (.clk(clk), .reset(reset), .clock_out(clock_out));
   
   // resetbounds are reset directly from the respective done signal //
   // NOTE: done signals last only for 1 cycle, see divider module description in maxminuxminratio.v //

@@ -50,25 +50,14 @@ set_property -dict {PACKAGE_PIN N14 IOSTANDARD TMDS_33} [get_ports {hdmi_dat_n[2
 ##-------------------------------------------------------------------------
 ## DEBUG pins & LEDs
 
-# debug pins and LEDs were not used in our implementation
-# therefore no constraints to specific pins were set
-
-#set_property PACKAGE_PIN A14 [get_ports {debug_pins[0]}]
-#set_property PACKAGE_PIN A13 [get_ports {debug_pins[1]}]
-#set_property PACKAGE_PIN B11 [get_ports {debug_pins[2]}]
-#set_property PACKAGE_PIN A11 [get_ports {debug_pins[3]}]
-#set_property PACKAGE_PIN D15 [get_ports {debug_pins[4]}]
-#set_property PACKAGE_PIN C15 [get_ports {debug_pins[5]}]
-#set_property PACKAGE_PIN A15 [get_ports {debug_pins[6]}]
-#set_property PACKAGE_PIN A16 [get_ports {debug_pins[7]}]
-#set_property PACKAGE_PIN G16 [get_ports {debug_pins[8]}]
-#set_property PACKAGE_PIN H16 [get_ports {debug_pins[9]}]
-#set_property PACKAGE_PIN F16 [get_ports {debug_pins[10]}]
-#set_property PACKAGE_PIN F15 [get_ports {debug_pins[11]}]
-#set_property PACKAGE_PIN H15 [get_ports {debug_pins[12]}]
-#set_property PACKAGE_PIN J14 [get_ports {debug_pins[13]}]
-#set_property PACKAGE_PIN B16 [get_ports {debug_pins[14]}]
-#set_property PACKAGE_PIN B17 [get_ports {debug_pins[15]}]
+set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS25} [get_ports {debug_pins[0]}]
+set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVCMOS25} [get_ports {debug_pins[1]}]
+set_property -dict {PACKAGE_PIN G15 IOSTANDARD LVCMOS25} [get_ports {debug_pins[2]}]
+set_property -dict {PACKAGE_PIN G16 IOSTANDARD LVCMOS25} [get_ports {debug_pins[3]}]
+set_property -dict {PACKAGE_PIN H17 IOSTANDARD LVCMOS25} [get_ports {debug_pins[4]}]
+set_property -dict {PACKAGE_PIN H18 IOSTANDARD LVCMOS25} [get_ports {debug_pins[5]}]
+set_property -dict {PACKAGE_PIN J22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[6]}]
+set_property -dict {PACKAGE_PIN H22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[7]}]
 
 # set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVCMOS25} [get_ports {led[0]}]
 # set_property -dict {PACKAGE_PIN B18 IOSTANDARD LVCMOS25} [get_ports {led[1]}]
