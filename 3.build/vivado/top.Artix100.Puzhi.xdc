@@ -46,22 +46,34 @@ set_property -dict {PACKAGE_PIN AB18 IOSTANDARD TMDS_33} [get_ports {hdmi_dat_n[
 set_property -dict {PACKAGE_PIN N13 IOSTANDARD TMDS_33} [get_ports {hdmi_dat_p[2]}]
 set_property -dict {PACKAGE_PIN N14 IOSTANDARD TMDS_33} [get_ports {hdmi_dat_n[2]}]
 
+#-------------------------------------------------------------------------
+# MICROPHONE
+
+set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVCMOS25} [get_ports {mdis}]
+set_property -dict {PACKAGE_PIN N19 IOSTANDARD LVCMOS25} [get_ports {mclk}]
+set_property -dict {PACKAGE_PIN N22 IOSTANDARD LVCMOS25} [get_ports {mdata}]
 
 ##-------------------------------------------------------------------------
 ## DEBUG pins & LEDs
 
-set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS25} [get_ports {debug_pins[0]}]
-set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVCMOS25} [get_ports {debug_pins[1]}]
-set_property -dict {PACKAGE_PIN G15 IOSTANDARD LVCMOS25} [get_ports {debug_pins[2]}]
-set_property -dict {PACKAGE_PIN G16 IOSTANDARD LVCMOS25} [get_ports {debug_pins[3]}]
-set_property -dict {PACKAGE_PIN H17 IOSTANDARD LVCMOS25} [get_ports {debug_pins[4]}]
-set_property -dict {PACKAGE_PIN H18 IOSTANDARD LVCMOS25} [get_ports {debug_pins[5]}]
-set_property -dict {PACKAGE_PIN J22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[6]}]
-set_property -dict {PACKAGE_PIN H22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[7]}]
+set_property -dict {PACKAGE_PIN L19 IOSTANDARD LVCMOS25} [get_ports {debug_pins[0]}]
+set_property -dict {PACKAGE_PIN L20 IOSTANDARD LVCMOS25} [get_ports {debug_pins[1]}]
+set_property -dict {PACKAGE_PIN K21 IOSTANDARD LVCMOS25} [get_ports {debug_pins[2]}]
+set_property -dict {PACKAGE_PIN K22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[3]}]
+set_property -dict {PACKAGE_PIN J22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[4]}]
+set_property -dict {PACKAGE_PIN H22 IOSTANDARD LVCMOS25} [get_ports {debug_pins[5]}]
+set_property -dict {PACKAGE_PIN L16 IOSTANDARD LVCMOS25} [get_ports {debug_pins[6]}]
+set_property -dict {PACKAGE_PIN K16 IOSTANDARD LVCMOS25} [get_ports {debug_pins[7]}]
+set_property -dict {PACKAGE_PIN K18 IOSTANDARD LVCMOS25} [get_ports {debug_pins[8]}]
+set_property -dict {PACKAGE_PIN K19 IOSTANDARD LVCMOS25} [get_ports {debug_pins[9]}]
+set_property -dict {PACKAGE_PIN M21 IOSTANDARD LVCMOS25} [get_ports {debug_pins[10]}]
+set_property -dict {PACKAGE_PIN L21 IOSTANDARD LVCMOS25} [get_ports {debug_pins[11]}]
+set_property -dict {PACKAGE_PIN G15 IOSTANDARD LVCMOS25} [get_ports {debug_pins[12]}]
+set_property -dict {PACKAGE_PIN G16 IOSTANDARD LVCMOS25} [get_ports {debug_pins[13]}]
+set_property -dict {PACKAGE_PIN H13 IOSTANDARD LVCMOS25} [get_ports {debug_pins[14]}]
+set_property -dict {PACKAGE_PIN G13 IOSTANDARD LVCMOS25} [get_ports {debug_pins[15]}]
 
-# set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVCMOS25} [get_ports {led[0]}]
-# set_property -dict {PACKAGE_PIN B18 IOSTANDARD LVCMOS25} [get_ports {led[1]}]
-# set_property -dict {PACKAGE_PIN L15 IOSTANDARD LVCMOS25} [get_ports {led[2]}]
+set_property -dict {PACKAGE_PIN P14 IOSTANDARD LVCMOS33} [get_ports led]
 
 #========================================================================
 # End-of-File

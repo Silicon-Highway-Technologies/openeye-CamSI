@@ -270,12 +270,178 @@ The difference in brightness and color scaling is evident in the frame compariso
 - It is **sensitive to light**, meaning that the balancing is suboptimal when a source of light appears in the capture.
 - As it performs color balance on a frame-by-frame level, subtle differences between the frames can have a negative impact on the visual outcome.
 
+---
+
+## Objective III
+### Implement and Validate JPEG Module 
+
+The **JPEG** code was originally implemented by Robert Metchev as part of another project and can be found [here](https://github.com/brilliantlabsAR/frame-codebase/tree/main/source/fpga/modules/camera/jpeg_encoder).
+
+After a frame is captured from the sensor, and passed through the **MIPI-CSI2-ISP** pipeline, it must be compressed using the **JPEG** algorithm. If no compression was used, the transmission of raw data would not be manageable by the **high-speed USB interface** that must follow.
+
+The [JPEG module](1.hw/jpeg/jpeg_encoder.sv) handles the two supported resolutions (**1280x720 - 60fps** and **1920x1080 - 30fps**) and four different quality factors (`10%`, `25%`, `50%` and `100%`).
+
+To minimize the complexity of the flow, the JPEG input is chosen to be the same as the HDMI input. This means that the `pixel clock` has the value of **86.11MHz**. Additionally the JPEG uses two more clocks,
+namely the `JPEG slow clock`, which can run at a slower rate than the pixel clock, and the `JPEG fast clock`, which must be at least twice as fast as the pixel clock. In this case, the slow clock is chosen to have the same value as the pixel clock, while the fast clock will run at **175MHz**. This configuration is the same for both resolutions.
+
+#### JPEG Architecture and Submodules
+The block diagram of the JPEG architecture is as shown below:
+
+<p align="center">
+   <img width="1000" src="0.doc/pictures_sihi/jpeg_blockdiagram_horizontal.png">
+</p>
+
+The data is first fed to a [circuit](1.hw/jpeg/jisp/rgb2yuv.sv) that converts it from the `RGB` format to the `YCbCr` format, meaning that
+the **Red, Green and Blue** channels are transated to the **Y (Luma), Cb (Blue-difference Chroma) and Cr (Red-Difference Chroma)**. The Y channel holds most of the information about the details of the image,
+while the other two are necessary for the accurate color representation.
+
+In the next step, a part of the color information (Cb, Cr) is discarded while the brightness information (Y) is fully preserved. This step, called [**Subsampling**](1.hw/jpeg/jisp/subsample.sv), leverages the human eye's decreased
+sensitivity to color resolution, to reduce the total amount of data representing a frame. **4:2:0 Subsampling** is used for the JPEG module, which operates as displayed in the figures below.
+
+<p align="center">
+  <img src="0.doc/pictures_sihi/chroma_subsampling.jpg" width="35%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="0.doc/pictures_sihi/subsampkling.drawio.png" width="52%">
+</p>
+
+The data is then fed to an [**MCU (Minimal Coded Unit) Buffer**](1.hw/jpeg/jisp/mcu_buffer.sv), which holds data in 16-line chunks. The JPEG algorithm works with 16x16 blocks, referred to as MCUs, therefore it is essential to be able to store 16 full lines at any given time. A **CDC synchronizer** is also included, in the case that the JPEG slow clock is chosen to be slower than the pixel clock.
+
+Afterwards the data is translated from the spatial pixel domain into the frequency domain using a [**2-D DCT (Discrete Cosine Transform)**](1.hw/jpeg/jenc/dct_2d.sv), which is split in two 1-D passes, for the sake of hardware resource management. As a lot of mathematical operations are carried out in this step, the fast JPEG clock is required.
+
+In the next step, the [**Quantization**](1.hw/jpeg/jisp/quant.sv) process is performed. High-frequency details that are not
+noticeable by the human eye are discarded, according to pre-defined quantization matrices. The level of quantization is determined by the `Quality Factor` input.
+
+The data is then encoded using [**Entropy Encoding**](1.hw/jpeg/jenc/entropy.sv) and a [**Huffman table**](1.hw/jpeg/jenc/huff_tables.sv), so that similar frequencies are groupped together. The compression in this step is lossless.
+
+Finally, the generated Huffman codes which normally vary in length, are [packed in 8-bit units](1.hw/jpeg/jenc/byte_pack.sv). In this module, the required output signals are generated when the entire frame has been encoded. The data is constantly fed to the output when a byte is completed, so there is no requirement to store a full frame or raw data. This **minimizes BRAM utilization**, requiring only the memory that is necessary for the 16-line buffer, as well as smaller memories for the DCT operation, whose size is negligible. 
+
+The reduction of the total bytes transmitted essentially happens in three stages:
+- In the **Subsampling** module, the `4:2:0` scheme is used, which keeps 100% of the brightness data but deletes 75% of the color data. As a result, the size of the video stream is halved without a visible difference.
+- In the **Quantization** module, the division of high-frequency details leads to data reduction.
+- The **Entropy Encoder** and **Huffman Encode**r assign specific codes on patterns that appear often, packing the transmitted data as effectively as possible.
+
+#### JPEG Simulation
+
+The JPEG module was first verified in [simulation](2.sim/jpeg_usb_audio/jpeg_tb.sv), by sending multiple images of the same resolution one after another, as if a video is being transmitted. Both resolutions (720p60fps, 1080p30fps) were tested.
+
+To verify that the pixel clock of `86.11MHz` is correct for these resolutions, we set each frame to be transmitted every *1/60th* or every *1/30th* of a second respectively. If each frame is successfully encoded before the new frame signal ticks, this means that the JPEG module works as expected. Indeed, this was proven through simulation.
+
+An image is loaded in a Verilog testbench in text format, after conversion from ``.bmp`` format. The JPEG headers are not actually generated inside the JPEG module, so they have to be added through external software. If this happens, then a JPEG output frame can be displayed.
+
+Four encoded frames of a picture in **720p** resolution are shown below, each encoded with a different `QF` value. 
+<table>
+  <tr>
+    <th width="49%">QF = 10%</th>
+    <th width="2%"></th>
+    <th width="49%">QF = 25%</th>
+  </tr>
+  <tr>
+    <td><img src="0.doc\pictures_sihi\jpeg_720p\seagulls_qf10.jpg" width="100%"></td>
+    <td></td>
+    <td><img src="0.doc\pictures_sihi\jpeg_720p\seagulls_qf25.jpg" width="100%"></td>
+  </tr>
+  <tr><td colspan="3" height="20"></td></tr> <!-- Vertical Space -->
+  <tr>
+    <th>QF = 50%</th>
+    <td></td>
+    <th>QF = 100%</th>
+  </tr>
+  <tr>
+    <td><img src="0.doc\pictures_sihi\jpeg_720p\seagulls_qf50.jpg" width="100%"></td>
+    <td></td>
+    <td><img src="0.doc\pictures_sihi\jpeg_720p\seagulls_qf100.jpg" width="100%"></td>
+  </tr>
+</table>
+
+Similarly, below are displayed four encoded frames in **1080p** resolution, with different `QF` values.
+<table>
+  <tr>
+    <th width="49%">QF = 10%</th>
+    <th width="2%"></th>
+    <th width="49%">QF = 25%</th>
+  </tr>
+  <tr>
+    <td><img src="0.doc\pictures_sihi\jpeg_1080p\horses_qf10.jpg" width="100%"></td>
+    <td></td>
+    <td><img src="0.doc\pictures_sihi\jpeg_1080p\horses_qf25.jpg" width="100%"></td>
+  </tr>
+  <tr><td colspan="3" height="20"></td></tr> <!-- Vertical Space -->
+  <tr>
+    <th>QF = 50%</th>
+    <td></td>
+    <th>QF = 100%</th>
+  </tr>
+  <tr>
+    <td><img src="0.doc\pictures_sihi\jpeg_1080p\horses_qf50.jpg" width="100%"></td>
+    <td></td>
+    <td><img src="0.doc\pictures_sihi\jpeg_1080p\horses_qf100.jpg" width="100%"></td>
+  </tr>
+</table>
+
+#### JPEG Validation on FPGA
+
+Finally, the JPEG module was also verified on the FPGA, with the aid of the USB module. In this experiment, the `IMX219` sensor samples [this YouTube video](https://www.youtube.com/watch?v=Cyxixzi2dgQ), which acts an **60fps framerate tester**, in 720p60fps. In this video, each frame corresponds to one of 60 clock ticks. Multiple frames are encoded using `QF=10%` and transmitted over USB, in raw format, to a host. The JPEG headers are then added using external Python scripts, and the output images are displayed. As shown in the video below, the JPEG successfully captures every single tick of the clock, verifying that the chosen clocks support 60fps. Note that no color balancing is used in this setting, which explains the green color of the video.
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=89hWuUNnUS8">
+    <img width="70%" img src="0.doc\pictures_sihi\thumbnail_jpeg_sampling.jpg" alt="jpegsampling">
+  </a>
+</p>
+
+Since the full flow is not assembled together yet, it is difficult to assess the timing validity of the JPEG in real hardware. We have got a first indication that it is working, as shown in the above experiment. However, should this pixel clock value (`86.11MHz`) prove too high, it is possible to drop to the standard pixel clock value of `74.25MHz`, though this would require changes to the entire pipeline, starting from the *I2C* configuration. 
+
+#### JPEG Bandwidth Evaluation
+
+Some mathematical operations can prove the importance of compression:
+
+- **Pre Compression**:
+  - By translating the data from `RGB` to `YUV`, each pixel requires 1.5 byte instead of 3 bytes
+  - For 720p60fps, each frame requires 1280 &times; 720 = 921.600 pixels per frame, so **~1.38MBs per frame**.
+  - At 60FPS, this adds up to **~82.9MB/s** which exceeds the theoretical upper bound of 60MB/s on the USB side.
+
+- **Post Compression**:
+  - An 720p frame encoded at `QF = 50%` resulted in a file of approx. **60kB**.
+  - At 60FPS this translates to **3.6MB/s** which can easily be handled by the USB interface.
+
+### Implement and Validate Audio Module 
+
+To sample audio input in our FPGA, we use a *dedicated PCB board* provided by Thomas Ludemann. On this board, the microphone chip `SPK0641HT4H-1` is installed.
+
+<p align="center">
+   <img width="400" src="0.doc/pictures_sihi/board_mic.png">
+</p>
+
+ The IO signals used, which are all connected to the board via *GPIO* pins, are:
+
+- A **clock** from the FPGA to the board (`mclk`), which runs at **2.4MHz**.
+- The **microphone data** (`mdata`) fed from the board to the FPGA.
+- A signal to disable the microphone (`mdis`) which is not used in our implementation.
+
+The [audio module](1.hw/audio/audio_top.sv) is designed to capture a **raw 1-bit PDM (Pulse Density Modulation)** stream from the microphone and transform it into **16-bit, 48kHz PCM (Pulse Code Modulation)** audio which can be transferred over USB. 
+
+This architecture operates using three different frequencies:
+- The `24MHz` clock, which the only physical clock driving the audio core logic, acts as the **master clock**. It drives the PDM sampling pulse every 10 cycles and eliminates the need for complex CDC structures.
+- The **PDM Sampling Pulse** runs at `2.4MHz` and dictates when to sample the 1-bit data stream from the microphone.
+- The **PCM output pulse** runs exactly once for every 50 PDM pulses received (at `48kHz`). It signals that a 16-bit PCM audio word is ready to be transmitted to the output.
+
+The [PDM mapping module](1.hw/audio/pdm_mapper.sv) maps the incoming 1 and 0 bits to signed numbers (+1 and -1), which are accumulated in the [integrator module](1.hw/audio/cic_integrators.sv). Then, in the [decimator module](1.hw/audio/cic_decimator.sv), the accumulated values are forwarded with a frequency of `48KHz`, and are converted to PCM using [low-pass filters](1.hw/audio/cic_comb_filters.sv). Finally, a [DC centering module](1.hw/audio/dc_blocker.sv) removes the DC bias and an [amplifying module](amplifier.sv) applies a digital gain to make the audio loud enough.
+
+A **block diagram** of the module is shown below:
+
+<p align="center">
+   <img width="1000" src="0.doc/pictures_sihi/audio_top.png">
+</p>
+
+There are no timing issues when considering the connection with the USB interface. The rate on which the output data is transmitted (`48kHz`) is much slower than the USB clock (`60MHz`) so it is mathematically guaranteed that the generated audio can pass through USB.
+
+To verify the audio core in [simulation](2.sim/jpeg_usb_audio/audio_tb.sv), the microphone data fed to the testbench represents a sound sample which lasts a single second and plays four beeping sounds. Indeed, when converting the output PCM data to a `.wav file`, the output is a loud, clear sequence of [beeping sounds](2.sim/jpeg_usb_audio/simulated_beep.wav).
+
 ### Upcoming:
    - [X] Validate Basic Development Hardware Setup
 
    - [X] Implement and Validate ISP (Image Signal Processing) Block 
 
-   - [ ] Implement and Validate JPEG Module and Audio core 
+   - [X] Implement and Validate JPEG Module and Audio core 
 
    - [ ] Implement and Validate USB2.0 Module 
 

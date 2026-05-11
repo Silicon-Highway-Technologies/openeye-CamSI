@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="audio_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="audio_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="3,219.862626 us"></ZoomEndTime>
+      <Cursor1Time time="2,770.307916 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="263"></NameColumnWidth>
+      <ValueColumnWidth column_width="102"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="1" />
+   <wvobject fp_name="group1462" type="group">
+      <obj_property name="label">dut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/audio_tb/audio_top_inst/sysclk" type="logic">
+         <obj_property name="ElementShortName">sysclk</obj_property>
+         <obj_property name="ObjectShortName">sysclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/mdata" type="logic">
+         <obj_property name="ElementShortName">mdata</obj_property>
+         <obj_property name="ObjectShortName">mdata</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/audio_8bit" type="array">
+         <obj_property name="ElementShortName">audio_8bit[7:0]</obj_property>
+         <obj_property name="ObjectShortName">audio_8bit[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/afifo_write_en" type="logic">
+         <obj_property name="ElementShortName">afifo_write_en</obj_property>
+         <obj_property name="ObjectShortName">afifo_write_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/mclk" type="logic">
+         <obj_property name="ElementShortName">mclk</obj_property>
+         <obj_property name="ObjectShortName">mclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/mapped_data" type="array">
+         <obj_property name="ElementShortName">mapped_data[23:0]</obj_property>
+         <obj_property name="ObjectShortName">mapped_data[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/integrated_data" type="array">
+         <obj_property name="ElementShortName">integrated_data[23:0]</obj_property>
+         <obj_property name="ObjectShortName">integrated_data[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/decimated_data" type="array">
+         <obj_property name="ElementShortName">decimated_data[23:0]</obj_property>
+         <obj_property name="ObjectShortName">decimated_data[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/combed_data" type="array">
+         <obj_property name="ElementShortName">combed_data[23:0]</obj_property>
+         <obj_property name="ObjectShortName">combed_data[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/pcm_pulse" type="logic">
+         <obj_property name="ElementShortName">pcm_pulse</obj_property>
+         <obj_property name="ObjectShortName">pcm_pulse</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/pdm_pulse" type="logic">
+         <obj_property name="ElementShortName">pdm_pulse</obj_property>
+         <obj_property name="ObjectShortName">pdm_pulse</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/clk_24MHz" type="logic">
+         <obj_property name="ElementShortName">clk_24MHz</obj_property>
+         <obj_property name="ObjectShortName">clk_24MHz</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/raw_audio_16bit" type="array">
+         <obj_property name="ElementShortName">raw_audio_16bit[15:0]</obj_property>
+         <obj_property name="ObjectShortName">raw_audio_16bit[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/audio_tb/audio_top_inst/amplified_audio_16bit" type="array">
+         <obj_property name="ElementShortName">amplified_audio_16bit[15:0]</obj_property>
+         <obj_property name="ObjectShortName">amplified_audio_16bit[15:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

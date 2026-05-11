@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="jpeg_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_edge_detector_sv_1542403838 " />
+            <top_module name="glbl" />
+            <top_module name="jpeg_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="999,991 ps"></ZoomStartTime>
+      <ZoomEndTime time="1,000,002 ps"></ZoomEndTime>
+      <Cursor1Time time="1,000,000 ps"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="263"></NameColumnWidth>
+      <ValueColumnWidth column_width="107"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="1" />
+   <wvobject fp_name="group1381" type="group">
+      <obj_property name="label">dut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_tb/dut/clk_ext" type="logic">
+         <obj_property name="ElementShortName">clk_ext</obj_property>
+         <obj_property name="ObjectShortName">clk_ext</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/sys_rst_n" type="logic">
+         <obj_property name="ElementShortName">sys_rst_n</obj_property>
+         <obj_property name="ObjectShortName">sys_rst_n</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/hdmi_clk" type="logic">
+         <obj_property name="ElementShortName">hdmi_clk</obj_property>
+         <obj_property name="ObjectShortName">hdmi_clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/start_capture_in" type="logic">
+         <obj_property name="ElementShortName">start_capture_in</obj_property>
+         <obj_property name="ObjectShortName">start_capture_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/red_data_in" type="array">
+         <obj_property name="ElementShortName">red_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">red_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/green_data_in" type="array">
+         <obj_property name="ElementShortName">green_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">green_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/blue_data_in" type="array">
+         <obj_property name="ElementShortName">blue_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">blue_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/frame_valid_in" type="logic">
+         <obj_property name="ElementShortName">frame_valid_in</obj_property>
+         <obj_property name="ObjectShortName">frame_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/line_valid_in" type="logic">
+         <obj_property name="ElementShortName">line_valid_in</obj_property>
+         <obj_property name="ObjectShortName">line_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/data_out" type="array">
+         <obj_property name="ElementShortName">data_out[31:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/address_out" type="array">
+         <obj_property name="ElementShortName">address_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">address_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/image_valid_out" type="logic">
+         <obj_property name="ElementShortName">image_valid_out</obj_property>
+         <obj_property name="ObjectShortName">image_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/data_valid_out" type="logic">
+         <obj_property name="ElementShortName">data_valid_out</obj_property>
+         <obj_property name="ObjectShortName">data_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/qf_select_in" type="array">
+         <obj_property name="ElementShortName">qf_select_in[1:0]</obj_property>
+         <obj_property name="ObjectShortName">qf_select_in[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/x_size_in" type="array">
+         <obj_property name="ElementShortName">x_size_in[10:0]</obj_property>
+         <obj_property name="ObjectShortName">x_size_in[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/y_size_in" type="array">
+         <obj_property name="ElementShortName">y_size_in[9:0]</obj_property>
+         <obj_property name="ObjectShortName">y_size_in[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/red_data_balanced" type="array">
+         <obj_property name="ElementShortName">red_data_balanced[7:0]</obj_property>
+         <obj_property name="ObjectShortName">red_data_balanced[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/green_data_balanced" type="array">
+         <obj_property name="ElementShortName">green_data_balanced[7:0]</obj_property>
+         <obj_property name="ObjectShortName">green_data_balanced[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/blue_data_balanced" type="array">
+         <obj_property name="ElementShortName">blue_data_balanced[7:0]</obj_property>
+         <obj_property name="ObjectShortName">blue_data_balanced[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/line_valid_in_delayed" type="logic">
+         <obj_property name="ElementShortName">line_valid_in_delayed</obj_property>
+         <obj_property name="ObjectShortName">line_valid_in_delayed</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/frame_valid_in_delayed" type="logic">
+         <obj_property name="ElementShortName">frame_valid_in_delayed</obj_property>
+         <obj_property name="ObjectShortName">frame_valid_in_delayed</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/jpeg_fast_clock" type="logic">
+         <obj_property name="ElementShortName">jpeg_fast_clock</obj_property>
+         <obj_property name="ObjectShortName">jpeg_fast_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/jpeg_slow_clock" type="logic">
+         <obj_property name="ElementShortName">jpeg_slow_clock</obj_property>
+         <obj_property name="ObjectShortName">jpeg_slow_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/pixel_clock" type="logic">
+         <obj_property name="ElementShortName">pixel_clock</obj_property>
+         <obj_property name="ObjectShortName">pixel_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/WIDTH" type="array">
+         <obj_property name="ElementShortName">WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">WIDTH[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_tb/dut/HEIGHT" type="array">
+         <obj_property name="ElementShortName">HEIGHT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">HEIGHT[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

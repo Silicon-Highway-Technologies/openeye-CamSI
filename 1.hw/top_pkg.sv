@@ -61,7 +61,7 @@
 
 //----------------Select monitor resolution
 `define HDMI_720p60
-//`define HDMI_1080p30
+// `define HDMI_1080p30
 //`define HDMI_1080p60 /*Artix-7 nominally cannot do this, but we push it*/ 
 
 

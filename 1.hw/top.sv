@@ -80,11 +80,16 @@ module top
    output logic  hdmi_clk_p,
    output logic  hdmi_clk_n,
    output bus3_t hdmi_dat_p,
-   output bus3_t hdmi_dat_n
+   output bus3_t hdmi_dat_n,
+
+   // audio //
+    output logic mclk,
+    input mdata,
+    output logic mdis   
    
 //   //Misc/Debug
 //    output bus3_t led,
-   // output bus8_t debug_pins
+//    output bus8_t debug_pins
 );
 
 `ifdef COCOTB_SIM
@@ -273,8 +278,53 @@ IBUFDS #(
       .x            (x),            //o'bus12_t
       .y            (y)             //o'bus11_t
    );
-   
 
+// AUDIO module //
+
+logic [7:0] audio_8bit;
+logic audio_afifo_write_en;
+
+audio_top audio_top_inst(
+  .sysclk(clk_ext),
+  .rst(phyrst),
+  .mdata(mdata),
+  .mclk(mclk),
+  .audio_8bit(audio_8bit),
+  .afifo_write_en(audio_afifo_write_en)
+);
+
+assign mdis = 1'b0;
+
+// JPEG module //
+
+logic [31:0] data_out;
+logic [23:0] address_out;
+logic data_valid_out, image_valid_out;
+
+jpeg_colorbalance_top jpeg_colorbalance_top_inst (
+  .clk_ext(clk_ext),
+  .sys_rst_n(sys_rst_n),
+  .hdmi_clk(hdmi_clk),
+  .start_capture_in(cam_en),          // this may need to be a different signal //
+  .red_data_in({hdmi_pix.R, 2'b0}),
+  .green_data_in({hdmi_pix.G, 2'b0}),
+  .blue_data_in({hdmi_pix.B, 2'b0}),
+  .frame_valid_in(!hdmi_frame),
+  .line_valid_in(!hdmi_blank),
+  .data_out(data_out),
+  .address_out(address_out),
+  .image_valid_out(image_valid_out),
+  .data_valid_out(data_valid_out),
+  .qf_select_in(2'b10),
+  `ifdef HDMI_720p60
+    .x_size_in(11'd1280),
+    .y_size_in(10'd720)
+  `elsif HDMI_1080p30
+    .x_size_in(11'd1920),
+    .y_size_in(11'd1080)
+  `endif
+);
+  
 // //--------------------------------
 // // Misc and Debug
 // //--------------------------------
