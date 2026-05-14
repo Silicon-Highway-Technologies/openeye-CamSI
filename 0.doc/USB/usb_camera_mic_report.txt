@@ -1,0 +1,501 @@
+
+    =========================== USB Port2 ===========================
+
+Connection Status        : 0x01 (Device is connected)
+Port Chain               : 2-2
+Properties               : 0x01
+ IsUserConnectable       : yes
+ PortIsDebugCapable      : no
+ PortHasMultiCompanions  : no
+ PortConnectorIsTypeC    : no
+ConnectionIndex          : 0x02 (Port 2)
+CompanionIndex           : 0
+ CompanionHubSymLnk      : USB#ROOT_HUB30#5&328881ba&0&0#{f18a0e88-c30c-11d0-8815-00a0c906bed8}
+ CompanionPortNumber     : 0x05 (Port 5)
+ -> CompanionPortChain   : 2-5
+
+      ========================== Summary =========================
+Vendor ID                : 0xCACC (Unknown Vendor)
+Product ID               : 0x3487
+Manufacturer String      : ---
+Product String           : ---
+Serial                   : ---
+USB Version              : 2.0 (480 Mbit/s)
+Port maximum Speed       : High-Speed (Companion Port 2-5 is doing the SuperSpeed)
+Device maximum Speed     : High-Speed
+Device Connection Speed  : High-Speed
+Self powered             : yes
+Demanded Current         : 0 mA
+Used Endpoints           : 2
+Video                    : UVC Version 1.00
+                 -------- Default Video Modes --------
+1280 x 720 @ 60 fps      : MJPEG
+
+      ======================== USB Device ========================
+
+        +++++++++++++++++ Device Information ++++++++++++++++++
+Device Description       : USB Composite Device
+Device Path              : \\?\USB#VID_CACC&PID_3487#6&25156ddd&0&2#{a5dcbf10-6530-11d2-901f-00c04fb951ed} (GUID_DEVINTERFACE_USB_DEVICE)
+Kernel Name              : \Device\USBPDO-14
+Device ID                : USB\VID_CACC&PID_3487\6&25156DDD&0&2
+Hardware IDs             : USB\VID_CACC&PID_3487&REV_0100 USB\VID_CACC&PID_3487
+Driver KeyName           : {36fc9e60-c465-11cf-8056-444553540000}\0025 (GUID_DEVCLASS_USB)
+Driver                   : \SystemRoot\System32\drivers\usbccgp.sys (Version: 10.0.26100.8115  Date: 2026-04-15  Company: Microsoft Corporation)
+Driver Inf               : C:\Windows\inf\usb.inf
+Legacy BusType           : PNPBus
+Class                    : USB
+Class GUID               : {36fc9e60-c465-11cf-8056-444553540000} (GUID_DEVCLASS_USB)
+Service                  : usbccgp
+Enumerator               : USB
+Location Info            : Port_#0002.Hub_#0002
+Address                  : 2
+Location IDs             : PCIROOT(0)#PCI(0801)#PCI(0004)#USBROOT(0)#USB(2), ACPI(_SB_)#ACPI(PCI0)#ACPI(GP17)#ACPI(XHC1)#ACPI(RHUB)#ACPI(HS02)
+Container ID             : {fb7c94ce-3e16-11f1-9ff6-24b2b99cc302}
+Manufacturer Info        : (Standard USB Host Controller)
+Capabilities             : 0x84 (Removable, SurpriseRemovalOK)
+Status                   : 0x0180600A (DN_DRIVER_LOADED, DN_STARTED, DN_DISABLEABLE, DN_REMOVABLE, DN_NT_ENUMERATOR, DN_NT_DRIVER)
+First Install Date       : 2026-04-22 14:13:12
+Last Arrival Date        : 2026-05-13 11:00:52
+EnhancedPowerMgmtEnabled : 0
+Power State              : D0 (supported: D0, D3, wake from D0)
+
+        +++++++++++++++++ Registry USB Flags +++++++++++++++++
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\CACC34870100
+ osvc                    : REG_BINARY 00 00
+
+        ---------------- Connection Information ---------------
+Connection Index         : 0x02 (Port 2)
+Connection Status        : 0x01 (DeviceConnected)
+Current Config Value     : 0x01 (Configuration 1)
+Device Address           : 0x04 (4)
+Is Hub                   : 0x00 (no)
+Device Bus Speed         : 0x02 (High-Speed)
+Number of open Pipes     : 0x01 (1 pipe to data endpoints)
+Pipe[0]                  : EndpointID=1  Direction=IN   ScheduleOffset=0  Type=Isochronous  wMaxPacketSize=0x400   bInterval=1   -> 77128 Bits/ms = 9641000 Bytes/s
+
+        --------------- Connection Information V2 -------------
+Connection Index         : 0x02 (2)
+Length                   : 0x10 (16 bytes)
+SupportedUsbProtocols    : 0x03
+ Usb110                  : 1 (yes, port supports USB 1.1)
+ Usb200                  : 1 (yes, port supports USB 2.0)
+ Usb300                  : 0 (no, port not supports USB 3.0) -> but Companion Port 2-5 does
+ ReservedMBZ             : 0x00
+Flags                    : 0x00
+ DevIsOpAtSsOrHigher     : 0 (Device is not operating at SuperSpeed or higher)
+ DevIsSsCapOrHigher      : 0 (Device is not SuperSpeed capable or higher)
+ DevIsOpAtSsPlusOrHigher : 0 (Device is not operating at SuperSpeedPlus or higher)
+ DevIsSsPlusCapOrHigher  : 0 (Device is not SuperSpeedPlus capable or higher)
+ ReservedMBZ             : 0x00
+
+    ---------------------- Device Descriptor ----------------------
+bLength                  : 0x12 (18 bytes)
+bDescriptorType          : 0x01 (Device Descriptor)
+bcdUSB                   : 0x200 (USB Version 2.0)
+bDeviceClass             : 0xEF (Miscellaneous)
+bDeviceSubClass          : 0x02
+bDeviceProtocol          : 0x01 (IAD - Interface Association Descriptor)
+bMaxPacketSize0          : 0x40 (64 bytes)
+idVendor                 : 0xCACC (Unknown Vendor)
+idProduct                : 0x3487
+bcdDevice                : 0x0100
+iManufacturer            : 0x00 (No String Descriptor)
+iProduct                 : 0x00 (No String Descriptor)
+iSerialNumber            : 0x00 (No String Descriptor)
+bNumConfigurations       : 0x01 (1 Configuration)
+
+    ------------------ Configuration Descriptor -------------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x02 (Configuration Descriptor)
+wTotalLength             : 0x0101 (257 bytes)
+bNumInterfaces           : 0x04 (4 Interfaces)
+bConfigurationValue      : 0x01 (Configuration 1)
+iConfiguration           : 0x00 (No String Descriptor)
+bmAttributes             : 0xC0
+ D7: Reserved, set 1     : 0x01
+ D6: Self Powered        : 0x01 (yes)
+ D5: Remote Wakeup       : 0x00 (no)
+ D4..0: Reserved, set 0  : 0x00
+MaxPower                 : 0x00 (0 mA)
+
+        ------------------- IAD Descriptor --------------------
+bLength                  : 0x08 (8 bytes)
+bDescriptorType          : 0x0B (Interface Association Descriptor)
+bFirstInterface          : 0x00 (Interface 0)
+bInterfaceCount          : 0x02 (2 Interfaces)
+bFunctionClass           : 0x0E (Video)
+bFunctionSubClass        : 0x03 (Video Interface Collection)
+bFunctionProtocol        : 0x00 (PC_PROTOCOL_UNDEFINED)
+iFunction                : 0x00 (No String Descriptor)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x00 (Interface 0)
+bAlternateSetting        : 0x00
+bNumEndpoints            : 0x00 (Default Control Pipe only)
+bInterfaceClass          : 0x0E (Video)
+bInterfaceSubClass       : 0x01 (Video Control)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        ------- Video Control Interface Header Descriptor -----
+bLength                  : 0x0D (13 bytes)
+bDescriptorType          : 0x24 (Video Control Interface)
+bDescriptorSubtype       : 0x01 (Video Control Header)
+bcdUVC                   : 0x0100 (UVC Version 1.00)
+wTotalLength             : 0x0025 (37 bytes)
+dwClockFreq              : 0x005B8D80 (6 MHz)
+bInCollection            : 0x01 (1 VideoStreaming interface)
+baInterfaceNr[1]         : 0x01 (Interface 1)
+
+        -------- Video Control Input Terminal Descriptor ------
+bLength                  : 0x0F (15 bytes)
+bDescriptorType          : 0x24 (Video Control Interface)
+bDescriptorSubtype       : 0x02 (Input Terminal)
+bTerminalID              : 0x01 (1)
+wTerminalType            : 0x0201 (ITT_CAMERA)
+bAssocTerminal           : 0x00 (Not associated with an Output Terminal)
+iTerminal                : 0x00 (No String Descriptor)
+Camera Input Terminal Data:
+wObjectiveFocalLengthMin : 0x0000
+wObjectiveFocalLengthMax : 0x0000
+wOcularFocalLength       : 0x0002
+bControlSize             : 0x00 (0 bytes)
+
+        ------- Video Control Output Terminal Descriptor ------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x24 (Video Control Interface)
+bDescriptorSubtype       : 0x03 (Output Terminal)
+bTerminalID              : 0x02 (2)
+wTerminalType            : 0x0101 (TT_STREAMING)
+bAssocTerminal           : 0x00 (Not associated with an Input Terminal)
+bSourceID                : 0x01 (1)
+iTerminal                : 0x00 (No String Descriptor)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x01 (Interface 1)
+bAlternateSetting        : 0x00
+bNumEndpoints            : 0x00 (Default Control Pipe only)
+bInterfaceClass          : 0x0E (Video)
+bInterfaceSubClass       : 0x02 (Video Streaming)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        ---- VC-Specific VS Video Input Header Descriptor -----
+bLength                  : 0x0E (14 bytes)
+bDescriptorType          : 0x24 (Video Streaming Interface)
+bDescriptorSubtype       : 0x01 (Input Header)
+bNumFormats              : 0x01
+wTotalLength             : 0x003D (61 bytes)
+bEndpointAddress         : 0x81 (Direction=IN  EndpointID=1)
+bmInfo                   : 0x00 (Dynamic Format Change not supported)
+bTerminalLink            : 0x02 (Output Terminal ID 2)
+bStillCaptureMethod      : 0x00 (No Still Capture)
+nbTriggerSupport         : 0x00 (Hardware Triggering not supported)
+bTriggerUsage            : 0x00 (Host will initiate still image capture)
+bControlSize             : 0x01 (1 bytes each)
+Video Payload Format 1   : 0x00
+ D0                      : 0   no -  Key Frame Rate
+ D1                      : 0   no -  P Frame Rate
+ D2                      : 0   no -  Compression Quality
+ D3                      : 0   no -  Compression Window Size
+ D4                      : 0   no -  Generate Key Frame
+ D5                      : 0   no -  Update Frame Segment
+ D6                      : 0   no -  Reserved
+ D7                      : 0   no -  Reserved
+
+        ----- Video Streaming MJPEG Format Type Descriptor ----
+bLength                  : 0x0B (11 bytes)
+bDescriptorType          : 0x24 (Video Streaming Interface)
+bDescriptorSubtype       : 0x06 (Format MJPEG)
+bFormatIndex             : 0x01 (1)
+bNumFrameDescriptors     : 0x01 (1)
+bmFlags                  : 0x01 (Sample size is fixed)
+bDefaultFrameIndex       : 0x01 (1)
+bAspectRatioX            : 0x00
+bAspectRatioY            : 0x00
+bmInterlaceFlags         : 0x00
+ D0 IL stream or variable: 0 (no)
+ D1 Fields per frame     : 0 (2 fields)
+ D2 Field 1 first        : 0 (no)
+ D3 Reserved             : 0
+ D4..5 Field pattern     : 0 (Field 1 only)
+ D6..7 Display Mode      : 0 (Bob only)
+bCopyProtect             : 0x00 (No restrictions)
+
+        ----- Video Streaming MJPEG Frame Type Descriptor -----
+---> This is the Default (optimum) Frame index
+bLength                  : 0x1E (30 bytes)
+bDescriptorType          : 0x24 (Video Streaming Interface)
+bDescriptorSubtype       : 0x07 (MJPEG Frame Type)
+bFrameIndex              : 0x01
+bmCapabilities           : 0x00
+wWidth                   : 0x0500 (1280)
+wHeight                  : 0x02D0 (720)
+dwMinBitRate             : 0x0E4E1C00 (240000000 bps -> 30 MB/s)
+dwMaxBitRate             : 0x0E4E1C00 (240000000 bps -> 30 MB/s)
+dwMaxVideoFrameBufferSize: 0x0007A120 (500000 bytes)
+dwDefaultFrameInterval   : 0x00028B0A (16.6666 ms -> 60.0000 fps)
+bFrameIntervalType       : 0x01 (1 discrete frame interval supported)
+adwFrameInterval[1]      : 0x00028B0A (16.6666 ms -> 60.0000 fps)
+
+        ------- VS Color Matching Descriptor Descriptor -------
+bLength                  : 0x06 (6 bytes)
+bDescriptorType          : 0x24 (Video Streaming Interface)
+bDescriptorSubtype       : 0x0D (Color Matching)
+bColorPrimaries          : 0x01 (BT.709, sRGB)
+bTransferCharacteristics : 0x01 (BT.709)
+bMatrixCoefficients      : 0x04 (SMPTE 170M)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x01 (Interface 1)
+bAlternateSetting        : 0x01
+bNumEndpoints            : 0x01 (1 Endpoint)
+bInterfaceClass          : 0x0E (Video)
+bInterfaceSubClass       : 0x02 (Video Streaming)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        ----------------- Endpoint Descriptor -----------------
+bLength                  : 0x07 (7 bytes)
+bDescriptorType          : 0x05 (Endpoint Descriptor)
+bEndpointAddress         : 0x81 (Direction=IN EndpointID=1)
+bmAttributes             : 0x05 (TransferType=Isochronous  SyncType=Asynchronous  EndpointType=Data)
+wMaxPacketSize           : 0x0400
+ Bits 15..13             : 0x00 (reserved, must be zero)
+ Bits 12..11             : 0x00 (0 additional transactions per microframe -> allows 1..1024 bytes per packet)
+ Bits 10..0              : 0x400 (1024 bytes per packet)
+bInterval                : 0x01 (1 microframe -> 0.125 ms)
+
+        ------------------- IAD Descriptor --------------------
+bLength                  : 0x08 (8 bytes)
+bDescriptorType          : 0x0B (Interface Association Descriptor)
+bFirstInterface          : 0x02 (Interface 2)
+bInterfaceCount          : 0x02 (2 Interfaces)
+bFunctionClass           : 0x01 (Audio)
+bFunctionSubClass        : 0x01 (Audio Control)
+bFunctionProtocol        : 0x00
+iFunction                : 0x00 (No String Descriptor)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x02 (Interface 2)
+bAlternateSetting        : 0x00
+bNumEndpoints            : 0x00 (Default Control Pipe only)
+bInterfaceClass          : 0x01 (Audio)
+bInterfaceSubClass       : 0x01 (Audio Control)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        ------ Audio Control Interface Header Descriptor ------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x01 (Header)
+bcdADC                   : 0x0100
+wTotalLength             : 0x0027 (39 bytes)
+bInCollection            : 0x01
+baInterfaceNr[1]         : 0x03
+
+        ------- Audio Control Input Terminal Descriptor -------
+bLength                  : 0x0C (12 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x02 (Input Terminal)
+bTerminalID              : 0x03
+wTerminalType            : 0x0201 (Microphone)
+bAssocTerminal           : 0x00
+bNrChannels              : 0x01 (1 channel)
+wChannelConfig           : 0x0000 (-)
+iChannelNames            : 0x00 (No String Descriptor)
+iTerminal                : 0x00 (No String Descriptor)
+
+        -------- Audio Control Feature Unit Descriptor --------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x06 (Feature Unit)
+bUnitID                  : 0x04 (4)
+bSourceID                : 0x03 (3)
+bControlSize             : 0x01 (1 byte per control)
+bmaControls[0]           : 0x03
+ D0: Mute                : 1
+ D1: Volume              : 1
+ D2: Bass                : 0
+ D3: Mid                 : 0
+ D4: Treble              : 0
+ D5: Graphic Equalizer   : 0
+ D6: Automatic Gain      : 0
+ D7: Delay               : 0
+bmaControls[1]           : 0x00
+ D0: Mute                : 0
+ D1: Volume              : 0
+ D2: Bass                : 0
+ D3: Mid                 : 0
+ D4: Treble              : 0
+ D5: Graphic Equalizer   : 0
+ D6: Automatic Gain      : 0
+ D7: Delay               : 0
+iFeature                 : 0x00 (No String Descriptor)
+
+        ------- Audio Control Output Terminal Descriptor ------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x03 (Output Terminal)
+bTerminalID              : 0x05
+wTerminalType            : 0x0101 (USB Streaming)
+bAssocTerminal           : 0x00 (0)
+bSourceID                : 0x04 (4)
+iTerminal                : 0x00 (No String Descriptor)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x03 (Interface 3)
+bAlternateSetting        : 0x00
+bNumEndpoints            : 0x00 (Default Control Pipe only)
+bInterfaceClass          : 0x01 (Audio)
+bInterfaceSubClass       : 0x02 (Audio Streaming)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        ---------------- Interface Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x04 (Interface Descriptor)
+bInterfaceNumber         : 0x03 (Interface 3)
+bAlternateSetting        : 0x01
+bNumEndpoints            : 0x01 (1 Endpoint)
+bInterfaceClass          : 0x01 (Audio)
+bInterfaceSubClass       : 0x02 (Audio Streaming)
+bInterfaceProtocol       : 0x00
+iInterface               : 0x00 (No String Descriptor)
+
+        -------- Audio Streaming Interface Descriptor ---------
+bLength                  : 0x07 (7 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x01 (AS_GENERAL)
+bTerminalLink            : 0x05 (Terminal ID 5)
+bDelay                   : 0x01 (1 frame)
+wFormatTag               : 0x0001 (PCM)
+
+        ------- Audio Streaming Format Type Descriptor --------
+bLength                  : 0x0B (11 bytes)
+bDescriptorType          : 0x24 (Audio Interface Descriptor)
+bDescriptorSubtype       : 0x02 (Format Type)
+bFormatType              : 0x01 (FORMAT_TYPE_I)
+bNrChannels              : 0x01 (1 channel)
+bSubframeSize            : 0x02 (2 bytes per subframe)
+bBitResolution           : 0x10 (16 bits per sample)
+bSamFreqType             : 0x01 (supports 1 sample frequence)
+tSamFreq[1]              : 0x0BB80 (48000 Hz)
+
+        ----------------- Endpoint Descriptor -----------------
+bLength                  : 0x09 (9 bytes)
+bDescriptorType          : 0x05 (Endpoint Descriptor)
+bEndpointAddress         : 0x82 (Direction=IN EndpointID=2)
+bmAttributes             : 0x05 (TransferType=Isochronous  SyncType=Asynchronous  EndpointType=Data)
+wMaxPacketSize           : 0x0064
+ Bits 15..13             : 0x00 (reserved, must be zero)
+ Bits 12..11             : 0x00 (0 additional transactions per microframe -> allows 1..1024 bytes per packet)
+ Bits 10..0              : 0x64 (100 bytes per packet)
+bInterval                : 0x04 (4 ms)
+bRefresh                 : 0x00
+bSynchAddress            : 0x00
+
+        ----------- Audio Data Endpoint Descriptor ------------
+bLength                  : 0x07 (7 bytes)
+bDescriptorType          : 0x25 (Audio Endpoint Descriptor)
+bDescriptorSubtype       : 0x01 (General)
+bmAttributes             : 0x00
+ D0   : Sampling Freq    : 0x00 (not supported)
+ D1   : Pitch            : 0x00 (not supported)
+ D6..2: Reserved         : 0x00
+ D7   : MaxPacketsOnly   : 0x00 (no)
+bLockDelayUnits          : 0x00 (Undefined)
+wLockDelay               : 0x0000
+
+    ----------------- Device Qualifier Descriptor -----------------
+Error                    : ERROR_GEN_FAILURE  (*!*ERROR   USB 2.0 HighSpeed devices must provide a Device Qualifier Descriptor)
+
+      -------------------- String Descriptors -------------------
+none
+
+        +++++++++++++++++ Device Information ++++++++++++++++++
+Device Description       : USB Video Device
+Device Path 1            : \\?\USB#VID_CACC&PID_3487&MI_00#7&1c37918&0&0000#{e5323777-f976-4f5b-9b55-b94699c46e44}\global (STATIC_KSCATEGORY_VIDEO_CAMERA)
+Device Path 2            : \\?\USB#VID_CACC&PID_3487&MI_00#7&1c37918&0&0000#{6994ad05-93ef-11d0-a3cc-00a0c9223196}\global (AM_KSCATEGORY_VIDEO)
+Device Path 3            : \\?\USB#VID_CACC&PID_3487&MI_00#7&1c37918&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global (AM_KSCATEGORY_CAPTURE)
+Kernel Name              : \Device\0000042b
+Device ID                : USB\VID_CACC&PID_3487&MI_00\7&1C37918&0&0000
+Hardware IDs             : USB\VID_CACC&PID_3487&REV_0100&MI_00 USB\VID_CACC&PID_3487&MI_00
+Driver KeyName           : {ca3e7ab9-b4c3-4ae6-8251-579ef933890f}\0010 (GUID_DEVCLASS_CAMERA)
+Driver                   : \SystemRoot\System32\Drivers\usbvideo.sys (Version: 10.0.26100.8246  Date: 2026-04-15  Company: Microsoft Corporation)
+Driver Inf               : C:\Windows\inf\usbvideo.inf
+Legacy BusType           : PNPBus
+Class                    : Camera
+Class GUID               : {ca3e7ab9-b4c3-4ae6-8251-579ef933890f} (GUID_DEVCLASS_CAMERA)
+Service                  : usbvideo
+Enumerator               : USB
+Location Info            : 0004.0000.0004.002.000.000.000.000.000
+Address                  : 2
+Manufacturer Info        : Microsoft
+Capabilities             : 0xA4 (Removable, SilentInstall, SurpriseRemovalOK)
+Status                   : 0x0180600A (DN_DRIVER_LOADED, DN_STARTED, DN_DISABLEABLE, DN_REMOVABLE, DN_NT_ENUMERATOR, DN_NT_DRIVER)
+Lower Filters            : WdmCompanionFilter
+First Install Date       : 2026-04-22 15:09:15
+Last Arrival Date        : 2026-05-13 11:00:52
+EnhancedPowerMgmtEnabled : 0
+Power State              : D0 (supported: D0, D3, wake from D0)
+
+        +++++++++++++++++ Device Information ++++++++++++++++++
+Device Description       : USB Audio Device
+Device Path 1            : \\?\USB#VID_CACC&PID_3487&MI_02#7&1c37918&0&0002#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\global (AM_KSCATEGORY_AUDIO)
+Device Path 2            : \\?\USB#VID_CACC&PID_3487&MI_02#7&1c37918&0&0002#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global (AM_KSCATEGORY_CAPTURE)
+Kernel Name              : \Device\0000042c
+Device ID                : USB\VID_CACC&PID_3487&MI_02\7&1C37918&0&0002
+Hardware IDs             : USB\VID_CACC&PID_3487&REV_0100&MI_02 USB\VID_CACC&PID_3487&MI_02
+Driver KeyName           : {4d36e96c-e325-11ce-bfc1-08002be10318}\0009 (GUID_DEVCLASS_MEDIA)
+Driver                   : \SystemRoot\system32\drivers\usbaudio.sys (Version: 10.0.26100.8115  Date: 2026-04-15  Company: Microsoft Corporation)
+Driver Inf               : C:\Windows\inf\wdma_usb.inf
+Legacy BusType           : PNPBus
+Class                    : MEDIA
+Class GUID               : {4d36e96c-e325-11ce-bfc1-08002be10318} (GUID_DEVCLASS_MEDIA)
+Service                  : usbaudio
+Enumerator               : USB
+Location Info            : 0004.0000.0004.002.000.000.000.000.000
+Address                  : 4
+Manufacturer Info        : (Generic USB Audio)
+Capabilities             : 0xA0 (SilentInstall, SurpriseRemovalOK)
+Status                   : 0x0180200A (DN_DRIVER_LOADED, DN_STARTED, DN_DISABLEABLE, DN_NT_ENUMERATOR, DN_NT_DRIVER)
+First Install Date       : 2026-04-22 15:09:15
+Last Arrival Date        : 2026-05-13 11:00:52
+EnhancedPowerMgmtEnabled : 0
+Power State              : D0 (supported: D0, D3, wake from D0)
+
+        +++++++++++++++++ Device Information ++++++++++++++++++
+Friendly Name            : Microphone (2- USB Audio Device)
+Device Description       : Audio Endpoint
+BusReported Device Desc  : Microphone (2- USB Audio Device)
+Device Path              : \\?\SWD#MMDEVAPI#{0.0.1.00000000}.{eff2f735-e9a3-4ecd-9cda-f667e46f7dd5}#{2eef81be-33fa-4800-9670-1cd474972c3f} (DEVINTERFACE_AUDIO_CAPTURE)
+Kernel Name              : \Device\0000042f
+Device ID                : SWD\MMDEVAPI\{0.0.1.00000000}.{EFF2F735-E9A3-4ECD-9CDA-F667E46F7DD5}
+Hardware IDs             : MMDEVAPI\AudioEndpoints
+Driver KeyName           : {c166523c-fe0c-4a94-a586-f1a80cfbbf3e}\0009 (AUDIOENDPOINT_CLASS_UUID)
+Driver Inf               : C:\Windows\inf\audioendpoint.inf
+Legacy BusType           : PNPBus
+Class                    : AudioEndpoint
+Class GUID               : {c166523c-fe0c-4a94-a586-f1a80cfbbf3e} (AUDIOENDPOINT_CLASS_UUID)
+Service                  : -
+Enumerator               : SWD
+Location Info            : -
+Address                  : -
+Manufacturer Info        : Microsoft
+Capabilities             : 0xD0 (UniqueID, RawDeviceOK, SurpriseRemovalOK)
+Status                   : 0x0180200A (DN_DRIVER_LOADED, DN_STARTED, DN_DISABLEABLE, DN_NT_ENUMERATOR, DN_NT_DRIVER)
+First Install Date       : 2026-04-23 11:58:35
+Last Arrival Date        : 2026-05-13 11:00:53
+EnhancedPowerMgmtEnabled : 0
+Power State              : D0 (supported: D0, D3)

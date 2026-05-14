@@ -2,6 +2,7 @@ module audio_top (
   input sysclk,
   input rst,
   input mdata,
+  output logic clk_24MHz,
   output logic [7:0] audio_8bit,
   output logic afifo_write_en,
   output logic mclk
@@ -10,7 +11,6 @@ module audio_top (
 logic [23:0] mapped_data, integrated_data, decimated_data;
 logic [23:0] combed_data;
 logic pcm_pulse, pdm_pulse;
-logic clk_24MHz;
 
 logic signed [15:0] raw_audio_16bit;
 logic signed [15:0] amplified_audio_16bit;

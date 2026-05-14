@@ -85,9 +85,19 @@ module top
    // audio //
     output logic mclk,
     input mdata,
-    output logic mdis   
-   
+    output logic mdis, 
+
+    // usb //
+    input phyclk, // 60MHz //
+    input DIR,
+    input NXT,
+    output logic STP,
+    inout logic [7:0] DATA,
+    output logic phyrst,
+
 //   //Misc/Debug
+
+    input button
 //    output bus3_t led,
 //    output bus8_t debug_pins
 );
@@ -281,19 +291,19 @@ IBUFDS #(
 
 // AUDIO module //
 
-logic [7:0] audio_8bit;
-logic audio_afifo_write_en;
+// logic [7:0] audio_8bit;
+// logic audio_afifo_write_en;
 
-audio_top audio_top_inst(
-  .sysclk(clk_ext),
-  .rst(phyrst),
-  .mdata(mdata),
-  .mclk(mclk),
-  .audio_8bit(audio_8bit),
-  .afifo_write_en(audio_afifo_write_en)
-);
+// audio_top audio_top_inst(
+//   .sysclk(clk_ext),
+//   .rst(phyrst),
+//   // .mdata(mdata),
+//   // .mclk(mclk),
+//   .audio_8bit(audio_8bit),
+//   .afifo_write_en(audio_afifo_write_en)
+// );
 
-assign mdis = 1'b0;
+// assign mdis = 1'b0;
 
 // JPEG module //
 
@@ -323,6 +333,23 @@ jpeg_colorbalance_top jpeg_colorbalance_top_inst (
     .x_size_in(11'd1920),
     .y_size_in(11'd1080)
   `endif
+);
+
+// USB module //
+
+usb_top usb_top_inst(
+  .sysclk(clk_ext),
+  .sysrst(sys_rst_n),
+  .button(button),
+  .phyclk(phyclk),
+  .phyrst(phyrst),
+  .DIR(DIR),
+  .NXT(NXT),
+  .STP(STP),
+  .DATA(DATA),
+  .mdata(mdata),
+  .mdis(mdis),
+  .mclk(mclk)
 );
   
 // //--------------------------------

@@ -9,7 +9,8 @@
 set_property -dict {PACKAGE_PIN R4 IOSTANDARD DIFF_SSTL15} [get_ports sys_clk_p]
 set_property -dict {PACKAGE_PIN T4 IOSTANDARD DIFF_SSTL15} [get_ports sys_clk_n]
 
-set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVCMOS33} [get_ports sys_rst_n]
+set_property -dict {PACKAGE_PIN P16 IOSTANDARD LVCMOS33} [get_ports sys_rst_n]
+set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVCMOS33} [get_ports button]
 
 set_property -dict {PACKAGE_PIN L13 IOSTANDARD LVCMOS25} [get_ports cam_en]
 
@@ -52,6 +53,23 @@ set_property -dict {PACKAGE_PIN N14 IOSTANDARD TMDS_33} [get_ports {hdmi_dat_n[2
 set_property -dict {PACKAGE_PIN N18 IOSTANDARD LVCMOS25} [get_ports {mdis}]
 set_property -dict {PACKAGE_PIN N19 IOSTANDARD LVCMOS25} [get_ports {mclk}]
 set_property -dict {PACKAGE_PIN N22 IOSTANDARD LVCMOS25} [get_ports {mdata}]
+
+#-------------------------------------------------------------------------
+# USB
+
+set_property -dict {PACKAGE_PIN E13 IOSTANDARD LVCMOS18} [get_ports DIR]
+set_property -dict {PACKAGE_PIN C18 IOSTANDARD LVCMOS18} [get_ports phyclk]
+set_property -dict {PACKAGE_PIN F13 IOSTANDARD LVCMOS18} [get_ports NXT]
+set_property -dict {PACKAGE_PIN F14 IOSTANDARD LVCMOS18} [get_ports STP]
+set_property -dict {PACKAGE_PIN AB10 IOSTANDARD LVCMOS18} [get_ports phyrst]
+set_property -dict {PACKAGE_PIN E14 IOSTANDARD LVCMOS18} [get_ports {DATA[0]}]
+set_property -dict {PACKAGE_PIN C13 IOSTANDARD LVCMOS18} [get_ports {DATA[1]}]
+set_property -dict {PACKAGE_PIN B13 IOSTANDARD LVCMOS18} [get_ports {DATA[2]}]
+set_property -dict {PACKAGE_PIN C14 IOSTANDARD LVCMOS18} [get_ports {DATA[3]}]
+set_property -dict {PACKAGE_PIN C15 IOSTANDARD LVCMOS18} [get_ports {DATA[4]}]
+set_property -dict {PACKAGE_PIN C22 IOSTANDARD LVCMOS18} [get_ports {DATA[5]}]
+set_property -dict {PACKAGE_PIN B22 IOSTANDARD LVCMOS18} [get_ports {DATA[6]}]
+set_property -dict {PACKAGE_PIN F18 IOSTANDARD LVCMOS18} [get_ports {DATA[7]}]
 
 ##-------------------------------------------------------------------------
 ## DEBUG pins & LEDs

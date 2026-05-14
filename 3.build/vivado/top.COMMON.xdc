@@ -22,6 +22,15 @@ create_clock -period 2.190 -name cam_dphy_clk -waveform {0.000 1.095} -add [get_
 
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets u_csi_rx_top/u_phy_clk/dphy_clk_in]
 
+# USB constraints 
+create_clock -period 16.666 -name phyclk [get_ports phyclk]
+
+set_input_delay -clock phyclk -max 6.0 [get_ports {DATA[*] DIR NXT}]
+set_input_delay -clock phyclk -min 1.5 [get_ports {DATA[*] DIR NXT}]
+
+set_output_delay -clock phyclk -max 5.0 [get_ports {DATA[*] STP}]
+set_output_delay -clock phyclk -min 0.0 [get_ports {DATA[*] STP}]
+
 #-------------------------------------------------------------------------
 # Async
 #set_false_path -from [get_pins u_clkrst_gen/u_pll_top/srst_reg/C] #               -to   [get_pins u_csi_rx_top/u_clk_det/byte_clk_fail_reg/PRE]

@@ -436,6 +436,141 @@ There are no timing issues when considering the connection with the USB interfac
 
 To verify the audio core in [simulation](2.sim/jpeg_usb_audio/audio_tb.sv), the microphone data fed to the testbench represents a sound sample which lasts a single second and plays four beeping sounds. Indeed, when converting the output PCM data to a `.wav file`, the output is a loud, clear sequence of [beeping sounds](2.sim/jpeg_usb_audio/simulated_beep.wav).
 
+---
+
+## Objective IV
+### Implement and Validate USB 2.0 Module
+
+To connect the FPGA and a PC host, a **USB 2.0 PCB board** is used, which was provided to us by Thomas Ludemann. Such a board is required, because the standard I/O pins of the FPGA operate entirely on digital logic levels, and cannot drive the **USB 2.0 differential signals**, as they lack the native analog hardware. 
+
+The external board utilizes a **USB3343 PHY transceiver**, which internally translates the analog USB signals into a digital **ULPI interface**, which operates at `60MHz`. The use of this chip allows the FPGA to directly communicate with the PC host.
+
+The board is connected to the FPGA via an **FMC connector**.
+
+<p align="center">
+  <img src="0.doc/pictures_sihi/usb_front.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="0.doc/pictures_sihi/usb_back.png" width="45.3%">
+</p>
+
+The `ULPI` protocol reduces the amount of physical pins required for a USB interface, from over 30 pins required in the original `UTMI` protocol, to **12 pins**. This standard offers a much-needed abstraction from the analog electrical states of the USB cable, while continuously operating at `60MHz`. The 12 pins are:
+
+- `CLK` (1 bit, PHY to FPGA)
+- `DIR` (1 bit, PHY to FPGA)
+- `NXT` (1 bit, PHY to FPGA),
+- `STP` (1 bit, FPGA to PHY),
+- `DATA` (8 bit, bidirectional)
+
+Aside from these I/O signals, ULPI uses a large **register set** which can be accessed using `Register Read` or `Register Write` operation. When the link wants to access these registers, or transmit data over the bus, it must send a byte called **TXCMD** to notify the PHY about its intentions. Similarly, for any status changes, the PHY must transmit a byte called **RXCMD** to the host.
+
+For video transmission, it is essential to support **USB 2.0 High Speed**. In theory, the maximum data transfer rate is `480Mbps` (60MB/s), which is a significant leap over `12Mbps` supported in the next fastest mode, which is Full Speed. In practice, the rate achieved ranges between `30-40MB/s`, due to overhead.
+
+The [ULPI Manual](0.doc/USB/ULPI_v1_1.pdf) describes the process required to [set-up USB 2.0 High Speed](1.hw/usb/fsm/fsm_setup_highspeed.sv). This revolves around a process called **chirping**, in which the two **USB Data Lines** (`D+` and `D-`) are driven to specific voltage values by the link and by the host. After this process is completed, the two sides can exchange packets over the USB 2.0 High-Speed connection.
+
+In the [next step](1.hw/usb/fsm/fsm_read_packets.sv), the host typically asks the device for information, by sending packets which form specific **requests**, shaped in standard templates named **Descriptors**. The device must be programmed to [decode these requests](1.hw/usb/packet_utility/decode_request.sv) and [respond to them accordingly](1.hw/usb/packet_utility/send_descriptor_fsm.sv). After the device responds to all requests, the host will have a good idea of the characteristics of the device, and what operations it will be used for. It explicitly declares its class and function to the host. For example, the device might identify as a **Video Class (UVC)** device for streaming video, an **Audio Class (UAC)** device for transmitting audio, or a **Custom (Vendor-Specific)** device.
+
+The packets can be divided in four categories:
+- **Token Packets** are always the first packets in a transaction, and they identify the target and the purpose of the transaction.
+- **Data Packets** include the data transmitted in the Data stage of a transaction.
+- **Handshake Packets** are used to signal if a transaction was acknowledged by the receiving side.
+- **SOF Packets** are sent every `1ms` on Full-speed links, and every `125us` on High-Speed links, and can be used for scheduling.
+
+Packets can consist of the following elements:
+- **PID (8 bits)**: Every Packet must include an 8-bit `PID`, which shows the type of transaction.
+- **Address (7 bits) and Endpoint (4 bits)**: Used in **Token Packets**. Address is used to distinguish between different devices, while there can be different endpoints in the same device.
+- **CRC (5 or 16 bits)**: After every non-Handshake packet, a `CRC` must be send. This is a type of checksum which is decoded by the receiver to verify that no bytes were lost through the transaction.
+- **Data (0-1024 &times; 8 bits).**
+
+After the host has sent all the requests, the [data transmission](1.hw/usb/fsm/fsm_transfer_data.sv) can start. The data can be sent in either **Isochronous** or **Bulk** mode. Isochronous can achieve a higher data rate, and thus is recommented for Video streaming, while Bulk is more limited but still fast enough, and more reliable due to the inclusion of `ACK` / `NAK` packets. 
+
+The top-level flow is shown below. The `ULPI` I/O signals are sufficient to control the whole flow. The `DIR` signal shows who has control of the `DATA` bus. The `NXT` signal is used to shpw when the `DATA` bus includes a valid byte. The link raises the `STP` signal when it has finished an operation. For better organization, the circuit is separated in **three phases**, each of which operates with its own FSM:
+
+<p align="center">
+   <img width="90%" src="0.doc/pictures_sihi/usb_top.drawio.png">
+</p>
+
+#### USB Video Class & USB Audio Class
+
+In order to transmit video and audio simultaneously, the device has to declare itself to the host as a **Composite Device**. This means that the connection is divided into two independent **Interfaces**. Each interface acts as a standalone virtual device with its own endpoints, thus allowing the host PC to process the camera and the microphone as if they were two entirely separate devices, as shown in the below screenshot of the **USBTreeView** software :
+
+<p align="center">
+   <img width="40%" src="0.doc/pictures_sihi/usbtreeview_devices.png">
+</p>
+
+The first interface is configured as a **UVC (USB Video Class)** device. When the device responds to the specific `UVC` descriptors, the host recognizes this and loads its native webcam drivers. The device must then send the JPEG frames whenever the host tells them to. In **Isochronous** mode, the host sends an `IN` packet once per microframe (every `125 us`), allowing the device to send up to 1024 bytes. However, the JPEG frames must be wrapped around **UVC headers**, so that every program that can open a camera (like OBS, Zoom or the Windows Camera app) knows exactly when a frame begins and ends.
+
+The second interface is configured as a **UAC (USB Audio Class)** device. Similarly, the host loads its native audio drivers whenever the device reads the `UAC` descriptors. The device can then send PCM audio data whenever asked. This audio data does not require specific headers. 
+
+To distinguish between the two interfaces, the host assigns a **different endpoint number** to each interface. This endpoint number is included in the `IN` packet sent, so that the device can respond with either Video or Audio data. By sending alternate requests, the host can broadcast both **real-time video** and **real-time audio**. Note that the data required for video significantly overweigh the data required for audio, and this is also reflected in the frequency of `IN` packets send by the host in each endpoint. If the data is not yet ready, the device must respond with a **ZLP (Zero-length packet)**. 
+
+<p align="center">
+   <img width="60%" src="0.doc/pictures_sihi/usb_fsm.drawio.png">
+</p>
+
+#### USB Simulation
+
+In the simulation, the [testbench environment](2.sim/jpeg_usb_audio/usb_tb.sv) is modelled as the **USB host**, while the [module instantiated](1.hw/usb/usb_top.sv) performs as the **USB device**. The host behaves exactly as a real USB host would, as observed by using a logic analyzer to monitor the values of the ULPI ports. The testbench mimics operations such as **chirping**, **RXCMD transmitting** and **packet transmitting**. Additionally, a memory block that holds the sequence of the requests sent by the host is instantiated and used inside the testbench:
+
+<p align="center">
+   <img width="60%" src="0.doc/pictures_sihi/usb_request_memory.png">
+</p>
+
+The aim of the simulation is to ensure that the behaviour of the USB device is exactly as documented in the [ULPI Manual](0.doc/USB/ULPI_v1_1.pdf) and the [USB3343 Data Sheet](0.doc/USB/USB334x-Data-Sheet-DS00002646A.pdf). All ULPI ports must rise and fall in a cycle-accurate manner. The device must pass through all three phases shown in the block diagram above, and eventually start transmitting video and audio data. It also must be able to respond to any requests out-of-the-box.
+
+The device has to transmit video and audio data at the same time. For the sake of simplicity, the JPEG encoder is not used in this module, but a JPEG-encoded frame is instead loaded from a [memory file](1.hw/usb/mem/seagulls.mem). It is important to mention that the *JPEG headers* are obtained from a [separate memory file](1.hw/usb/mem/headers_720p_qf10.mem) and they are the same for every other frame in this configuration. As for audio, input `mdata` is given random values. While the video data is fetched straight from the memory when required, a short fifo must be used to store the audio data.
+
+#### USB Validation
+
+After step-by-step experiments using a Digital Analyzer, the USB device appears in the **Device Manager**, both as a Video and as an Audio device. Using the USBTreeView software, we can see the information of the device, as specified during the enumeration phase. The top-level information is shown below, while all the details can be found [in this text file](0.doc/USB/usb_camera_mic_report.txt). The `VID (Vendor ID)` and `Product ID (PID)` values, which together form the ID of the device, are chosen arbitrarily.
+
+<p align="center">
+   <img width="90%" src="0.doc/pictures_sihi/usbtreeview_info.png">
+</p>
+
+Another tool that proved invaluable for debugging and validation is **Wireshark**, which can track all USB traffic and examine all packets in detail. By targetting the address value that corresponds to this device, using the native Wireshark filters, we have a clear picture of the requests that the host sends:
+
+<p align="center">
+  <img src="0.doc/pictures_sihi/wireshark_traffic.png" width="70%">
+</p>
+
+<p align="center">
+  <img src="0.doc/pictures_sihi/wireshark_example.png" width="70%">
+</p>
+
+The **FPGA setup** used is shown below. Both PCB boards (the USB PHY and the Microphone chip) are utilized. As shown, the Microphone board is connected via GPIO pins to the FPGA, the USB board is connected via the FMC connector, while the USB board is also connected to the PC host using a standard MicroUSB cable:
+
+<p align="center">
+  <img src="0.doc/pictures_sihi/usb_fpga_setup.jpg" width="50%">
+</p>
+
+A demonstration of the **full, working USB - UVC - UAC flow** is shown below. Here, the *JPEG test image* is loaded from the memory and broadcast into the **Windows Camera app**, while at the same time the **Windows Recorder app** can record and play the audio at real time:
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=fiw-4s3qQ5s">
+    <img width="70%" img src="0.doc\pictures_sihi\usb_uvc_uac_thumbnail.JPG" alt="usb_demo">
+  </a>
+</p>
+
+#### USB Bandwidth Analysis
+
+For **Video transmission**:
+
+- The maximum packet size in Isochronous mode is *1024 bytes*.
+- In High-Bandwidth Isochronous mode, the device can send **3 packets per microframe**.
+- A microframe corresponds to 125us, so there are **8000 microframes per second**.
+
+Therefore, the maximum bandwidth for video transmission is **1024 &times; 3 &times; 8000 = 24.57MB/s**.
+
+For **Audio transmission**:
+
+- The audio format is 16-bit, so each sample consists of 2 bytes.
+- 48kHz sample rate translates to **48000 samples per second**.
+
+The bandwidth required for audio transmission is **48000 &times; 2 = 96kB/s or &lt;  0.1MB/s**.
+It is evident that, when transmitting both Video and Audio, the latter is negligible compared with the former. 
+
+For `60FPS` to be supported, each frame has to occupy less than **24.75 / 60 = ~410kB**. As shown in the JPEG analysis, an encoded frame occupies around **60kB**, so the transmission can be carried out without issues. In fact, a higher FPS is theoretically possible based on these numbers.
+
 ### Upcoming:
    - [X] Validate Basic Development Hardware Setup
 
@@ -443,6 +578,6 @@ To verify the audio core in [simulation](2.sim/jpeg_usb_audio/audio_tb.sv), the 
 
    - [X] Implement and Validate JPEG Module and Audio core 
 
-   - [ ] Implement and Validate USB2.0 Module 
+   - [X] Implement and Validate USB2.0 Module 
 
    - [ ] Put together and Demonstrate working MIPI-JPEG-USB FPGA System 
