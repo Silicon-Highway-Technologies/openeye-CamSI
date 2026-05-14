@@ -404,7 +404,7 @@ Some mathematical operations can prove the importance of compression:
   - A 1080p frame encoded at `QF = 50%` resulted in a file of approx. **290kB**, which translates to **8.7MB/s** at 30FPS.
   - Both of the above can easily be handled by the USB interface.
 
-*Note: The size of a JPEG-encoded image is not standard and depends on the complexity of the image. The above values refer to the [images that were tested during the simulation](2.sim/jpeg_usb_audio/image_files/output_jpeg/seagulls_qf50.jpg).*
+*Note: The size of a JPEG-encoded image is not standard and depends on the complexity of the image. The above values refer to the [images that were tested during the simulation](2.sim/jpeg_usb_audio/image_files/output_jpeg/).*
 ### Implement and Validate Audio Module 
 
 To sample audio input in our FPGA, we use a *dedicated PCB board* provided by Thomas Ludemann. On this board, the microphone chip `SPK0641HT4H-1` is installed.
