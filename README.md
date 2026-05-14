@@ -396,13 +396,15 @@ Some mathematical operations can prove the importance of compression:
 
 - **Pre Compression**:
   - By translating the data from `RGB` to `YUV`, each pixel requires 1.5 byte instead of 3 bytes
-  - For 720p60fps, each frame requires 1280 &times; 720 = 921.600 pixels per frame, so **~1.38MBs per frame**.
-  - At 60FPS, this adds up to **~82.9MB/s** which exceeds the theoretical upper bound of 60MB/s on the USB side.
+  - For `720p60fps`, each frame requires 1280 &times; 720 = 921.600 pixels per frame, so **~1.38MBs per frame**, while for `1080p30fps`, each frame consists of 1920 &times; 1080 pixels per frame, so **~2.07MBs per frame**.
+  - The rates per second are calculated to be **~82.9MB/s** for `720p60fps` and **~62.19MB/s** for `1080p30`, both of which exceed the theoretical upper bound of 60MB/s on the USB side.
 
 - **Post Compression**:
-  - An 720p frame encoded at `QF = 50%` resulted in a file of approx. **60kB**.
-  - At 60FPS this translates to **3.6MB/s** which can easily be handled by the USB interface.
+  - A 720p frame encoded at `QF = 50%` resulted in a file of approx. **60kB**, which translates to **3.6MB/s** at 60FPS.
+  - A 1080p frame encoded at `QF = 50%` resulted in a file of approx. **290kB**, which translates to **8.7MB/s** at 30FPS.
+  - Both of the above can easily be handled by the USB interface.
 
+*Note: The size of a JPEG-encoded image is not standard and depends on the complexity of the image. The above values refer to the [images that were tested during the simulation](2.sim/jpeg_usb_audio/image_files/output_jpeg/seagulls_qf50.jpg).*
 ### Implement and Validate Audio Module 
 
 To sample audio input in our FPGA, we use a *dedicated PCB board* provided by Thomas Ludemann. On this board, the microphone chip `SPK0641HT4H-1` is installed.
@@ -569,7 +571,7 @@ For **Audio transmission**:
 The bandwidth required for audio transmission is **48000 &times; 2 = 96kB/s or &lt;  0.1MB/s**.
 It is evident that, when transmitting both Video and Audio, the latter is negligible compared with the former. 
 
-For `60FPS` to be supported, each frame has to occupy less than **24.75 / 60 = ~410kB**. As shown in the JPEG analysis, an encoded frame occupies around **60kB**, so the transmission can be carried out without issues. In fact, a higher FPS is theoretically possible based on these numbers.
+For `60FPS` to be supported, each frame has to occupy less than **24.75 / 60 = ~410kB**, while for `30FPS` the size of the frame must not exceed **24.57 / 30 = ~820kB**. As shown in the JPEG analysis, an encoded frame occupies around **60kB** for `720p` and **290kB** for `1080p`, so the transmission can be carried out without issues. In fact, a higher FPS is theoretically possible based on these numbers.
 
 ### Upcoming:
    - [X] Validate Basic Development Hardware Setup
