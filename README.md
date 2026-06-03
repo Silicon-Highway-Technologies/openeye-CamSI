@@ -407,7 +407,7 @@ Some mathematical operations can prove the importance of compression:
 *Note: The size of a JPEG-encoded image is not standard and depends on the complexity of the image. The above values refer to the [images that were tested during the simulation](2.sim/jpeg_usb_audio/image_files/output_jpeg/).*
 ### Implement and Validate Audio Module 
 
-To sample audio input in our FPGA, we use a *dedicated PCB board* provided by Thomas Ludemann. On this board, the microphone chip `SPK0641HT4H-1` is installed.
+To sample audio input in our FPGA, we use a *dedicated PCB board* provided by Thomas Ludemann. The design of this board is publicly available both as an [Altium Designer project](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/WCAM-BREAKOUT-PCB-R03) and as a [KiCad project](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/KiCad_WCAM-BREAKOUT-PCB-R03). On this board, the microphone chip `SPK0641HT4H-1` is installed.
 
 <p align="center">
    <img width="400" src="0.doc/pictures_sihi/board_mic.png">
@@ -448,6 +448,8 @@ To connect the FPGA and a PC host, a **USB 2.0 PCB board** is used, which was pr
 The external board utilizes a **USB3343 PHY transceiver**, which internally translates the analog USB signals into a digital **ULPI interface**, which operates at `60MHz`. The use of this chip allows the FPGA to directly communicate with the PC host.
 
 The board is connected to the FPGA via an **FMC connector**.
+
+The design of this board is publicly available both as an [Altium Designer project](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/FMC-USB-PHY-BOARD-R02) and as a [KiCad project](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/KiCad_FMC-USB-PHY-BOARD-R02). The availability of both Altium and KiCad project files allows users to inspect, modify, and reproduce the USB-PHY hardware platform used for the FPGA-to-host USB 2.0 validation activities. This supports the project's objective of providing an open and reproducible hardware development environment for USB-based FPGA systems.
 
 <p align="center">
   <img src="0.doc/pictures_sihi/usb_front.png" width="45%">
