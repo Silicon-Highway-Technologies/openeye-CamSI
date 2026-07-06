@@ -4,6 +4,11 @@
 #========================================================================
 
 #-------------------------------------------------------------------------
+
+# Bypass sub-optimal clock routing for the JPEG MMCMs
+set_property CLOCK_DEDICATED_ROUTE ANY_CMT_COLUMN [get_nets jpeg_clkgen_inst/fast_clk_unbuf]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets jpeg_clkgen_inst/clkfb_out]
+
 # clk, reset and misc
 
 set_property -dict {PACKAGE_PIN R4 IOSTANDARD DIFF_SSTL15} [get_ports sys_clk_p]
@@ -19,6 +24,10 @@ set_property -dict {PACKAGE_PIN L13 IOSTANDARD LVCMOS25} [get_ports cam_en]
 
 set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
 set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
+
+#OV2740
+# set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
+# set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
 
 #-------------------------------------------------------------------------
 #CSI 

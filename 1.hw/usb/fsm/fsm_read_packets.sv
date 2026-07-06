@@ -75,8 +75,6 @@ assign new_byte = (DIR && NXT);
 always @(posedge clk) begin
 
 	if (!rst) check_address_enabled <= 1'b0;
-
-	// else if (check_address_enabled_flag) check_address_enabled <= 1'b1;
   else if (request == SET_ADDRESS && new_byte && DATA == PID_ACK) check_address_enabled <= 1'b1;
 
 end
@@ -223,12 +221,13 @@ verify_address_and_endpoint verify_address_and_endpoint_inst(
 // but this instance is part of a SOF packet, which are regularly sent //
 // so this module detects a SOF PID and raises a flag //
 // which is used to ignore any PIDs while this flag is active //
-ignore_sof ignore_sof_inst(
+detect_sof detect_sof_inst(
   .clk(clk),
   .rst(rst),
-  .dir(DIR),
-  .data(DATA),
-  .ignore(ignore_sof_flag)
+  .DIR(DIR),
+  .NXT(NXT),
+  .DATA(DATA),
+  .ignore_sof(ignore_sof_flag)
 );
 
 // increment packets when we receive the config descriptor //

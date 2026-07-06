@@ -1,28 +1,18 @@
 module audio_top (
-  input sysclk,
+  input clk_24MHz,
   input rst,
+  input pdm_pulse,
   input mdata,
-  output logic clk_24MHz,
   output logic [7:0] audio_8bit,
-  output logic afifo_write_en,
-  output logic mclk
+  output logic afifo_write_en
 );
 
 logic [23:0] mapped_data, integrated_data, decimated_data;
 logic [23:0] combed_data;
-logic pcm_pulse, pdm_pulse;
+logic pcm_pulse;
 
 logic signed [15:0] raw_audio_16bit;
 logic signed [15:0] amplified_audio_16bit;
-
-// generate 24MHz clock //
-audio_clocking audio_clocking_inst(
-  .sysclk(sysclk),
-  .rst(rst),
-  .clk_24MHz(clk_24MHz),
-  .pdm_pulse(pdm_pulse),
-  .mclk(mclk)
-);
 
 // pdm mapping - increase or decrease current accumulated value based on input //
 pdm_mapper pdm_mapper_inst (

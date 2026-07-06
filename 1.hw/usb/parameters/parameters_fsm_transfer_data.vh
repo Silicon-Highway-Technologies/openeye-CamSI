@@ -5,4 +5,5 @@ parameter wait_for_ack = 5'b00011;
 parameter sending_nak = 5'b00100;
 parameter sending_video = 5'b00101;
 parameter sending_audio = 5'b00110;
+parameter zlp_mode = 5'b00111;
 parameter terminalstate = 5'b11111;

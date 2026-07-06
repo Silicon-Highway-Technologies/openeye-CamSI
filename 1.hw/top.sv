@@ -97,10 +97,11 @@ module top
 
 //   //Misc/Debug
 
-    input button
-//    output bus3_t led,
-//    output bus8_t debug_pins
+    output logic led,
+    output logic [15:0] debug_pins
 );
+
+`include "settings.vh"
 
 `ifdef COCOTB_SIM
 glbl glbl();
@@ -257,6 +258,135 @@ IBUFDS #(
       .debug_fifo   (debug_fifo)      //o'bus4_t
    );
 
+
+  logic jpeg_fast_clock;
+  logic jpeg_slow_clock;
+  logic pixel_clock;
+
+  jpeg_clkgen jpeg_clkgen_inst(
+    .sysclk(clk_ext),
+    .reset(areset),
+    .hdmi_clock(hdmi_clk),
+    .jpeg_fast_clock(jpeg_fast_clock),
+    .jpeg_slow_clock(jpeg_slow_clock),
+    .pixel_clock(pixel_clock)
+  );
+  
+  logic [31:0] data_out;
+  logic [23:0] address_out;
+  logic image_valid_out;
+  logic data_valid_out;
+  logic [2:0] state;
+
+  // jpeg_encoder jpeg_encoder_inst (
+  //   .start_capture_in(cam_en),
+  //   .red_data_in({hdmi_pix.R, 2'b0}),
+  //   .green_data_in({hdmi_pix.G, 2'b0}),
+  //   .blue_data_in({hdmi_pix.B, 2'b0}),
+  //   .frame_valid_in(!hdmi_frame),
+  //   .line_valid_in(!hdmi_blank),
+  //   .data_out(data_out),
+  //   .address_out(address_out),
+  //   .image_valid_out(image_valid_out),
+  //   .data_valid_out(data_valid_out),
+  //   .qf_select_in(2'b10),
+  //   .x_size_in(11'd1280),
+  //   .y_size_in(10'd720),
+  //   .pixel_clock_in(pixel_clock),
+  //   .pixel_reset_n_in(sys_rst_n),
+  //   .jpeg_fast_clock_in(jpeg_fast_clock),
+  //   .jpeg_fast_reset_n_in(sys_rst_n),
+  //   .jpeg_slow_clock_in(jpeg_slow_clock),
+  //   .jpeg_slow_reset_n_in(sys_rst_n),
+  //   .state(state),
+  //   .*
+  // );
+
+logic start_capture;
+
+always @(posedge pixel_clock) begin
+
+  if (!sys_rst_n) start_capture <= 1'b0;
+
+  else if (usb_handshake_finished && !line_valid && !frame_valid) start_capture <= 1'b1;
+
+end
+
+logic [7:0] afifo_data_out;
+logic afifo_data_valid_out;
+logic afifo_wait;
+logic sending_packet;
+logic usb_handshake_finished;
+logic [15:0] debug_jpeg_usb;
+logic afifo_led;
+logic jpeg_data_valid_out;
+logic full;
+
+logic frame_valid, line_valid;
+assign frame_valid = !hdmi_frame;
+assign line_valid = !hdmi_blank;
+
+jpeg_usb_top jpeg_usb_top_inst (
+  .button               (sys_rst_n),
+  // .led                  (led),
+  .sysclk(clk_ext),
+
+  // USB3343 ULPI Interface
+  .phyclk               (phyclk),
+  .DIR                  (DIR),
+  .NXT                  (NXT),
+  .STP                  (STP),
+  .DATA                 (DATA),
+  .phyrst               (phyrst),
+  .debug_jpeg_usb       (debug_jpeg_usb),
+
+  .full(full),
+
+  // JPEG Input
+  .start_capture_in(start_capture),
+  // .start_capture_in(csi_in_frame),
+  .red_data_in(hdmi_pix.R),
+  .green_data_in(hdmi_pix.G),
+  .blue_data_in(hdmi_pix.B),
+  .frame_valid_in(frame_valid),
+  .line_valid_in(line_valid),
+  .image_valid_out      (image_valid_out),
+`ifdef QF10
+  .qf_select_in(2'b10),
+`elsif QF25
+  .qf_select_in(2'b11),
+`elsif QF50
+  .qf_select_in(2'b00),
+`elsif QF100
+  .qf_select_in(2'b01),
+`endif
+
+`ifdef HDMI_720p60
+  .x_size_in            (11'd1280),
+  .y_size_in            (10'd720),
+`elsif HDMI_1080p30
+  .x_size_in            (11'd1920),
+  .y_size_in            (11'd1080),
+`endif
+
+  // Clocks and Resets
+  .pixel_clock_in(pixel_clock),
+  .pixel_reset_n_in(sys_rst_n),
+  .jpeg_fast_clock_in(jpeg_fast_clock),
+  .jpeg_fast_reset_n_in(sys_rst_n),
+  .jpeg_slow_clock_in(jpeg_slow_clock),
+  .jpeg_slow_reset_n_in(sys_rst_n),
+
+  // audio //
+  .mclk(mclk),
+  .mdis(mdis),
+  .mdata(mdata),
+
+  // Status Signals
+  .sending_packet       (sending_packet),
+  .handshake_finished (usb_handshake_finished)
+);
+
 //--------------------------------
 // HDMI backend
 //--------------------------------
@@ -288,85 +418,10 @@ IBUFDS #(
       .x            (x),            //o'bus12_t
       .y            (y)             //o'bus11_t
    );
-
-// AUDIO module //
-
-// logic [7:0] audio_8bit;
-// logic audio_afifo_write_en;
-
-// audio_top audio_top_inst(
-//   .sysclk(clk_ext),
-//   .rst(phyrst),
-//   // .mdata(mdata),
-//   // .mclk(mclk),
-//   .audio_8bit(audio_8bit),
-//   .afifo_write_en(audio_afifo_write_en)
-// );
-
-// assign mdis = 1'b0;
-
-// JPEG module //
-
-logic [31:0] data_out;
-logic [23:0] address_out;
-logic data_valid_out, image_valid_out;
-
-jpeg_colorbalance_top jpeg_colorbalance_top_inst (
-  .clk_ext(clk_ext),
-  .sys_rst_n(sys_rst_n),
-  .hdmi_clk(hdmi_clk),
-  .start_capture_in(cam_en),          // this may need to be a different signal //
-  .red_data_in({hdmi_pix.R, 2'b0}),
-  .green_data_in({hdmi_pix.G, 2'b0}),
-  .blue_data_in({hdmi_pix.B, 2'b0}),
-  .frame_valid_in(!hdmi_frame),
-  .line_valid_in(!hdmi_blank),
-  .data_out(data_out),
-  .address_out(address_out),
-  .image_valid_out(image_valid_out),
-  .data_valid_out(data_valid_out),
-  .qf_select_in(2'b10),
-  `ifdef HDMI_720p60
-    .x_size_in(11'd1280),
-    .y_size_in(10'd720)
-  `elsif HDMI_1080p30
-    .x_size_in(11'd1920),
-    .y_size_in(11'd1080)
-  `endif
-);
-
-// USB module //
-
-usb_top usb_top_inst(
-  .sysclk(clk_ext),
-  .sysrst(sys_rst_n),
-  .button(button),
-  .phyclk(phyclk),
-  .phyrst(phyrst),
-  .DIR(DIR),
-  .NXT(NXT),
-  .STP(STP),
-  .DATA(DATA),
-  .mdata(mdata),
-  .mdis(mdis),
-  .mclk(mclk)
-);
   
-// //--------------------------------
-// // Misc and Debug
-// //--------------------------------
-//    assign led[0] = cam_en;
-//    assign led[1] = clk_1hz;
-//    assign led[2] = csi_in_frame; 
+assign debug_pins = debug_jpeg_usb;
 
-// //   assign debug_pins = { 
-// //       hdmi_blank, 
-// //       rgb_reading, 
-// //       hdmi_reset_n, 
-// //       debug_csi[2:0]
-// //   };
-
-// assign debug_pins = {hdmi_reset_n, hdmi_hsync, hdmi_vsync, hdmi_frame, rgb_reading,  hdmi_blank, csi_in_line, csi_in_frame};
+assign led = full;
 
 endmodule: top
 

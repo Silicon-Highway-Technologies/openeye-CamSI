@@ -1,14 +1,14 @@
 module send_descriptor_fsm(
 
-    input clk,
-    input rst,
-    input dir,
-    input active,
-    input nxt,
-		input [4:0] request,
-    input [2:0] config_descriptor_packet_counter,
-    output logic stp,
-    output logic [7:0] data_out
+  input clk,
+  input rst,
+  input dir,
+  input active,
+  input nxt,
+  input [4:0] request,
+  input [2:0] config_descriptor_packet_counter,
+  output logic stp,
+  output logic [7:0] data_out
 
 );
 
@@ -17,6 +17,7 @@ module send_descriptor_fsm(
 
 `include "pid.vh"
 `include "request_parameters.vh"
+`include "settings.vh"
 
 logic [1:0] current_state, next_state;
 
@@ -28,40 +29,36 @@ parameter send_data = 2'b01;
 parameter send_stp = 2'b10;
 
 always @(posedge clk) begin
-    if (!rst) current_state <= idle;
-    else current_state <= next_state;
+  if (!rst) current_state <= idle;
+  else current_state <= next_state;
 end
 
 always @(*) begin
 
-    next_state = current_state;
-    stp = 1'b0;
-    pid_active = 1'b0;
+  next_state = current_state;
+  stp = 1'b0;
+  pid_active = 1'b0;
 
-    case(current_state)
+  case(current_state)
 
-        idle: begin
-            if (active && (!dir)) begin
-                next_state = send_data;
-                pid_active = 1'b1;
+    idle: begin
+      if (active && (!dir)) begin
+        next_state = send_data;
+        pid_active = 1'b1;
+      end
+    end
 
-            end
-        end
+    send_data: begin
+      if (bytecounter == countermax && nxt)
+          next_state = send_stp;
+    end
 
+    send_stp: begin
+      stp = 1'b1;
+      next_state = idle;
+    end
 
-        send_data: begin
-
-            if (bytecounter == countermax && nxt)
-                next_state = send_stp;
-
-        end
-
-        send_stp: begin
-            stp = 1'b1;
-            next_state = idle;
-        end
-
-    endcase
+  endcase
 
 
 end
@@ -282,16 +279,25 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd32)  data_out <= 8'h00; // bmInterlaceFlags (0)
               else if (bytecounter == 8'd33)  data_out <= 8'h00; // bCopyProtect (0) 
 
-              // --- PART 10: VS FRAME MJPEG [720p @ 60fps] (30 bytes) ---
+              // --- PART 10: VS FRAME MJPEG ---
               else if (bytecounter == 8'd34)   data_out <= 8'h1E; // bLength
               else if (bytecounter == 8'd35)   data_out <= 8'h24; // bDescriptorType (CS_INTERFACE)
               else if (bytecounter == 8'd36)   data_out <= 8'h07; // bDescriptorSubtype (VS_FRAME_MJPEG)
               else if (bytecounter == 8'd37)   data_out <= 8'h01; // bFrameIndex (1)
               else if (bytecounter == 8'd38)   data_out <= 8'h00; // bmCapabilities (0)
+
+            `ifdef RES_720P60
               else if (bytecounter == 8'd39)   data_out <= 8'h00; // wWidth (Low - 1280)
               else if (bytecounter == 8'd40)   data_out <= 8'h05; // wWidth (High)
               else if (bytecounter == 8'd41)   data_out <= 8'hD0; // wHeight (Low - 720)
               else if (bytecounter == 8'd42)   data_out <= 8'h02; // wHeight (High)
+            `elsif RES_1080P30
+              else if (bytecounter == 8'd39)   data_out <= 8'h00; // wWidth (Low - 1920)
+              else if (bytecounter == 8'd40)   data_out <= 8'h07; // wWidth (High)
+              else if (bytecounter == 8'd41)   data_out <= 8'h38; // wHeight (Low - 1080)
+              else if (bytecounter == 8'd42)   data_out <= 8'h04; // wHeight (High)
+            `endif
+
               else if (bytecounter == 8'd43)  data_out <= 8'h00; // dwMinBitRate (Low)
               else if (bytecounter == 8'd44)  data_out <= 8'h1C; // dwMinBitRate
               else if (bytecounter == 8'd45)  data_out <= 8'h4E; // dwMinBitRate
@@ -300,10 +306,20 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd48)  data_out <= 8'h1C; // dwMaxBitRate
               else if (bytecounter == 8'd49)  data_out <= 8'h4E; // dwMaxBitRate
               else if (bytecounter == 8'd50)  data_out <= 8'h0E; // dwMaxBitRate (High - 240Mbps)
+
+            `ifdef RES_720P60
               else if (bytecounter == 8'd51)  data_out <= 8'h20; // dwMaxVideoFrameBufferSize (Low)
               else if (bytecounter == 8'd52)  data_out <= 8'hA1; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd53)  data_out <= 8'h07; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd54)  data_out <= 8'h00; // dwMaxVideoFrameBufferSize (High - 500,000 bytes)
+            `elsif RES_1080P30
+              else if (bytecounter == 8'd51)  data_out <= 8'h40; // dwMaxVideoFrameBufferSize (Low)
+              else if (bytecounter == 8'd52)  data_out <= 8'h42; // dwMaxVideoFrameBufferSize 
+              else if (bytecounter == 8'd53)  data_out <= 8'h0F; // dwMaxVideoFrameBufferSize 
+              else if (bytecounter == 8'd54)  data_out <= 8'h00; // dwMaxVideoFrameBufferSize (High - 1,000,000 bytes)
+            `endif 
+
+            `ifdef RES_720P60
               else if (bytecounter == 8'd55)  data_out <= 8'h0A; // dwDefaultFrameInterval (Low)
               else if (bytecounter == 8'd56)  data_out <= 8'h8B; // dwDefaultFrameInterval
               else if (bytecounter == 8'd57)  data_out <= 8'h02; // dwDefaultFrameInterval
@@ -313,13 +329,30 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd61)  data_out <= 8'h8B; // dwFrameInterval
               else if (bytecounter == 8'd62)  data_out <= 8'h02; // dwFrameInterval
               else if (bytecounter == 8'd63)  data_out <= 8'h00; // dwFrameInterval (High - 60fps)   
+            `elsif RES_1080P30
+              else if (bytecounter == 8'd55)  data_out <= 8'h15; // dwDefaultFrameInterval (Low)
+              else if (bytecounter == 8'd56)  data_out <= 8'h16; // dwDefaultFrameInterval
+              else if (bytecounter == 8'd57)  data_out <= 8'h05; // dwDefaultFrameInterval
+              else if (bytecounter == 8'd58)  data_out <= 8'h00; // dwDefaultFrameInterval (High - 30fps)
+              else if (bytecounter == 8'd59)  data_out <= 8'h01; // bFrameIntervalType (1 discrete framerate)
+              else if (bytecounter == 8'd60)  data_out <= 8'h15; // dwFrameInterval (Low)
+              else if (bytecounter == 8'd61)  data_out <= 8'h16; // dwFrameInterval
+              else if (bytecounter == 8'd62)  data_out <= 8'h05; // dwFrameInterval
+              else if (bytecounter == 8'd63)  data_out <= 8'h00; // dwFrameInterval (High - 60fps)  
+            `endif
 
               // --- PART 11: VS COLOR MATCHING (6 bytes) ---
               else if (bytecounter == 8'd64)  data_out <= 8'h06; // bLength                               
 
+
               // --- CRC16 CHECKSUM ---
+            `ifdef RES_720P60
               else if (bytecounter == 8'd65) data_out <= 8'hC3; // CRC Byte 1 (Low) 
               else if (bytecounter == 8'd66) data_out <= 8'h61; // CRC Byte 2 (High)
+            `elsif RES_1080P30
+              else if (bytecounter == 8'd65) data_out <= 8'h9D; // CRC Byte 1 (Low) 
+              else if (bytecounter == 8'd66) data_out <= 8'h86; // CRC Byte 2 (High)
+            `endif 
 
               // --- STOP PADDING ---
               else if (bytecounter == 8'd67) data_out <= 8'h00; // Drive 0 before STP			                     
@@ -350,7 +383,7 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd17) data_out <= 8'h81; // bEndpointAddress (EP1 IN)
               else if (bytecounter == 8'd18) data_out <= 8'h05; // bmAttributes (0x05 = Isochronous + Asynchronous)
               else if (bytecounter == 8'd19) data_out <= 8'h00; // wMaxPacketSize (Low)
-              else if (bytecounter == 8'd20) data_out <= 8'h04; // wMaxPacketSize (High - 1024 bytes)
+              else if (bytecounter == 8'd20) data_out <= 8'h14; // wMaxPacketSize (High - 1024 bytes)
               else if (bytecounter == 8'd21) data_out <= 8'h01; // bInterval (1 = 1 microframe = 125us) 
 
               // --- PART 13: AUDIO IAD (8 bytes) ---
@@ -407,10 +440,9 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd64) data_out <= 8'h03; // bSourceID (3 - Linked to Microphone Terminal)
 
               // --- CRC16 CHECKSUM FOR PACKET 2 ---
-              else if (bytecounter == 8'd65) data_out <= 8'h5E; // CRC Byte 1
-              else if (bytecounter == 8'd66) data_out <= 8'hB2; // CRC Byte 2
+              else if (bytecounter == 8'd65) data_out <= 8'h42; // CRC Byte 1
+              else if (bytecounter == 8'd66) data_out <= 8'hBB; // CRC Byte 2
 
-              // --- STOP PADDING ---
               else if (bytecounter == 8'd67) data_out <= 8'h00; // Drive 0 before STP
             end                   
 
@@ -484,7 +516,7 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd53) data_out <= 8'h05; // bmAttributes (Isochronous, Asynchronous)
               else if (bytecounter == 8'd54) data_out <= 8'h64; // wMaxPacketSize (Low - 12 bytes/uFrame)
               else if (bytecounter == 8'd55) data_out <= 8'h00; // wMaxPacketSize (High)
-              else if (bytecounter == 8'd56) data_out <= 8'h04; // bInterval (1 microframe)
+              else if (bytecounter == 8'd56) data_out <= 8'h04; // bInterval (4 microframes)
               else if (bytecounter == 8'd57) data_out <= 8'h00; // bRefresh (0)
               else if (bytecounter == 8'd58) data_out <= 8'h00; // bSynchAddress (0)
 
@@ -562,11 +594,18 @@ always @ (posedge clk) begin
             
             else if (bytecounter == 8'd4)  data_out <= 8'h01; // bFrameIndex (1 = 720p)
             
+          `ifdef RES_720P60
             else if (bytecounter == 8'd5)  data_out <= 8'h0A; // dwFrameInterval (Byte 0) - 60fps
             else if (bytecounter == 8'd6)  data_out <= 8'h8B; // dwFrameInterval (Byte 1)
             else if (bytecounter == 8'd7)  data_out <= 8'h02; // dwFrameInterval (Byte 2)
             else if (bytecounter == 8'd8)  data_out <= 8'h00; // dwFrameInterval (Byte 3)
-            
+          `elsif RES_1080P30
+            else if (bytecounter == 8'd5)  data_out <= 8'h40; // dwFrameInterval (Byte 0) - 60fps
+            else if (bytecounter == 8'd6)  data_out <= 8'h42; // dwFrameInterval (Byte 1)
+            else if (bytecounter == 8'd7)  data_out <= 8'h0F; // dwFrameInterval (Byte 2)
+            else if (bytecounter == 8'd8)  data_out <= 8'h00; // dwFrameInterval (Byte 3)
+          `endif       
+
             else if (bytecounter == 8'd9)  data_out <= 8'h00; // wKeyFrameRate (Low)
             else if (bytecounter == 8'd10) data_out <= 8'h00; // wKeyFrameRate (High)
             
@@ -593,8 +632,14 @@ always @ (posedge clk) begin
             else if (bytecounter == 8'd26) data_out <= 8'h00; // dwMaxPayloadTransferSize (Byte 3)
             
             // --- CRC16 GOES HERE ---
+          `ifdef RES_720P60
             else if (bytecounter == 8'd27) data_out <= 8'h91; // (Calculate CRC for these 26 bytes)
             else if (bytecounter == 8'd28) data_out <= 8'h64; 
+          `elsif RES_1080P30
+            else if (bytecounter == 8'd27) data_out <= 8'h9A; // (Calculate CRC for these 26 bytes)
+            else if (bytecounter == 8'd28) data_out <= 8'hA6; 
+          `endif
+
             else if (bytecounter == 8'd29) data_out <= 8'h00; // STP Padding
           end
 

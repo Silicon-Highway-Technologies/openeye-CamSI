@@ -20,16 +20,23 @@ create_clock -period 5.000 -name sys_clk_pin -waveform {0.000 2.500} -add [get_p
 # 456MHz CSI 2-lane clock
 create_clock -period 2.190 -name cam_dphy_clk -waveform {0.000 1.095} -add [get_ports {cam_dphy_clk[1]}]
 
+#60MHz audio clock
+create_clock -period 16.666 -name phyclk -add [get_ports phyclk]
+
+#2.4mhz audio clock
+create_clock -period 416.667 -name mclk -add [get_ports mclk]
+
 set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets u_csi_rx_top/u_phy_clk/dphy_clk_in]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets clk_ext]
 
-# USB constraints 
-create_clock -period 16.666 -name phyclk [get_ports phyclk]
+# # USB constraints 
+# create_clock -period 16.666 -name phyclk [get_ports phyclk]
 
-set_input_delay -clock phyclk -max 6.0 [get_ports {DATA[*] DIR NXT}]
-set_input_delay -clock phyclk -min 1.5 [get_ports {DATA[*] DIR NXT}]
+# set_input_delay -clock phyclk -max 6.0 [get_ports {DATA[*] DIR NXT}]
+# set_input_delay -clock phyclk -min 1.5 [get_ports {DATA[*] DIR NXT}]
 
-set_output_delay -clock phyclk -max 5.0 [get_ports {DATA[*] STP}]
-set_output_delay -clock phyclk -min 0.0 [get_ports {DATA[*] STP}]
+# set_output_delay -clock phyclk -max 5.0 [get_ports {DATA[*] STP}]
+# set_output_delay -clock phyclk -min 0.0 [get_ports {DATA[*] STP}]
 
 #-------------------------------------------------------------------------
 # Async

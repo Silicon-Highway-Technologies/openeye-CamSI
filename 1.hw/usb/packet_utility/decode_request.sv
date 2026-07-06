@@ -12,6 +12,8 @@ module decode_request(
 
 `include "request_parameters.vh"
 
+// counter that starts when DATA == DATA0 PID  //
+// and counts each cycle afterwards (DIR == 1) //
 logic [3:0] bytecounter;
 logic [7:0] bmRequestType;
 logic [7:0] bRequest;

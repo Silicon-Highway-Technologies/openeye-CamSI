@@ -8,10 +8,12 @@
  * Copyright (C) 2024 Robert Metchev
  */
 
+// `timescale 1ns/10ps
+
  module jpeg_encoder #(
     parameter DW = 8,
     parameter SENSOR_X_SIZE    = 1280, //1280,
-    parameter SENSOR_Y_SIZE    = 720
+    parameter SENSOR_Y_SIZE    = 720  //720
 )(
     input   logic               start_capture_in,
 
@@ -22,7 +24,7 @@
     input   logic               line_valid_in,
 
     output  logic [31:0]        data_out,           // 4 bytes of data
-    output  logic [23:0]        address_out,        // Adress of 16-byte data in image buffer (in bytes) // edited to 20 bit //
+    output  logic [23:0]        address_out,        // Adress of 16-byte data in image buffer (in bytes)
     output  logic               image_valid_out,    // Set to 1 when compression finished. If 1, size of encoded data is address_out
     output  logic               data_valid_out,     // Qualifier for valid data. Data is invalid if 0.
 
@@ -36,7 +38,6 @@
     input   logic               jpeg_fast_reset_n_in,
     input   logic               jpeg_slow_clock_in,
     input   logic               jpeg_slow_reset_n_in
-
 );
 
 // clock
@@ -47,7 +48,17 @@ logic               slow_clock;
 logic               slow_reset_n;
 
 // JPEG FSM
-enum logic [2:0] {IDLE, RESET, WAIT_FOR_FRAME_START, COMPRESS, IMAGE_VALID} state;
+// enum logic [2:0] {IDLE, RESET, WAIT_FOR_FRAME_START, COMPRESS, IMAGE_VALID} state;
+logic [2:0] state;
+
+parameter IDLE                 = 3'b000;
+parameter RESET                = 3'b001;
+parameter WAIT_FOR_FRAME_START = 3'b010;
+parameter COMPRESS             = 3'b011;
+parameter IMAGE_VALID_1        = 3'b100;
+parameter IMAGE_VALID_2        = 3'b101;
+parameter IMAGE_VALID_3        = 3'b110;
+
 logic               jpeg_reset_n;
 logic               jpeg_en;
 
@@ -65,7 +76,7 @@ logic [2:0]         di_cnt;
 logic [31:0]        out_data, out_data_rr;
 logic               out_tlast, out_valid, out_hold;
 
-// x22 reset
+// x22 
 always_comb clk_x22 = jpeg_fast_clock_in;
 reset_sync reset_sync_x22 (.clock_in(clk_x22), .async_reset_n_in(jpeg_fast_reset_n_in & jpeg_reset_n), .sync_reset_n_out(resetn_x22));
 
@@ -89,16 +100,28 @@ always @(posedge pixel_clock_in)
 if (!pixel_reset_n_in)
     state <= IDLE;
 else 
-    case(state)
-    RESET:                  if (~frame_valid_in) state <= WAIT_FOR_FRAME_START;     // reset state (1), hold in reset until end of previous frame
-    WAIT_FOR_FRAME_START:   if (frame_valid_in) state <= COMPRESS;                  // wait for frame start (2)
-    COMPRESS:               if (compress_2_image_valid) state <= IMAGE_VALID;       // compress state (3)
-    default:                if (start_capture_in) state <= RESET;                   // idle state (0) or image valid state (4)
-    endcase        
+case(state)
+    IDLE:                   if (start_capture_in) state <= RESET; // Start capture triggers RESET
+    RESET:                  if (~frame_valid_in) state <= WAIT_FOR_FRAME_START;     // Wait for blanking
+    WAIT_FOR_FRAME_START:   if (frame_valid_in) state <= COMPRESS;                  // Wait for first active pixel
+    COMPRESS:               if (compress_2_image_valid) state <= IMAGE_VALID_1;     // Compress frame
+    
+    // The 3-Cycle Pulse Stretcher
+    IMAGE_VALID_1:          state <= IMAGE_VALID_2; 
+    IMAGE_VALID_2:          state <= IMAGE_VALID_3;
+    IMAGE_VALID_3:          state <= IDLE;          // Safely return to IDLE
+    
+    default:                state <= IDLE;
+endcase        
 
 always_comb jpeg_reset_n    = ~(state == RESET);
-always_comb jpeg_en         = state == WAIT_FOR_FRAME_START | state == COMPRESS;
-always_comb image_valid_out = state == IMAGE_VALID;
+
+// always_comb jpeg_en         = state == WAIT_FOR_FRAME_START | state == COMPRESS;
+always_comb jpeg_en         = ((state == COMPRESS) || (frame_valid_in)) && (state != IDLE);
+
+always_comb image_valid_out = (state == IMAGE_VALID_1) | 
+                              (state == IMAGE_VALID_2) | 
+                              (state == IMAGE_VALID_3);
 
 // image size config
 always_comb x_size_m1 = x_size_in - 1;
@@ -143,24 +166,17 @@ psync1 psync_frame_start (
 );
 
 // Size reg logic
-logic [23:0]        size;
+logic [19:0]        size;
 always @(posedge slow_clock)
 if (frame_start)
     size <= 0;
 else if (out_valid & ~out_hold)
     size <= size + 4;
 
-// // data out: need to reverse data endianness 
-// always_comb
-//     for(int i=0; i<4; i++)
-//         data_out[8*i +: 8] = out_data[8*(3-i) +: 8];    
-// always_comb address_out = size;
-// always_comb data_valid_out = out_valid;
-// always_comb out_hold = 0;
-
+// data out: need to reverse data endianness 
 always @(posedge slow_clock) begin
   if (!jpeg_slow_reset_n_in) begin
-        for(int i=0; i<4; i++)
+      for(int i=0; i<4; i++)
           data_out[8*i +: 8] <= 0;    
       address_out <= 0;
   end
@@ -182,6 +198,5 @@ else
     data_valid_out <= out_valid;
 
 always_comb out_hold = data_valid_out;
-
 
 endmodule

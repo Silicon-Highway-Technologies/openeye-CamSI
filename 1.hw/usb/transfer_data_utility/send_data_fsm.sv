@@ -2,16 +2,24 @@ module send_data_fsm(
   input clk,
   input reset,
   input start_transmitting,
+  input [3:0] send_data_PID,
   output logic finished_transmitting,
   input [7:0] data_in,
   output logic [7:0] data_out,
+  input zlp_mode,
   input nxt,
+  input audio_mode,
   output logic stp,
   input afifo_empty,            // Empty flag from actual AFIFO
+  input sending_footer,
   input send_zlp,
+  input jpeg_send_data,
+  output logic sending_packet,
   output logic sending_crc,
   output logic afifo_read       // Read flag sent to actual AFIFO
 );
+
+`include "pid.vh"
 
 // FSM parameters //
 localparam SEND_IDLE        = 3'b000;
@@ -63,29 +71,41 @@ always @(*) begin
   afifo_read = 1'b0;
   finished_transmitting = 1'b0;
   sending_crc = 1'b0;
+  sending_packet = 1'b0;
 
   case(current_state)
     SEND_IDLE: begin
-      if (start_transmitting && !afifo_empty) begin
+
+      if ((zlp_mode && start_transmitting) || (afifo_empty && start_transmitting)) begin
+        if (nxt) begin
+          next_state = SEND_CRCLOW;
+          sending_crc = 1'b1;
+        end
+      end
+
+      else if (start_transmitting && !afifo_empty) begin
         if (nxt) begin
           if (send_zlp) begin
             next_state = SEND_CRCLOW;
             sending_crc = 1'b1;
           end else begin
             next_state = SEND_DATA_ACTIVE;
-            afifo_read = 1'b1;
+
+            if (jpeg_send_data || audio_mode) afifo_read = 1'b1;
           end
         end
       end
+
     end
 
     SEND_DATA_ACTIVE: begin
       if (nxt) begin
-        if (afifo_empty) begin
+        sending_packet = 1'b1;
+        if (afifo_empty && !sending_footer) begin
           next_state = SEND_CRCLOW;
           sending_crc = 1'b1;
         end else begin
-          afifo_read = 1'b1;
+          if (jpeg_send_data || audio_mode) afifo_read = 1'b1; 
         end
       end
     end
@@ -125,7 +145,16 @@ always_ff @(posedge clk) begin
     case(current_state)
     
       SEND_IDLE: begin
-        if (start_transmitting && !afifo_empty) begin
+
+        if ((zlp_mode && start_transmitting) || (afifo_empty && start_transmitting)) begin
+          if (nxt) begin
+            data_out_reg <= ~current_crc[7:0];
+          end else begin
+            data_out_reg <= {2'b01, 2'b00, send_data_PID};
+          end
+        end
+
+        else if (start_transmitting && !afifo_empty) begin
           if (nxt) begin
             if (send_zlp) begin
               data_out_reg <= ~current_crc[7:0]; 
@@ -134,7 +163,7 @@ always_ff @(posedge clk) begin
               current_crc  <= next_crc_val;
             end
           end else begin
-             data_out_reg <= {2'b01, 2'b00, 4'b0011}; // always PID DATA0
+             data_out_reg <= {2'b01, 2'b00, send_data_PID};
           end
         end else begin
           data_out_reg <= 8'b0;
@@ -143,7 +172,7 @@ always_ff @(posedge clk) begin
 
       SEND_DATA_ACTIVE: begin
         if (nxt) begin
-          if (afifo_empty) begin
+          if (afifo_empty && !sending_footer) begin
             data_out_reg <= ~current_crc[7:0]; 
           end else begin
             data_out_reg <= data_in;
