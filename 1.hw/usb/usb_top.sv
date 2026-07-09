@@ -18,8 +18,6 @@ module usb_top (
   input frame_transmitted,
 
   output logic handshake_finished,
-  output logic sending_packet,
-
 
   input [7:0] jpeg_data_in,
   input jpeg_data_valid_in,
@@ -125,7 +123,6 @@ fsm_transfer_data fsm_transfer_data_inst(
   .audio_afifo_empty(audio_afifo_empty),
   .audio_afifo_read(audio_afifo_read),  
   .image_valid_out(image_valid_out),
-  .sending_packet(sending_packet),
   .jpeg_afifo_finished(jpeg_afifo_finished),
   .frame_transmitted(frame_transmitted),
   .jpeg_bytes_in_fifo(jpeg_bytes_in_fifo), 

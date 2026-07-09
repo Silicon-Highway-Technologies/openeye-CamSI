@@ -14,7 +14,6 @@ module send_data_fsm(
   input sending_footer,
   input send_zlp,
   input jpeg_send_data,
-  output logic sending_packet,
   output logic sending_crc,
   output logic afifo_read       // Read flag sent to actual AFIFO
 );
@@ -71,7 +70,6 @@ always @(*) begin
   afifo_read = 1'b0;
   finished_transmitting = 1'b0;
   sending_crc = 1'b0;
-  sending_packet = 1'b0;
 
   case(current_state)
     SEND_IDLE: begin
@@ -100,7 +98,6 @@ always @(*) begin
 
     SEND_DATA_ACTIVE: begin
       if (nxt) begin
-        sending_packet = 1'b1;
         if (afifo_empty && !sending_footer) begin
           next_state = SEND_CRCLOW;
           sending_crc = 1'b1;

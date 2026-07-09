@@ -24,7 +24,6 @@ module fsm_transfer_data(
   output logic [6:0] debug_fsm,
 
 	output logic [4:0] current_state,
-  output logic sending_packet,
 	output logic active
 
 );
@@ -181,7 +180,6 @@ send_data_fsm send_data_fsm_inst(
 	.sending_crc(sending_crc),
 	.stp(stp_value_send_data),
   .sending_footer(sending_footer),
-  .sending_packet(sending_packet),
   .zlp_mode((current_state == zlp_mode) && !audio_mode),
   .send_zlp(send_zlp),
 	.afifo_empty(afifo_empty)

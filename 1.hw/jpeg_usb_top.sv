@@ -14,16 +14,13 @@ module jpeg_usb_top(
 
   output logic phyrst,
   output logic [15:0] debug_jpeg_usb,
+  output logic debug_led_usb,
 
-  // jpeg input (only simulation for now)
-
-  input start_capture_in,  // must rise before every frame to trigger the FSM <----------- IS THIS CORRECT? CURRENT IMPL DOES NOT COMPLY WITH THIS ASSUMPTION
   input [7:0] red_data_in,       // 8-bit value of the red channel
   input [7:0] green_data_in,     // 8-bit value of the green channel
   input [7:0] blue_data_in,      // 8-bit value of the blue channel
   input frame_valid_in,    // active while a frame is being transmitted
   input line_valid_in,     // active while a line is being transmitted
-  output logic image_valid_out,   // when 1, a frame has been fully processed
   input [1:0] qf_select_in,      // select one of the 4 possible QF (00 for 50%, 01 for 100%, 10 for 10%, 11 for 25%)
   input [10:0] x_size_in, 
   input [10:0] y_size_in, 
@@ -35,12 +32,7 @@ module jpeg_usb_top(
   input jpeg_slow_clock_in,
   input jpeg_slow_reset_n_in,
 
-  output logic sending_packet,
-  output logic handshake_finished,
-
   output logic jpeg_data_valid_out,
-
-  output logic full,
 
   // mic data //
   output logic mclk,
@@ -65,11 +57,22 @@ logic jpeg_afifo_data_valid;
 logic afifo_wait;
 logic audio_afifo_empty;
 logic audio_afifo_read;
-
+logic start_capture;
 logic [23:0] jpeg_bytes_in_fifo;
 logic [7:0] debug_usb;
+logic image_valid_out;   // when 1, a frame has been fully processed
+
 
 assign mdis = 1'b0;
+
+// drive signal start_capture (stays at 1 until reset) //
+always @(posedge pixel_clock_in) begin
+
+  if (!button) start_capture <= 1'b0;
+
+  else if (handshake_finished && !line_valid_in && !frame_valid_in) start_capture <= 1'b1;
+
+end
 
 usb_top usb_top_inst (
   .button(button),
@@ -81,7 +84,6 @@ usb_top usb_top_inst (
   .DATA(DATA),
   .phyrst(phyrst),
   .handshake_finished(handshake_finished),
-  .sending_packet(sending_packet),
   .jpeg_afifo_empty(jpeg_afifo_empty),
   .jpeg_afifo_read(jpeg_afifo_read),
   .audio_afifo_empty(audio_afifo_empty),
@@ -98,7 +100,7 @@ usb_top usb_top_inst (
 );
 
 jpeg_afifo_top jpeg_afifo_top_inst(
-  .start_capture_in(start_capture_in),
+  .start_capture_in(start_capture),
   .red_data_in(red_data_in),
   .green_data_in(green_data_in),
   .blue_data_in(blue_data_in),
@@ -156,7 +158,6 @@ audio_afifo_top audio_afifo_top_inst(
   .rst(phyrst),
   .clk_24MHz(clk_24MHz),
   .afifo_write_en(audio_afifo_write_en && transmission_started),
-  // .afifo_write_en(audio_afifo_write_en && start_capture_in), // start_capture_in is a PULSE in this context //
   .afifo_read(audio_afifo_read),
   .audio_8bit(audio_8bit),
   .data_to_send(audio_afifo_data),
@@ -174,6 +175,7 @@ fsm_afifo_finished fsm_afifo_finished_inst(
   .jpeg_afifo_finished(jpeg_afifo_finished)
 );
 
-assign debug_jpeg_usb = {debug_usb, image_valid_out, line_valid_in, frame_valid_in, jpeg_afifo_empty, full, frame_transmitted, jpeg_afifo_finished, start_capture_in};
+assign debug_jpeg_usb = {debug_usb, image_valid_out, line_valid_in, frame_valid_in, jpeg_afifo_empty, full, frame_transmitted, jpeg_afifo_finished, 1'b0};
+assign debug_led_usb = full;
 
 endmodule

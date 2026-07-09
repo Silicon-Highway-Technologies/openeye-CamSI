@@ -271,64 +271,12 @@ IBUFDS #(
     .jpeg_slow_clock(jpeg_slow_clock),
     .pixel_clock(pixel_clock)
   );
-  
-  logic [31:0] data_out;
-  logic [23:0] address_out;
-  logic image_valid_out;
-  logic data_valid_out;
-  logic [2:0] state;
 
-  // jpeg_encoder jpeg_encoder_inst (
-  //   .start_capture_in(cam_en),
-  //   .red_data_in({hdmi_pix.R, 2'b0}),
-  //   .green_data_in({hdmi_pix.G, 2'b0}),
-  //   .blue_data_in({hdmi_pix.B, 2'b0}),
-  //   .frame_valid_in(!hdmi_frame),
-  //   .line_valid_in(!hdmi_blank),
-  //   .data_out(data_out),
-  //   .address_out(address_out),
-  //   .image_valid_out(image_valid_out),
-  //   .data_valid_out(data_valid_out),
-  //   .qf_select_in(2'b10),
-  //   .x_size_in(11'd1280),
-  //   .y_size_in(10'd720),
-  //   .pixel_clock_in(pixel_clock),
-  //   .pixel_reset_n_in(sys_rst_n),
-  //   .jpeg_fast_clock_in(jpeg_fast_clock),
-  //   .jpeg_fast_reset_n_in(sys_rst_n),
-  //   .jpeg_slow_clock_in(jpeg_slow_clock),
-  //   .jpeg_slow_reset_n_in(sys_rst_n),
-  //   .state(state),
-  //   .*
-  // );
-
-logic start_capture;
-
-always @(posedge pixel_clock) begin
-
-  if (!sys_rst_n) start_capture <= 1'b0;
-
-  else if (usb_handshake_finished && !line_valid && !frame_valid) start_capture <= 1'b1;
-
-end
-
-logic [7:0] afifo_data_out;
-logic afifo_data_valid_out;
-logic afifo_wait;
-logic sending_packet;
-logic usb_handshake_finished;
 logic [15:0] debug_jpeg_usb;
-logic afifo_led;
-logic jpeg_data_valid_out;
-logic full;
-
-logic frame_valid, line_valid;
-assign frame_valid = !hdmi_frame;
-assign line_valid = !hdmi_blank;
+logic debug_led_usb;
 
 jpeg_usb_top jpeg_usb_top_inst (
   .button               (sys_rst_n),
-  // .led                  (led),
   .sysclk(clk_ext),
 
   // USB3343 ULPI Interface
@@ -338,19 +286,18 @@ jpeg_usb_top jpeg_usb_top_inst (
   .STP                  (STP),
   .DATA                 (DATA),
   .phyrst               (phyrst),
-  .debug_jpeg_usb       (debug_jpeg_usb),
 
-  .full(full),
+  .debug_jpeg_usb       (debug_jpeg_usb),
+  .debug_led_usb        (debug_led_usb),
 
   // JPEG Input
-  .start_capture_in(start_capture),
-  // .start_capture_in(csi_in_frame),
+
   .red_data_in(hdmi_pix.R),
   .green_data_in(hdmi_pix.G),
   .blue_data_in(hdmi_pix.B),
-  .frame_valid_in(frame_valid),
-  .line_valid_in(line_valid),
-  .image_valid_out      (image_valid_out),
+  .frame_valid_in(!hdmi_frame),
+  .line_valid_in(!hdmi_blank),
+  
 `ifdef QF10
   .qf_select_in(2'b10),
 `elsif QF25
@@ -380,11 +327,7 @@ jpeg_usb_top jpeg_usb_top_inst (
   // audio //
   .mclk(mclk),
   .mdis(mdis),
-  .mdata(mdata),
-
-  // Status Signals
-  .sending_packet       (sending_packet),
-  .handshake_finished (usb_handshake_finished)
+  .mdata(mdata)
 );
 
 //--------------------------------
@@ -420,8 +363,7 @@ jpeg_usb_top jpeg_usb_top_inst (
    );
   
 assign debug_pins = debug_jpeg_usb;
-
-assign led = full;
+assign led = debug_led_usb;
 
 endmodule: top
 
