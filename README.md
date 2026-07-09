@@ -511,6 +511,7 @@ To distinguish between the two interfaces, the host assigns a **different endpoi
    <img width="60%" src="0.doc/pictures_sihi/usb_fsm.drawio.png">
 </p>
 
+
 #### USB Simulation
 
 In the simulation, the [testbench environment](2.sim/jpeg_usb_audio/usb_tb.sv) is modelled as the **USB host**, while the [module instantiated](1.hw/usb/usb_top.sv) performs as the **USB device**. The host behaves exactly as a real USB host would, as observed by using a logic analyzer to monitor the values of the ULPI ports. The testbench mimics operations such as **chirping**, **RXCMD transmitting** and **packet transmitting**. Additionally, a memory block that holds the sequence of the requests sent by the host is instantiated and used inside the testbench:
