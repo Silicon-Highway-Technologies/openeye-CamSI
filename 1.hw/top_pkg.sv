@@ -64,6 +64,9 @@
 // `define HDMI_1080p30
 //`define HDMI_1080p60 /*Artix-7 nominally cannot do this, but we push it*/ 
 
+//----------------Select whether to apply the Simple Color Balance ISP algorithm
+// `define SCB
+`undef SCB
 
 package top_pkg;
    

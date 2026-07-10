@@ -1,8 +1,3 @@
-`define TEST_USB
-// `define USE_SCB 
-
-// eventually we must make SCB work when called in ISP //
-
 parameter AFIFO_SIZE = 4'd14;
 
 `include "settings.vh"
@@ -36,9 +31,7 @@ module jpeg_afifo_top
 
     // fifo input only when usb declared
 
-    `ifdef TEST_USB
     input fifo_read_en,
-    `endif
 
     // fifo output //
     output logic  [7:0] afifo_data_out,
@@ -55,40 +48,10 @@ module jpeg_afifo_top
     output logic empty
 );
 
-logic [7:0] red_data_balanced;
-logic [7:0] green_data_balanced;
-logic [7:0] blue_data_balanced;
-
-logic line_valid_in_delayed;
-logic frame_valid_in_delayed;
-
 logic [31:0] data_out;
 logic [23:0] address_out;
 
 logic read_en;
-
-`ifdef USE_SCB 
-  simplecolorbalance simplecolorbalance_inst(
-    .clk(pixel_clock_in),
-    .reset_async(!pixel_reset_n_in),
-    .red_data_in(red_data_in),
-    .green_data_in(green_data_in),
-    .blue_data_in(blue_data_in),
-    .line_valid_in(line_valid_in),
-    .frame_valid_in(frame_valid_in),
-    .red_data_out(red_data_balanced),
-    .green_data_out(green_data_balanced),
-    .blue_data_out(blue_data_balanced),
-    .line_valid_out(line_valid_in_delayed),
-    .frame_valid_out(frame_valid_in_delayed)
-  );
-`else
-  assign red_data_balanced = red_data_in;
-  assign green_data_balanced = green_data_in;
-  assign blue_data_balanced = blue_data_in;
-  assign line_valid_in_delayed = line_valid_in;
-  assign frame_valid_in_delayed = frame_valid_in;
-`endif
 
 // instantiate jpeg //
 // eventually have to remove clock outs //
@@ -98,11 +61,11 @@ jpeg_encoder #(
   .SENSOR_Y_SIZE(ACTIVE_HEIGHT)
 ) jpeg_encoder_inst (
   .start_capture_in(start_capture_in),
-  .red_data_in({red_data_balanced, 2'b0}),
-  .green_data_in({green_data_balanced, 2'b0}),
-  .blue_data_in({blue_data_balanced, 2'b0}),
-  .frame_valid_in(frame_valid_in_delayed),
-  .line_valid_in(line_valid_in_delayed),
+  .red_data_in({red_data_in, 2'b0}),
+  .green_data_in({green_data_in, 2'b0}),
+  .blue_data_in({blue_data_in, 2'b0}),
+  .frame_valid_in(frame_valid_in),
+  .line_valid_in(line_valid_in),
   .data_out(data_out),
   .address_out(address_out),
   .image_valid_out(image_valid_out),
@@ -186,15 +149,8 @@ assign data_in_fifo = (counter_enable) ? (read_data_out_buffer) : (8'b0);
 
 assign afifo_wr = write_en & ~full;
 assign afifo_rd = read_en & ~empty;
-
 assign write_en = counter_enable;
-
-`ifdef TEST_USB assign read_en = fifo_read_en;
-`else assign read_en = ~empty;
-`endif
-
-// right now we always read when the buffer is not empty //
-// if we add USB functionality we may not want to read always! //
+assign read_en = fifo_read_en;
 
 // Instantiate the asynchronous FIFO
 afifo #(

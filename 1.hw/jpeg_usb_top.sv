@@ -126,9 +126,7 @@ jpeg_afifo_top jpeg_afifo_top_inst(
 
   .clk_60MHz(phyclk),
   .reset_60MHz(phyrst),
-  // `ifdef TEST_USB
   .fifo_read_en(jpeg_afifo_read),
-  // `endif
   .empty(jpeg_afifo_empty),
   .full_packet_in_fifo(full_packet_in_fifo),
   .afifo_data_out(jpeg_afifo_data),

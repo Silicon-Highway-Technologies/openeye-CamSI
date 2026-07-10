@@ -39,9 +39,6 @@
 // Description: Top-level interconnect for all ISP functions
 //========================================================================
 
-`define SCB
-`undef SCB
-
 module isp_top
   import top_pkg::*;
   import hdmi_pkg::*;
@@ -119,7 +116,8 @@ logic [7:0] red_out;
 logic [7:0] blue_out;
 logic [7:0] green_out;
 
-// raise signals line_valid_in and frame_valid_in accordingly //
+// raise signals line_valid and frame_valid accordingly //
+// which are used by simple color balance //
 line_frame_signal_generator line_frame_signal_generator_inst(
    .clk(clk),
    .rst(rst),

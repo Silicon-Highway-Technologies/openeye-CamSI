@@ -43,7 +43,11 @@
 //   - CSI_RX camera front-end
 //   - ISP blocks:
 //        - raw2rgb
+//        - simplecolorbalance
 //   - Asynchronous FIFO
+//   - JPEG encoder
+//   - Audio module
+//   - USB interface
 //   - HDMI monitor back-end
 //   - Misc and Debug utilities
 //========================================================================
@@ -259,76 +263,83 @@ IBUFDS #(
    );
 
 
+//--------------------------------
+// JPEG Clock generator
+//--------------------------------
   logic jpeg_fast_clock;
   logic jpeg_slow_clock;
   logic pixel_clock;
 
   jpeg_clkgen jpeg_clkgen_inst(
-    .sysclk(clk_ext),
-    .reset(areset),
-    .hdmi_clock(hdmi_clk),
-    .jpeg_fast_clock(jpeg_fast_clock),
-    .jpeg_slow_clock(jpeg_slow_clock),
-    .pixel_clock(pixel_clock)
+    .sysclk             (clk_ext),       //i
+    .reset              (areset),        //i
+    .hdmi_clock         (hdmi_clk),      //i
+    .jpeg_fast_clock (jpeg_fast_clock),  //o
+    .jpeg_slow_clock (jpeg_slow_clock),  //o
+    .pixel_clock        (pixel_clock)    //o
   );
 
-logic [15:0] debug_jpeg_usb;
-logic debug_led_usb;
+//--------------------------------
+// JPEG-USB-AUDIO module
+//--------------------------------
 
-jpeg_usb_top jpeg_usb_top_inst (
-  .button               (sys_rst_n),
-  .sysclk(clk_ext),
+  logic [15:0] debug_jpeg_usb;
+  logic debug_led_usb;
 
-  // USB3343 ULPI Interface
-  .phyclk               (phyclk),
-  .DIR                  (DIR),
-  .NXT                  (NXT),
-  .STP                  (STP),
-  .DATA                 (DATA),
-  .phyrst               (phyrst),
+  jpeg_usb_top jpeg_usb_top_inst (
+    .button               (sys_rst_n),        //i
+    .sysclk               (clk_ext),          //i
 
-  .debug_jpeg_usb       (debug_jpeg_usb),
-  .debug_led_usb        (debug_led_usb),
+    // USB3343 ULPI Interface
+    .phyclk               (phyclk),           //i
+    .DIR                  (DIR),              //i
+    .NXT                  (NXT),              //i
+    .STP                  (STP),              //o
+    .DATA                 (DATA),             //io
+    .phyrst               (phyrst),           //o
 
-  // JPEG Input
+    // JPEG Input
+    .red_data_in          (hdmi_pix.R),       //i
+    .green_data_in        (hdmi_pix.G),       //i
+    .blue_data_in         (hdmi_pix.B),       //i
+    .frame_valid_in       (!hdmi_frame),      //i
+    .line_valid_in        (!hdmi_blank),      //i
+    
+  `ifdef QF10
+    .qf_select_in         (2'b10),            //i
+  `elsif QF25
+    .qf_select_in         (2'b11),            //i
+  `elsif QF50
+    .qf_select_in         (2'b00),            //i
+  `elsif QF100
+    .qf_select_in         (2'b01),            //i
+  `endif
 
-  .red_data_in(hdmi_pix.R),
-  .green_data_in(hdmi_pix.G),
-  .blue_data_in(hdmi_pix.B),
-  .frame_valid_in(!hdmi_frame),
-  .line_valid_in(!hdmi_blank),
-  
-`ifdef QF10
-  .qf_select_in(2'b10),
-`elsif QF25
-  .qf_select_in(2'b11),
-`elsif QF50
-  .qf_select_in(2'b00),
-`elsif QF100
-  .qf_select_in(2'b01),
-`endif
+  `ifdef HDMI_720p60
+    .x_size_in            (11'd1280),         //i
+    .y_size_in            (10'd720),          //i
+  `elsif HDMI_1080p30
+    .x_size_in            (11'd1920),         //i
+    .y_size_in            (11'd1080),         //i
+  `endif
 
-`ifdef HDMI_720p60
-  .x_size_in            (11'd1280),
-  .y_size_in            (10'd720),
-`elsif HDMI_1080p30
-  .x_size_in            (11'd1920),
-  .y_size_in            (11'd1080),
-`endif
+    // Clocks and Resets
+    .pixel_clock_in       (pixel_clock),      //i
+    .pixel_reset_n_in     (sys_rst_n),        //i
+    .jpeg_fast_clock_in   (jpeg_fast_clock),  //i
+    .jpeg_fast_reset_n_in (sys_rst_n),        //i
+    .jpeg_slow_clock_in   (jpeg_slow_clock),  //i
+    .jpeg_slow_reset_n_in (sys_rst_n),        //i
 
-  // Clocks and Resets
-  .pixel_clock_in(pixel_clock),
-  .pixel_reset_n_in(sys_rst_n),
-  .jpeg_fast_clock_in(jpeg_fast_clock),
-  .jpeg_fast_reset_n_in(sys_rst_n),
-  .jpeg_slow_clock_in(jpeg_slow_clock),
-  .jpeg_slow_reset_n_in(sys_rst_n),
-
-  // audio //
-  .mclk(mclk),
-  .mdis(mdis),
-  .mdata(mdata)
-);
+    // audio //
+    .mclk                 (mclk),             //i
+    .mdis                 (mdis),             //i
+    .mdata                (mdata),            //i
+    
+    // misc - debug //
+    .debug_jpeg_usb       (debug_jpeg_usb),   //i
+    .debug_led_usb        (debug_led_usb)     //i
+  );
 
 //--------------------------------
 // HDMI backend
@@ -361,7 +372,7 @@ jpeg_usb_top jpeg_usb_top_inst (
       .x            (x),            //o'bus12_t
       .y            (y)             //o'bus11_t
    );
-  
+
 assign debug_pins = debug_jpeg_usb;
 assign led = debug_led_usb;
 
