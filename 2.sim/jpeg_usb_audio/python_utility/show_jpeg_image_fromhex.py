@@ -48,11 +48,11 @@ def hex_to_jpeg(input_file: str, output_file: str, width: int, height: int, qf: 
 
 hex_to_jpeg(
     # input_file="../image_files/txts/seagulls_encoded_original.txt",
-    input_file="../image_files/txts/seagulls_encoded_1.txt",    
-    output_file="../image_files/output_jpeg/seagulls_dump.jpg",
+    input_file="input.txt",    
+    output_file="output.jpg",
     width=1280,
     height=720,
-    qf=10
+    qf=50
 )
 
 # hex_to_jpeg(

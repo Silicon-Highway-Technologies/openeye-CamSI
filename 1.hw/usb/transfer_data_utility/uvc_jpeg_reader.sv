@@ -56,27 +56,27 @@ initial begin
 
 `ifdef RES_720P60
   `ifdef QF10
-    $readmemh("../mem/headers_720p_qf10.mem", jpeg_header);
+    $readmemh("headers_720p_qf10.mem", jpeg_header);
   `elsif QF25
-    $readmemh("../mem/headers_720p_qf25.mem", jpeg_header);  
+    $readmemh("headers_720p_qf25.mem", jpeg_header);  
   `elsif QF50
-    $readmemh("../mem/headers_720p_qf50.mem", jpeg_header);  
+    $readmemh("headers_720p_qf50.mem", jpeg_header);  
   `elsif QF100 
-    $readmemh("../mem/headers_720p_qf100.mem", jpeg_header);          
+    $readmemh("headers_720p_qf100.mem", jpeg_header);          
   `endif
 `elsif RES_1080P30
   `ifdef QF10
-    $readmemh("../mem/headers_1080p_qf10.mem", jpeg_header);
+    $readmemh("headers_1080p_qf10.mem", jpeg_header);
   `elsif QF25
-    $readmemh("../mem/headers_1080p_qf25.mem", jpeg_header);  
+    $readmemh("headers_1080p_qf25.mem", jpeg_header);  
   `elsif QF50
-    $readmemh("../mem/headers_1080p_qf50.mem", jpeg_header);  
+    $readmemh("headers_1080p_qf50.mem", jpeg_header);  
   `elsif QF100 
-    $readmemh("../mem/headers_1080p_qf100.mem", jpeg_header);          
+    $readmemh("headers_1080p_qf100.mem", jpeg_header);          
   `endif
 `endif
 
-  $readmemh("../mem/footers.mem", jpeg_footer);
+  $readmemh("footers.mem", jpeg_footer);
 
 end
 

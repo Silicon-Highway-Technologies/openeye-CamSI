@@ -55,8 +55,7 @@ logic [6:0] address;
 
 logic [6:0] debug_fsm;
 
-logic pdm_pulse, clk_24MHz, pcm_pulse;
-logic audio_afifo_write_en, audio_afifo_empty;
+logic audio_afifo_empty;
 logic [7:0] audio_8bit, audio_afifo_data;
 logic [2:0] config_descriptor_packet_counter;
 

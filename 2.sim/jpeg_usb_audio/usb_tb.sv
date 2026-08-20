@@ -236,7 +236,6 @@ module usb_tb();
     // phases have concluded - PHY sends an IN PID with ENDPOINT 1 //
     // I can keep responding / reading packets but for now we shift focus //
 
-    // for (i = 0; i < 1000; i = i + 1) begin // repeat this 100 times
     while(1) begin
 
       // send video data //

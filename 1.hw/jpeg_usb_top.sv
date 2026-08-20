@@ -48,7 +48,6 @@ logic pdm_pulse;
 logic [7:0] audio_8bit;
 logic audio_afifo_write_en;
 logic handshake_finished;
-logic full_packet_in_fifo;
 logic transmission_started;
 logic jpeg_afifo_empty;
 logic jpeg_afifo_read;
@@ -128,7 +127,6 @@ jpeg_afifo_top jpeg_afifo_top_inst(
   .reset_60MHz(phyrst),
   .fifo_read_en(jpeg_afifo_read),
   .empty(jpeg_afifo_empty),
-  .full_packet_in_fifo(full_packet_in_fifo),
   .afifo_data_out(jpeg_afifo_data),
   .afifo_data_valid_out(jpeg_afifo_data_valid),
   .afifo_wait(afifo_wait)
