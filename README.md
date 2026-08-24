@@ -576,6 +576,48 @@ It is evident that, when transmitting both Video and Audio, the latter is neglig
 
 For `60FPS` to be supported, each frame has to occupy less than **24.75 / 60 = ~410kB**, while for `30FPS` the size of the frame must not exceed **24.57 / 30 = ~820kB**. As shown in the JPEG analysis, an encoded frame occupies around **60kB** for `720p` and **290kB** for `1080p`, so the transmission can be carried out without issues. In fact, a higher FPS is theoretically possible based on these numbers.
 
+---
+
+## Setup Guide
+
+To use the camera and microphone, you need:
+- An **FPGA board** of your choice (e.g. `Puzhi Artix-7`)
+- The two **custom PCBs** ([Board 1](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/KiCad_WCAM-BREAKOUT-PCB-R03) - [Board 2](https://github.com/OV-Tech-GmbH/OVT13/tree/main/01_Electronics/02_Webcam/KiCad_FMC-USB-PHY-BOARD-R02))
+- A supported MIPI CSI-2 **Camera Sensor** (i.e. `IMX219` or `OV2740`)
+
+The project parameter configuration is done by making changes to module [`top_pkg.sv`](1.hw/top_pkg.sv). The adjustable parameters include:
+- The **sensor type**
+- The **FPGA model** (`PUZHI` or a different board)
+- The **resolution & framerate** (`720p60` or `1080p30`)
+- Whether or not you want to use the **ISP block**
+
+**Synthesis and Implementation** can be performed either with commercial tools such as `Vivado`, or open-source tools such as `OpenXC7`.
+
+**Bitstream loading** can be performed either with commercial tools such as `Vivado`, or open-source tools such as `openFPGALoader`.
+
+If you are using `Vivado` for the above procedures:
+- Open `Vivado` and then choose the Vivado Project included in this codespace ([`vivado.xpr`](3.build/vivado/vivado.xpr))
+- Make any changes you wish to make in the code, or in the file [`top_pkg.sv`](1.hw/top_pkg.sv)
+  - The project is, by default, configured to run on the FPGA model `xc7a100tFGG484-2L`. If you are using a different device, you need to specify it by going to **`Project Settings -> General -> Project Device`** and choosing your device
+    - If you do this, you also need to configure the [**constraints file**](3.build/vivado/top.Artix100.Puzhi.xdc) to suit your own FPGA.
+- Click **Generate Bitstream** on the side panel. This will automatically run **Synthesis and Implementation** before generating the bitstream. 
+- After the bitstream is generated, go to **`Open Hardware Manager -> Open Target`** and then **`Program Device`**.
+
+To view the results:
+- Connect the FPGA to a **power supply**, and to your PC through the **`JTAG` port**
+- **Turn on** the FPGA
+- Ensure the camera board is **securely connected** to the FPGA **MIPI input port**
+- Ensure the PCBs are also connected
+  - The USB board is easily connected through the FPGA **`FMC` port**.
+  - The Sensor / Microphone module is connected via jumper cables to the FPGA **40P External Connector**. You have to ensure that the pin matching corresponds to the **constraints file**.
+- Connect the USB PCB to your PC using a **HiSpeed USB-C cable**. 
+  - Additionally, you can connect the FPGA to an HDMI monitor using an **HDMI cable**, if you prefer to see the visual output on your monitor.
+- Load the **bitstream** to your FPGA, as explained above
+- Open any application that uses a camera and microphone input (e.g., OBS Studio, Windows Camera, Zoom).
+  - **Note:** It is possible that the FPGA needs to be **reset** before the camera output can be used, using the **`NRST` button**.
+
+
+
 ### Upcoming:
    - [X] Validate Basic Development Hardware Setup
 
