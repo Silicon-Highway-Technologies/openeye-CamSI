@@ -1,4 +1,6 @@
-module send_descriptor_fsm(
+module send_descriptor_fsm
+  import top_pkg::*;
+(
 
   input clk,
   input rst,
@@ -286,12 +288,12 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd37)   data_out <= 8'h01; // bFrameIndex (1)
               else if (bytecounter == 8'd38)   data_out <= 8'h00; // bmCapabilities (0)
 
-            `ifdef RES_720P60
+            `ifdef HDMI_720p60
               else if (bytecounter == 8'd39)   data_out <= 8'h00; // wWidth (Low - 1280)
               else if (bytecounter == 8'd40)   data_out <= 8'h05; // wWidth (High)
               else if (bytecounter == 8'd41)   data_out <= 8'hD0; // wHeight (Low - 720)
               else if (bytecounter == 8'd42)   data_out <= 8'h02; // wHeight (High)
-            `elsif RES_1080P30
+            `elsif HDMI_1080p30
               else if (bytecounter == 8'd39)   data_out <= 8'h00; // wWidth (Low - 1920)
               else if (bytecounter == 8'd40)   data_out <= 8'h07; // wWidth (High)
               else if (bytecounter == 8'd41)   data_out <= 8'h38; // wHeight (Low - 1080)
@@ -307,19 +309,19 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd49)  data_out <= 8'h4E; // dwMaxBitRate
               else if (bytecounter == 8'd50)  data_out <= 8'h0E; // dwMaxBitRate (High - 240Mbps)
 
-            `ifdef RES_720P60
+            `ifdef HDMI_720p60
               else if (bytecounter == 8'd51)  data_out <= 8'h20; // dwMaxVideoFrameBufferSize (Low)
               else if (bytecounter == 8'd52)  data_out <= 8'hA1; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd53)  data_out <= 8'h07; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd54)  data_out <= 8'h00; // dwMaxVideoFrameBufferSize (High - 500,000 bytes)
-            `elsif RES_1080P30
+            `elsif HDMI_1080p30
               else if (bytecounter == 8'd51)  data_out <= 8'h40; // dwMaxVideoFrameBufferSize (Low)
               else if (bytecounter == 8'd52)  data_out <= 8'h42; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd53)  data_out <= 8'h0F; // dwMaxVideoFrameBufferSize 
               else if (bytecounter == 8'd54)  data_out <= 8'h00; // dwMaxVideoFrameBufferSize (High - 1,000,000 bytes)
             `endif 
 
-            `ifdef RES_720P60
+            `ifdef HDMI_720p60
               else if (bytecounter == 8'd55)  data_out <= 8'h0A; // dwDefaultFrameInterval (Low)
               else if (bytecounter == 8'd56)  data_out <= 8'h8B; // dwDefaultFrameInterval
               else if (bytecounter == 8'd57)  data_out <= 8'h02; // dwDefaultFrameInterval
@@ -329,7 +331,7 @@ always @ (posedge clk) begin
               else if (bytecounter == 8'd61)  data_out <= 8'h8B; // dwFrameInterval
               else if (bytecounter == 8'd62)  data_out <= 8'h02; // dwFrameInterval
               else if (bytecounter == 8'd63)  data_out <= 8'h00; // dwFrameInterval (High - 60fps)   
-            `elsif RES_1080P30
+            `elsif HDMI_1080p30
               else if (bytecounter == 8'd55)  data_out <= 8'h15; // dwDefaultFrameInterval (Low)
               else if (bytecounter == 8'd56)  data_out <= 8'h16; // dwDefaultFrameInterval
               else if (bytecounter == 8'd57)  data_out <= 8'h05; // dwDefaultFrameInterval
@@ -346,10 +348,10 @@ always @ (posedge clk) begin
 
 
               // --- CRC16 CHECKSUM ---
-            `ifdef RES_720P60
+            `ifdef HDMI_720p60
               else if (bytecounter == 8'd65) data_out <= 8'hC3; // CRC Byte 1 (Low) 
               else if (bytecounter == 8'd66) data_out <= 8'h61; // CRC Byte 2 (High)
-            `elsif RES_1080P30
+            `elsif HDMI_1080p30
               else if (bytecounter == 8'd65) data_out <= 8'h9D; // CRC Byte 1 (Low) 
               else if (bytecounter == 8'd66) data_out <= 8'h86; // CRC Byte 2 (High)
             `endif 
@@ -594,12 +596,12 @@ always @ (posedge clk) begin
             
             else if (bytecounter == 8'd4)  data_out <= 8'h01; // bFrameIndex (1 = 720p)
             
-          `ifdef RES_720P60
+          `ifdef HDMI_720p60
             else if (bytecounter == 8'd5)  data_out <= 8'h0A; // dwFrameInterval (Byte 0) - 60fps
             else if (bytecounter == 8'd6)  data_out <= 8'h8B; // dwFrameInterval (Byte 1)
             else if (bytecounter == 8'd7)  data_out <= 8'h02; // dwFrameInterval (Byte 2)
             else if (bytecounter == 8'd8)  data_out <= 8'h00; // dwFrameInterval (Byte 3)
-          `elsif RES_1080P30
+          `elsif HDMI_1080p30
             else if (bytecounter == 8'd5)  data_out <= 8'h40; // dwFrameInterval (Byte 0) - 60fps
             else if (bytecounter == 8'd6)  data_out <= 8'h42; // dwFrameInterval (Byte 1)
             else if (bytecounter == 8'd7)  data_out <= 8'h0F; // dwFrameInterval (Byte 2)
@@ -632,10 +634,10 @@ always @ (posedge clk) begin
             else if (bytecounter == 8'd26) data_out <= 8'h00; // dwMaxPayloadTransferSize (Byte 3)
             
             // --- CRC16 GOES HERE ---
-          `ifdef RES_720P60
+          `ifdef HDMI_720p60
             else if (bytecounter == 8'd27) data_out <= 8'h91; // (Calculate CRC for these 26 bytes)
             else if (bytecounter == 8'd28) data_out <= 8'h64; 
-          `elsif RES_1080P30
+          `elsif HDMI_1080p30
             else if (bytecounter == 8'd27) data_out <= 8'h9A; // (Calculate CRC for these 26 bytes)
             else if (bytecounter == 8'd28) data_out <= 8'hA6; 
           `endif

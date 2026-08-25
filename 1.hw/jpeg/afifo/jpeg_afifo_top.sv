@@ -3,8 +3,9 @@ parameter AFIFO_SIZE = 4'd14;
 `include "settings.vh"
 
 module jpeg_afifo_top
-(
 
+  import hdmi_pkg::*;
+  (
     // JPEG inputs //
 
     input start_capture_in,  // must rise before every frame to trigger the FSM
@@ -57,8 +58,8 @@ logic read_en;
 // eventually have to remove clock outs //
 
 jpeg_encoder #(
-  .SENSOR_X_SIZE(ACTIVE_WIDTH),
-  .SENSOR_Y_SIZE(ACTIVE_HEIGHT)
+  .SENSOR_X_SIZE(HSCREEN),
+  .SENSOR_Y_SIZE(VSCREEN)
 ) jpeg_encoder_inst (
   .start_capture_in(start_capture_in),
   .red_data_in({red_data_in, 2'b0}),

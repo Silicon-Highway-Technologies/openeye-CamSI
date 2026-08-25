@@ -1,4 +1,6 @@
-module uvc_jpeg_reader (
+module uvc_jpeg_reader
+  import top_pkg::*;
+(
   input clk,
   input rst,
   input nxt,
@@ -54,7 +56,7 @@ logic [2:0] current_state, next_state;
 
 initial begin
 
-`ifdef RES_720P60
+`ifdef HDMI_720p60
   `ifdef QF10
     $readmemh("headers_720p_qf10.mem", jpeg_header);
   `elsif QF25
@@ -64,7 +66,7 @@ initial begin
   `elsif QF100 
     $readmemh("headers_720p_qf100.mem", jpeg_header);          
   `endif
-`elsif RES_1080P30
+`elsif HDMI_1080p30
   `ifdef QF10
     $readmemh("headers_1080p_qf10.mem", jpeg_header);
   `elsif QF25

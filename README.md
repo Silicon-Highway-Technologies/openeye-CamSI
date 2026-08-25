@@ -526,7 +526,7 @@ The device has to transmit video and audio data at the same time. For the sake o
 
 #### USB Validation
 
-After step-by-step experiments using a Digital Analyzer, the USB device appears in the **Device Manager**, both as a Video and as an Audio device. Using the USBTreeView software, we can see the information of the device, as specified during the enumeration phase. The top-level information is shown below, while all the details can be found [in this text file](0.doc/USB/usb_camera_mic_report.txt). The `VID (Vendor ID)` and `Product ID (PID)` values, which together form the ID of the device, are chosen arbitrarily.
+After step-by-step experiments using a Digital Analyzer, the USB device appears in the **Device Manager**, both as a Video and as an Audio device. Using the USBTreeView software, we can see the information of the device, as specified during the enumeration phase. The top-level information is shown below, while all the details can be found [in this text file](0.doc/USB/usb_camera_mic_report.txt). The `VID (Vendor ID)` and `PID (Product ID)` values, which together form the ID of the device, are chosen arbitrarily.
 
 <p align="center">
    <img width="90%" src="0.doc/pictures_sihi/usbtreeview_info.png">
