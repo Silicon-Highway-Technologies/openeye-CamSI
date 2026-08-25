@@ -3,322 +3,1344 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="usb_tb_behav.wdb" id="1">
+      <db_ref path="jpeg_usb_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="\$unit_edge_detector_sv_1048206935 " />
+            <top_module name="\$unit_edge_detector_sv_1442891391 " />
             <top_module name="glbl" />
-            <top_module name="usb_tb" />
+            <top_module name="jpeg_usb_tb" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="20.576336903 ms"></ZoomEndTime>
-      <Cursor1Time time="17.623595416 ms"></Cursor1Time>
+      <ZoomStartTime time="6,566,818.968 ns"></ZoomStartTime>
+      <ZoomEndTime time="6,567,382.969 ns"></ZoomEndTime>
+      <Cursor1Time time="6,567,153.970 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="263"></NameColumnWidth>
-      <ValueColumnWidth column_width="97"></ValueColumnWidth>
+      <ValueColumnWidth column_width="77"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="1" />
+   <WVObjectSize size="9" />
+   <wave_markers>
+      <marker time="6557564854" label="" />
+      <marker time="6567169836" label="" />
+   </wave_markers>
    <wvobject fp_name="group413" type="group">
       <obj_property name="label">dut</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/usb_tb/usb_top_inst/button" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/button" type="logic">
          <obj_property name="ElementShortName">button</obj_property>
          <obj_property name="ObjectShortName">button</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/led" type="logic">
-         <obj_property name="ElementShortName">led</obj_property>
-         <obj_property name="ObjectShortName">led</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sysclk" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/sysclk" type="logic">
          <obj_property name="ElementShortName">sysclk</obj_property>
          <obj_property name="ObjectShortName">sysclk</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sysrst" type="logic">
-         <obj_property name="ElementShortName">sysrst</obj_property>
-         <obj_property name="ObjectShortName">sysrst</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/phyclk" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/phyclk" type="logic">
          <obj_property name="ElementShortName">phyclk</obj_property>
          <obj_property name="ObjectShortName">phyclk</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/DIR" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/DIR" type="logic">
          <obj_property name="ElementShortName">DIR</obj_property>
          <obj_property name="ObjectShortName">DIR</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/NXT" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/NXT" type="logic">
          <obj_property name="ElementShortName">NXT</obj_property>
          <obj_property name="ObjectShortName">NXT</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/STP" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/led" type="logic">
+         <obj_property name="ElementShortName">led</obj_property>
+         <obj_property name="ObjectShortName">led</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/STP" type="logic">
          <obj_property name="ElementShortName">STP</obj_property>
          <obj_property name="ObjectShortName">STP</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/DATA" type="array">
-         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
-         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/mclk" type="logic">
-         <obj_property name="ElementShortName">mclk</obj_property>
-         <obj_property name="ObjectShortName">mclk</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/mdata" type="logic">
-         <obj_property name="ElementShortName">mdata</obj_property>
-         <obj_property name="ObjectShortName">mdata</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/mdis" type="logic">
-         <obj_property name="ElementShortName">mdis</obj_property>
-         <obj_property name="ObjectShortName">mdis</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/phyrst" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/phyrst" type="logic">
          <obj_property name="ElementShortName">phyrst</obj_property>
          <obj_property name="ObjectShortName">phyrst</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/debug_pins" type="array">
-         <obj_property name="ElementShortName">debug_pins[15:0]</obj_property>
-         <obj_property name="ObjectShortName">debug_pins[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/mclk" type="logic">
+         <obj_property name="ElementShortName">mclk</obj_property>
+         <obj_property name="ObjectShortName">mclk</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/stp_value_setup_highspeed" type="logic">
-         <obj_property name="ElementShortName">stp_value_setup_highspeed</obj_property>
-         <obj_property name="ObjectShortName">stp_value_setup_highspeed</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/mdata" type="logic">
+         <obj_property name="ElementShortName">mdata</obj_property>
+         <obj_property name="ObjectShortName">mdata</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/stp_value_read_packets" type="logic">
-         <obj_property name="ElementShortName">stp_value_read_packets</obj_property>
-         <obj_property name="ObjectShortName">stp_value_read_packets</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/mdis" type="logic">
+         <obj_property name="ElementShortName">mdis</obj_property>
+         <obj_property name="ObjectShortName">mdis</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/stp_value_transfer_data" type="logic">
-         <obj_property name="ElementShortName">stp_value_transfer_data</obj_property>
-         <obj_property name="ObjectShortName">stp_value_transfer_data</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/stp_value" type="logic">
-         <obj_property name="ElementShortName">stp_value</obj_property>
-         <obj_property name="ObjectShortName">stp_value</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/data_drive" type="array">
+         <obj_property name="ElementShortName">data_drive[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_drive[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/data_value_setup_highspeed" type="array">
-         <obj_property name="ElementShortName">data_value_setup_highspeed[7:0]</obj_property>
-         <obj_property name="ObjectShortName">data_value_setup_highspeed[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/data_recv" type="array">
+         <obj_property name="ElementShortName">data_recv[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_recv[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/data_value_read_packets" type="array">
-         <obj_property name="ElementShortName">data_value_read_packets[7:0]</obj_property>
-         <obj_property name="ObjectShortName">data_value_read_packets[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/red_data_in" type="array">
+         <obj_property name="ElementShortName">red_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">red_data_in[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/data_value_transfer_data" type="array">
-         <obj_property name="ElementShortName">data_value_transfer_data[7:0]</obj_property>
-         <obj_property name="ObjectShortName">data_value_transfer_data[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/green_data_in" type="array">
+         <obj_property name="ElementShortName">green_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">green_data_in[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/data_value" type="array">
-         <obj_property name="ElementShortName">data_value[7:0]</obj_property>
-         <obj_property name="ObjectShortName">data_value[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/blue_data_in" type="array">
+         <obj_property name="ElementShortName">blue_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">blue_data_in[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/fsm_read_packets_active" type="logic">
-         <obj_property name="ElementShortName">fsm_read_packets_active</obj_property>
-         <obj_property name="ObjectShortName">fsm_read_packets_active</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_fast_clock_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_fast_clock_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_fast_clock_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/fsm_setup_highspeed_active" type="logic">
-         <obj_property name="ElementShortName">fsm_setup_highspeed_active</obj_property>
-         <obj_property name="ObjectShortName">fsm_setup_highspeed_active</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_fast_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_fast_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_fast_reset_n_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/fsm_transfer_data_active" type="logic">
-         <obj_property name="ElementShortName">fsm_transfer_data_active</obj_property>
-         <obj_property name="ObjectShortName">fsm_transfer_data_active</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_slow_clock_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_slow_clock_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_slow_clock_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/bmRequestType" type="array">
-         <obj_property name="ElementShortName">bmRequestType[7:0]</obj_property>
-         <obj_property name="ObjectShortName">bmRequestType[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_slow_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_slow_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_slow_reset_n_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/bRequest" type="array">
-         <obj_property name="ElementShortName">bRequest[7:0]</obj_property>
-         <obj_property name="ObjectShortName">bRequest[7:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/pixel_clock_in" type="logic">
+         <obj_property name="ElementShortName">pixel_clock_in</obj_property>
+         <obj_property name="ObjectShortName">pixel_clock_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/wValue" type="array">
-         <obj_property name="ElementShortName">wValue[15:0]</obj_property>
-         <obj_property name="ObjectShortName">wValue[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/pixel_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">pixel_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">pixel_reset_n_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/windex" type="array">
-         <obj_property name="ElementShortName">windex[15:0]</obj_property>
-         <obj_property name="ObjectShortName">windex[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/line_valid_in" type="logic">
+         <obj_property name="ElementShortName">line_valid_in</obj_property>
+         <obj_property name="ObjectShortName">line_valid_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/wLength" type="array">
-         <obj_property name="ElementShortName">wLength[15:0]</obj_property>
-         <obj_property name="ObjectShortName">wLength[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/frame_valid_in" type="logic">
+         <obj_property name="ElementShortName">frame_valid_in</obj_property>
+         <obj_property name="ObjectShortName">frame_valid_in</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/debug_byte" type="array">
-         <obj_property name="ElementShortName">debug_byte[15:0]</obj_property>
-         <obj_property name="ObjectShortName">debug_byte[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/qf_select_in" type="array">
+         <obj_property name="ElementShortName">qf_select_in[1:0]</obj_property>
+         <obj_property name="ObjectShortName">qf_select_in[1:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/debug_data" type="array">
-         <obj_property name="ElementShortName">debug_data[15:0]</obj_property>
-         <obj_property name="ObjectShortName">debug_data[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/x_size_in" type="array">
+         <obj_property name="ElementShortName">x_size_in[10:0]</obj_property>
+         <obj_property name="ObjectShortName">x_size_in[10:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/debug_data2" type="array">
-         <obj_property name="ElementShortName">debug_data2[15:0]</obj_property>
-         <obj_property name="ObjectShortName">debug_data2[15:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/y_size_in" type="array">
+         <obj_property name="ElementShortName">y_size_in[10:0]</obj_property>
+         <obj_property name="ObjectShortName">y_size_in[10:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/current_phase" type="array">
-         <obj_property name="ElementShortName">current_phase[4:0]</obj_property>
-         <obj_property name="ObjectShortName">current_phase[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/num_of_packets" type="array">
+         <obj_property name="ElementShortName">num_of_packets[31:0]</obj_property>
+         <obj_property name="ObjectShortName">num_of_packets[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/data_ready" type="logic">
-         <obj_property name="ElementShortName">data_ready</obj_property>
-         <obj_property name="ObjectShortName">data_ready</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/bytes_per_packet" type="array">
+         <obj_property name="ElementShortName">bytes_per_packet[31:0]</obj_property>
+         <obj_property name="ObjectShortName">bytes_per_packet[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/address" type="array">
-         <obj_property name="ElementShortName">address[6:0]</obj_property>
-         <obj_property name="ObjectShortName">address[6:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/i" type="array">
+         <obj_property name="ElementShortName">i[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/transmission_started" type="logic">
-         <obj_property name="ElementShortName">transmission_started</obj_property>
-         <obj_property name="ObjectShortName">transmission_started</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/j" type="array">
+         <obj_property name="ElementShortName">j[31:0]</obj_property>
+         <obj_property name="ObjectShortName">j[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/current_packet" type="array">
-         <obj_property name="ElementShortName">current_packet[31:0]</obj_property>
-         <obj_property name="ObjectShortName">current_packet[31:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/dump_file" type="array">
+         <obj_property name="ElementShortName">dump_file[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dump_file[31:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/request" type="array">
-         <obj_property name="ElementShortName">request[4:0]</obj_property>
-         <obj_property name="ObjectShortName">request[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/stp_flag" type="logic">
+         <obj_property name="ElementShortName">stp_flag</obj_property>
+         <obj_property name="ObjectShortName">stp_flag</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/pdm_pulse" type="logic">
-         <obj_property name="ElementShortName">pdm_pulse</obj_property>
-         <obj_property name="ObjectShortName">pdm_pulse</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/sequence_complete" type="logic">
+         <obj_property name="ElementShortName">sequence_complete</obj_property>
+         <obj_property name="ObjectShortName">sequence_complete</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/clk_24MHz" type="logic">
+      <wvobject fp_name="/jpeg_usb_tb/request_memory" type="array">
+         <obj_property name="ElementShortName">request_memory[0:16][63:0]</obj_property>
+         <obj_property name="ObjectShortName">request_memory[0:16][63:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/sof_counter" type="array">
+         <obj_property name="ElementShortName">sof_counter[23:0]</obj_property>
+         <obj_property name="ObjectShortName">sof_counter[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/send_sof" type="logic">
+         <obj_property name="ElementShortName">send_sof</obj_property>
+         <obj_property name="ObjectShortName">send_sof</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/debug_file_usb_jpeg" type="array">
+         <obj_property name="ElementShortName">debug_file_usb_jpeg[31:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_file_usb_jpeg[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpegusbi" type="array">
+         <obj_property name="ElementShortName">jpegusbi[31:0]</obj_property>
+         <obj_property name="ObjectShortName">jpegusbi[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/debug_file_usb_audio" type="array">
+         <obj_property name="ElementShortName">debug_file_usb_audio[31:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_file_usb_audio[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/audiousbi" type="array">
+         <obj_property name="ElementShortName">audiousbi[31:0]</obj_property>
+         <obj_property name="ObjectShortName">audiousbi[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/debug_file_jpeg" type="array">
+         <obj_property name="ElementShortName">debug_file_jpeg[31:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_file_jpeg[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/debug_file_afifo" type="array">
+         <obj_property name="ElementShortName">debug_file_afifo[31:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_file_afifo[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpegi" type="array">
+         <obj_property name="ElementShortName">jpegi[31:0]</obj_property>
+         <obj_property name="ObjectShortName">jpegi[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/afifoi" type="array">
+         <obj_property name="ElementShortName">afifoi[31:0]</obj_property>
+         <obj_property name="ObjectShortName">afifoi[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/SYSCLK_PERIOD" type="array">
+         <obj_property name="ElementShortName">SYSCLK_PERIOD[31:0]</obj_property>
+         <obj_property name="ObjectShortName">SYSCLK_PERIOD[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/PHY_CLK_PERIOD" type="other">
+         <obj_property name="ElementShortName">PHY_CLK_PERIOD</obj_property>
+         <obj_property name="ObjectShortName">PHY_CLK_PERIOD</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/DELAY" type="logic">
+         <obj_property name="ElementShortName">DELAY</obj_property>
+         <obj_property name="ObjectShortName">DELAY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/NO_DELAY" type="logic">
+         <obj_property name="ElementShortName">NO_DELAY</obj_property>
+         <obj_property name="ObjectShortName">NO_DELAY</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/ENDPOINT0" type="array">
+         <obj_property name="ElementShortName">ENDPOINT0[1:0]</obj_property>
+         <obj_property name="ObjectShortName">ENDPOINT0[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/ENDPOINT1" type="array">
+         <obj_property name="ElementShortName">ENDPOINT1[1:0]</obj_property>
+         <obj_property name="ObjectShortName">ENDPOINT1[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/ENDPOINT2" type="array">
+         <obj_property name="ElementShortName">ENDPOINT2[1:0]</obj_property>
+         <obj_property name="ObjectShortName">ENDPOINT2[1:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group1379" type="group">
+      <obj_property name="label">jpeg_usb_top</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/button" type="logic">
+         <obj_property name="ElementShortName">button</obj_property>
+         <obj_property name="ObjectShortName">button</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/led" type="logic">
+         <obj_property name="ElementShortName">led</obj_property>
+         <obj_property name="ObjectShortName">led</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/sysclk" type="logic">
+         <obj_property name="ElementShortName">sysclk</obj_property>
+         <obj_property name="ObjectShortName">sysclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/phyclk" type="logic">
+         <obj_property name="ElementShortName">phyclk</obj_property>
+         <obj_property name="ObjectShortName">phyclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/DIR" type="logic">
+         <obj_property name="ElementShortName">DIR</obj_property>
+         <obj_property name="ObjectShortName">DIR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/NXT" type="logic">
+         <obj_property name="ElementShortName">NXT</obj_property>
+         <obj_property name="ObjectShortName">NXT</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/STP" type="logic">
+         <obj_property name="ElementShortName">STP</obj_property>
+         <obj_property name="ObjectShortName">STP</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/phyrst" type="logic">
+         <obj_property name="ElementShortName">phyrst</obj_property>
+         <obj_property name="ObjectShortName">phyrst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/debug_jpeg_usb" type="array">
+         <obj_property name="ElementShortName">debug_jpeg_usb[15:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_jpeg_usb[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/debug_led_usb" type="logic">
+         <obj_property name="ElementShortName">debug_led_usb</obj_property>
+         <obj_property name="ObjectShortName">debug_led_usb</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/red_data_in" type="array">
+         <obj_property name="ElementShortName">red_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">red_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/green_data_in" type="array">
+         <obj_property name="ElementShortName">green_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">green_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/blue_data_in" type="array">
+         <obj_property name="ElementShortName">blue_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">blue_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/frame_valid_in" type="logic">
+         <obj_property name="ElementShortName">frame_valid_in</obj_property>
+         <obj_property name="ObjectShortName">frame_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/line_valid_in" type="logic">
+         <obj_property name="ElementShortName">line_valid_in</obj_property>
+         <obj_property name="ObjectShortName">line_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/qf_select_in" type="array">
+         <obj_property name="ElementShortName">qf_select_in[1:0]</obj_property>
+         <obj_property name="ObjectShortName">qf_select_in[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/x_size_in" type="array">
+         <obj_property name="ElementShortName">x_size_in[10:0]</obj_property>
+         <obj_property name="ObjectShortName">x_size_in[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/y_size_in" type="array">
+         <obj_property name="ElementShortName">y_size_in[10:0]</obj_property>
+         <obj_property name="ObjectShortName">y_size_in[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/pixel_clock_in" type="logic">
+         <obj_property name="ElementShortName">pixel_clock_in</obj_property>
+         <obj_property name="ObjectShortName">pixel_clock_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/pixel_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">pixel_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">pixel_reset_n_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_fast_clock_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_fast_clock_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_fast_clock_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_fast_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_fast_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_fast_reset_n_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_slow_clock_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_slow_clock_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_slow_clock_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_slow_reset_n_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_slow_reset_n_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_slow_reset_n_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_data_valid_out" type="logic">
+         <obj_property name="ElementShortName">jpeg_data_valid_out</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/mclk" type="logic">
+         <obj_property name="ElementShortName">mclk</obj_property>
+         <obj_property name="ObjectShortName">mclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/mdata" type="logic">
+         <obj_property name="ElementShortName">mdata</obj_property>
+         <obj_property name="ObjectShortName">mdata</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/mdis" type="logic">
+         <obj_property name="ElementShortName">mdis</obj_property>
+         <obj_property name="ObjectShortName">mdis</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/clk_24MHz" type="logic">
          <obj_property name="ElementShortName">clk_24MHz</obj_property>
          <obj_property name="ObjectShortName">clk_24MHz</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/pcm_pulse" type="logic">
-         <obj_property name="ElementShortName">pcm_pulse</obj_property>
-         <obj_property name="ObjectShortName">pcm_pulse</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/pdm_pulse" type="logic">
+         <obj_property name="ElementShortName">pdm_pulse</obj_property>
+         <obj_property name="ObjectShortName">pdm_pulse</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/audio_afifo_write_en" type="logic">
-         <obj_property name="ElementShortName">audio_afifo_write_en</obj_property>
-         <obj_property name="ObjectShortName">audio_afifo_write_en</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/audio_afifo_read" type="logic">
-         <obj_property name="ElementShortName">audio_afifo_read</obj_property>
-         <obj_property name="ObjectShortName">audio_afifo_read</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/audio_afifo_empty" type="logic">
-         <obj_property name="ElementShortName">audio_afifo_empty</obj_property>
-         <obj_property name="ObjectShortName">audio_afifo_empty</obj_property>
-      </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/audio_8bit" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_8bit" type="array">
          <obj_property name="ElementShortName">audio_8bit[7:0]</obj_property>
          <obj_property name="ObjectShortName">audio_8bit[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/audio_afifo_data" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_afifo_write_en" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_write_en</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_write_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/handshake_finished" type="logic">
+         <obj_property name="ElementShortName">handshake_finished</obj_property>
+         <obj_property name="ObjectShortName">handshake_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/transmission_started" type="logic">
+         <obj_property name="ElementShortName">transmission_started</obj_property>
+         <obj_property name="ObjectShortName">transmission_started</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_afifo_read" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_afifo_data" type="array">
+         <obj_property name="ElementShortName">jpeg_afifo_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_afifo_data" type="array">
          <obj_property name="ElementShortName">audio_afifo_data[7:0]</obj_property>
          <obj_property name="ObjectShortName">audio_afifo_data[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/config_descriptor_packet_counter" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_afifo_data_valid" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_data_valid</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_data_valid</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/afifo_wait" type="logic">
+         <obj_property name="ElementShortName">afifo_wait</obj_property>
+         <obj_property name="ObjectShortName">afifo_wait</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_afifo_read" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/start_capture" type="logic">
+         <obj_property name="ElementShortName">start_capture</obj_property>
+         <obj_property name="ObjectShortName">start_capture</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_bytes_in_fifo" type="array">
+         <obj_property name="ElementShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/debug_usb" type="array">
+         <obj_property name="ElementShortName">debug_usb[7:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_usb[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/image_valid_out" type="logic">
+         <obj_property name="ElementShortName">image_valid_out</obj_property>
+         <obj_property name="ObjectShortName">image_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/jpeg_afifo_finished" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_finished</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/frame_transmitted" type="logic">
+         <obj_property name="ElementShortName">frame_transmitted</obj_property>
+         <obj_property name="ObjectShortName">frame_transmitted</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/full" type="logic">
+         <obj_property name="ElementShortName">full</obj_property>
+         <obj_property name="ObjectShortName">full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/ACTIVE_WIDTH" type="array">
+         <obj_property name="ElementShortName">ACTIVE_WIDTH[10:0]</obj_property>
+         <obj_property name="ObjectShortName">ACTIVE_WIDTH[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/ACTIVE_HEIGHT" type="array">
+         <obj_property name="ElementShortName">ACTIVE_HEIGHT[9:0]</obj_property>
+         <obj_property name="ObjectShortName">ACTIVE_HEIGHT[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/TOTAL_WIDTH" type="array">
+         <obj_property name="ElementShortName">TOTAL_WIDTH[10:0]</obj_property>
+         <obj_property name="ObjectShortName">TOTAL_WIDTH[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/TOTAL_HEIGHT" type="array">
+         <obj_property name="ElementShortName">TOTAL_HEIGHT[10:0]</obj_property>
+         <obj_property name="ObjectShortName">TOTAL_HEIGHT[10:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group387" type="group">
+      <obj_property name="label">usb</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/button" type="logic">
+         <obj_property name="ElementShortName">button</obj_property>
+         <obj_property name="ObjectShortName">button</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/led" type="logic">
+         <obj_property name="ElementShortName">led</obj_property>
+         <obj_property name="ObjectShortName">led</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/phyclk" type="logic">
+         <obj_property name="ElementShortName">phyclk</obj_property>
+         <obj_property name="ObjectShortName">phyclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/DIR" type="logic">
+         <obj_property name="ElementShortName">DIR</obj_property>
+         <obj_property name="ObjectShortName">DIR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/NXT" type="logic">
+         <obj_property name="ElementShortName">NXT</obj_property>
+         <obj_property name="ObjectShortName">NXT</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/STP" type="logic">
+         <obj_property name="ElementShortName">STP</obj_property>
+         <obj_property name="ObjectShortName">STP</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_afifo_read" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/audio_afifo_read" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/audio_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_afifo_finished" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_finished</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/frame_transmitted" type="logic">
+         <obj_property name="ElementShortName">frame_transmitted</obj_property>
+         <obj_property name="ObjectShortName">frame_transmitted</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/handshake_finished" type="logic">
+         <obj_property name="ElementShortName">handshake_finished</obj_property>
+         <obj_property name="ObjectShortName">handshake_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_data_in" type="array">
+         <obj_property name="ElementShortName">jpeg_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_data_valid_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_data_valid_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/image_valid_out" type="logic">
+         <obj_property name="ElementShortName">image_valid_out</obj_property>
+         <obj_property name="ObjectShortName">image_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/jpeg_bytes_in_fifo" type="array">
+         <obj_property name="ElementShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/audio_data_in" type="array">
+         <obj_property name="ElementShortName">audio_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">audio_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/transmission_started" type="logic">
+         <obj_property name="ElementShortName">transmission_started</obj_property>
+         <obj_property name="ObjectShortName">transmission_started</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/phyrst" type="logic">
+         <obj_property name="ElementShortName">phyrst</obj_property>
+         <obj_property name="ObjectShortName">phyrst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/debug_usb" type="array">
+         <obj_property name="ElementShortName">debug_usb[7:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_usb[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/stp_value_setup_highspeed" type="logic">
+         <obj_property name="ElementShortName">stp_value_setup_highspeed</obj_property>
+         <obj_property name="ObjectShortName">stp_value_setup_highspeed</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/stp_value_read_packets" type="logic">
+         <obj_property name="ElementShortName">stp_value_read_packets</obj_property>
+         <obj_property name="ObjectShortName">stp_value_read_packets</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/stp_value_transfer_data" type="logic">
+         <obj_property name="ElementShortName">stp_value_transfer_data</obj_property>
+         <obj_property name="ObjectShortName">stp_value_transfer_data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/stp_value" type="logic">
+         <obj_property name="ElementShortName">stp_value</obj_property>
+         <obj_property name="ObjectShortName">stp_value</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/data_value_setup_highspeed" type="array">
+         <obj_property name="ElementShortName">data_value_setup_highspeed[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_value_setup_highspeed[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/data_value_read_packets" type="array">
+         <obj_property name="ElementShortName">data_value_read_packets[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_value_read_packets[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/data_value_transfer_data" type="array">
+         <obj_property name="ElementShortName">data_value_transfer_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_value_transfer_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/data_value" type="array">
+         <obj_property name="ElementShortName">data_value[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_value[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_read_packets_active" type="logic">
+         <obj_property name="ElementShortName">fsm_read_packets_active</obj_property>
+         <obj_property name="ObjectShortName">fsm_read_packets_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_setup_highspeed_active" type="logic">
+         <obj_property name="ElementShortName">fsm_setup_highspeed_active</obj_property>
+         <obj_property name="ObjectShortName">fsm_setup_highspeed_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_active" type="logic">
+         <obj_property name="ElementShortName">fsm_transfer_data_active</obj_property>
+         <obj_property name="ObjectShortName">fsm_transfer_data_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/bmRequestType" type="array">
+         <obj_property name="ElementShortName">bmRequestType[7:0]</obj_property>
+         <obj_property name="ObjectShortName">bmRequestType[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/bRequest" type="array">
+         <obj_property name="ElementShortName">bRequest[7:0]</obj_property>
+         <obj_property name="ObjectShortName">bRequest[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/wValue" type="array">
+         <obj_property name="ElementShortName">wValue[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wValue[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/windex" type="array">
+         <obj_property name="ElementShortName">windex[15:0]</obj_property>
+         <obj_property name="ObjectShortName">windex[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/wLength" type="array">
+         <obj_property name="ElementShortName">wLength[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wLength[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/current_phase" type="array">
+         <obj_property name="ElementShortName">current_phase[4:0]</obj_property>
+         <obj_property name="ObjectShortName">current_phase[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/address" type="array">
+         <obj_property name="ElementShortName">address[6:0]</obj_property>
+         <obj_property name="ObjectShortName">address[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/debug_fsm" type="array">
+         <obj_property name="ElementShortName">debug_fsm[6:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_fsm[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/audio_8bit" type="array">
+         <obj_property name="ElementShortName">audio_8bit[7:0]</obj_property>
+         <obj_property name="ObjectShortName">audio_8bit[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/audio_afifo_data" type="array">
+         <obj_property name="ElementShortName">audio_afifo_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/config_descriptor_packet_counter" type="array">
          <obj_property name="ElementShortName">config_descriptor_packet_counter[2:0]</obj_property>
          <obj_property name="ObjectShortName">config_descriptor_packet_counter[2:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/fsm_state" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_state" type="array">
          <obj_property name="ElementShortName">fsm_state[4:0]</obj_property>
          <obj_property name="ObjectShortName">fsm_state[4:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/idle" type="array">
-         <obj_property name="ElementShortName">idle[4:0]</obj_property>
-         <obj_property name="ObjectShortName">idle[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group1462" type="group">
+      <obj_property name="label">audio_clocking</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/sysclk" type="logic">
+         <obj_property name="ElementShortName">sysclk</obj_property>
+         <obj_property name="ObjectShortName">sysclk</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/initial_in_packet" type="array">
-         <obj_property name="ElementShortName">initial_in_packet[4:0]</obj_property>
-         <obj_property name="ObjectShortName">initial_in_packet[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sending_data" type="array">
-         <obj_property name="ElementShortName">sending_data[4:0]</obj_property>
-         <obj_property name="ObjectShortName">sending_data[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/mclk" type="logic">
+         <obj_property name="ElementShortName">mclk</obj_property>
+         <obj_property name="ObjectShortName">mclk</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/wait_for_ack" type="array">
-         <obj_property name="ElementShortName">wait_for_ack[4:0]</obj_property>
-         <obj_property name="ObjectShortName">wait_for_ack[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/clk_24MHz" type="logic">
+         <obj_property name="ElementShortName">clk_24MHz</obj_property>
+         <obj_property name="ObjectShortName">clk_24MHz</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sending_nak" type="array">
-         <obj_property name="ElementShortName">sending_nak[4:0]</obj_property>
-         <obj_property name="ObjectShortName">sending_nak[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/pdm_pulse" type="logic">
+         <obj_property name="ElementShortName">pdm_pulse</obj_property>
+         <obj_property name="ObjectShortName">pdm_pulse</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sending_video" type="array">
-         <obj_property name="ElementShortName">sending_video[4:0]</obj_property>
-         <obj_property name="ObjectShortName">sending_video[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/clkfb" type="logic">
+         <obj_property name="ElementShortName">clkfb</obj_property>
+         <obj_property name="ObjectShortName">clkfb</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/sending_audio" type="array">
-         <obj_property name="ElementShortName">sending_audio[4:0]</obj_property>
-         <obj_property name="ObjectShortName">sending_audio[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/locked" type="logic">
+         <obj_property name="ElementShortName">locked</obj_property>
+         <obj_property name="ObjectShortName">locked</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/terminalstate" type="array">
-         <obj_property name="ElementShortName">terminalstate[4:0]</obj_property>
-         <obj_property name="ObjectShortName">terminalstate[4:0]</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/audio_clocking_inst/miccounter" type="array">
+         <obj_property name="ElementShortName">miccounter[3:0]</obj_property>
+         <obj_property name="ObjectShortName">miccounter[3:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_OUT" type="array">
+   </wvobject>
+   <wvobject fp_name="group1471" type="group">
+      <obj_property name="label">fsm_transfer_data</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/DIR" type="logic">
+         <obj_property name="ElementShortName">DIR</obj_property>
+         <obj_property name="ObjectShortName">DIR</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/NXT" type="logic">
+         <obj_property name="ElementShortName">NXT</obj_property>
+         <obj_property name="ObjectShortName">NXT</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_data_in" type="array">
+         <obj_property name="ElementShortName">jpeg_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_data_in" type="array">
+         <obj_property name="ElementShortName">audio_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">audio_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/address" type="array">
+         <obj_property name="ElementShortName">address[6:0]</obj_property>
+         <obj_property name="ObjectShortName">address[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_data_valid_in" type="logic">
+         <obj_property name="ElementShortName">jpeg_data_valid_in</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_valid_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/image_valid_out" type="logic">
+         <obj_property name="ElementShortName">image_valid_out</obj_property>
+         <obj_property name="ObjectShortName">image_valid_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_afifo_read" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_afifo_empty" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_afifo_read" type="logic">
+         <obj_property name="ElementShortName">audio_afifo_read</obj_property>
+         <obj_property name="ObjectShortName">audio_afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_afifo_finished" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_finished</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/frame_transmitted" type="logic">
+         <obj_property name="ElementShortName">frame_transmitted</obj_property>
+         <obj_property name="ObjectShortName">frame_transmitted</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_bytes_in_fifo" type="array">
+         <obj_property name="ElementShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_bytes_in_fifo[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/stp_value" type="logic">
+         <obj_property name="ElementShortName">stp_value</obj_property>
+         <obj_property name="ObjectShortName">stp_value</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/data_value" type="array">
+         <obj_property name="ElementShortName">data_value[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_value[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/transmission_started" type="logic">
+         <obj_property name="ElementShortName">transmission_started</obj_property>
+         <obj_property name="ObjectShortName">transmission_started</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/debug_fsm" type="array">
+         <obj_property name="ElementShortName">debug_fsm[6:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_fsm[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/current_state" type="array">
+         <obj_property name="ElementShortName">current_state[4:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/active" type="logic">
+         <obj_property name="ElementShortName">active</obj_property>
+         <obj_property name="ObjectShortName">active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/next_state" type="array">
+         <obj_property name="ElementShortName">next_state[4:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/new_byte" type="logic">
+         <obj_property name="ElementShortName">new_byte</obj_property>
+         <obj_property name="ObjectShortName">new_byte</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/ignore_sof_flag" type="logic">
+         <obj_property name="ElementShortName">ignore_sof_flag</obj_property>
+         <obj_property name="ObjectShortName">ignore_sof_flag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/check_address_and_endpoint" type="logic">
+         <obj_property name="ElementShortName">check_address_and_endpoint</obj_property>
+         <obj_property name="ObjectShortName">check_address_and_endpoint</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_active" type="logic">
+         <obj_property name="ElementShortName">send_data_fsm_active</obj_property>
+         <obj_property name="ObjectShortName">send_data_fsm_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/transmitted_data" type="array">
+         <obj_property name="ElementShortName">transmitted_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">transmitted_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/data_to_send" type="array">
+         <obj_property name="ElementShortName">data_to_send[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_to_send[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_data_finished" type="logic">
+         <obj_property name="ElementShortName">jpeg_data_finished</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/start_transmitting" type="logic">
+         <obj_property name="ElementShortName">start_transmitting</obj_property>
+         <obj_property name="ObjectShortName">start_transmitting</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/finished_transmitting" type="logic">
+         <obj_property name="ElementShortName">finished_transmitting</obj_property>
+         <obj_property name="ObjectShortName">finished_transmitting</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/new_packet_flag" type="logic">
+         <obj_property name="ElementShortName">new_packet_flag</obj_property>
+         <obj_property name="ObjectShortName">new_packet_flag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/sending_crc" type="logic">
+         <obj_property name="ElementShortName">sending_crc</obj_property>
+         <obj_property name="ObjectShortName">sending_crc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_UVC_header" type="logic">
+         <obj_property name="ElementShortName">send_UVC_header</obj_property>
+         <obj_property name="ObjectShortName">send_UVC_header</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/sent_frame" type="logic">
+         <obj_property name="ElementShortName">sent_frame</obj_property>
+         <obj_property name="ObjectShortName">sent_frame</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/new_frame" type="logic">
+         <obj_property name="ElementShortName">new_frame</obj_property>
+         <obj_property name="ObjectShortName">new_frame</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_zlp" type="logic">
+         <obj_property name="ElementShortName">send_zlp</obj_property>
+         <obj_property name="ObjectShortName">send_zlp</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_mode" type="logic">
+         <obj_property name="ElementShortName">audio_mode</obj_property>
+         <obj_property name="ObjectShortName">audio_mode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/video_endpoint" type="logic">
+         <obj_property name="ElementShortName">video_endpoint</obj_property>
+         <obj_property name="ObjectShortName">video_endpoint</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_endpoint" type="logic">
+         <obj_property name="ElementShortName">audio_endpoint</obj_property>
+         <obj_property name="ObjectShortName">audio_endpoint</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/endpoint0" type="logic">
+         <obj_property name="ElementShortName">endpoint0</obj_property>
+         <obj_property name="ObjectShortName">endpoint0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/audio_packet_done" type="logic">
+         <obj_property name="ElementShortName">audio_packet_done</obj_property>
+         <obj_property name="ObjectShortName">audio_packet_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/afifo_empty" type="logic">
+         <obj_property name="ElementShortName">afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/afifo_read" type="logic">
+         <obj_property name="ElementShortName">afifo_read</obj_property>
+         <obj_property name="ObjectShortName">afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/frame_complete" type="logic">
+         <obj_property name="ElementShortName">frame_complete</obj_property>
+         <obj_property name="ObjectShortName">frame_complete</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/new_microframe" type="logic">
+         <obj_property name="ElementShortName">new_microframe</obj_property>
+         <obj_property name="ObjectShortName">new_microframe</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/transmission_started_flag" type="logic">
+         <obj_property name="ElementShortName">transmission_started_flag</obj_property>
+         <obj_property name="ObjectShortName">transmission_started_flag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/control_PID" type="logic">
+         <obj_property name="ElementShortName">control_PID</obj_property>
+         <obj_property name="ObjectShortName">control_PID</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_byte" type="array">
+         <obj_property name="ElementShortName">jpeg_byte[7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_byte[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/jpeg_send_data" type="logic">
+         <obj_property name="ElementShortName">jpeg_send_data</obj_property>
+         <obj_property name="ObjectShortName">jpeg_send_data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/zlp_mode_active" type="logic">
+         <obj_property name="ElementShortName">zlp_mode_active</obj_property>
+         <obj_property name="ObjectShortName">zlp_mode_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/sending_footer" type="logic">
+         <obj_property name="ElementShortName">sending_footer</obj_property>
+         <obj_property name="ObjectShortName">sending_footer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/new_PID" type="array">
+         <obj_property name="ElementShortName">new_PID[3:0]</obj_property>
+         <obj_property name="ObjectShortName">new_PID[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_PID" type="array">
+         <obj_property name="ElementShortName">send_data_PID[3:0]</obj_property>
+         <obj_property name="ObjectShortName">send_data_PID[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/multipacket_transmission_active" type="logic">
+         <obj_property name="ElementShortName">multipacket_transmission_active</obj_property>
+         <obj_property name="ObjectShortName">multipacket_transmission_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/debug_uvc_reader" type="array">
+         <obj_property name="ElementShortName">debug_uvc_reader[4:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_uvc_reader[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/stp_value_send_data" type="logic">
+         <obj_property name="ElementShortName">stp_value_send_data</obj_property>
+         <obj_property name="ObjectShortName">stp_value_send_data</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group1557" type="group">
+      <obj_property name="label">uvc_jpeg_reader</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/nxt" type="logic">
+         <obj_property name="ElementShortName">nxt</obj_property>
+         <obj_property name="ObjectShortName">nxt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/send_data_fsm_active" type="logic">
+         <obj_property name="ElementShortName">send_data_fsm_active</obj_property>
+         <obj_property name="ObjectShortName">send_data_fsm_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/fetch_next" type="logic">
+         <obj_property name="ElementShortName">fetch_next</obj_property>
+         <obj_property name="ObjectShortName">fetch_next</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/sending_crc" type="logic">
+         <obj_property name="ElementShortName">sending_crc</obj_property>
+         <obj_property name="ObjectShortName">sending_crc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/send_new_frame" type="logic">
+         <obj_property name="ElementShortName">send_new_frame</obj_property>
+         <obj_property name="ObjectShortName">send_new_frame</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/send_UVC_header" type="logic">
+         <obj_property name="ElementShortName">send_UVC_header</obj_property>
+         <obj_property name="ObjectShortName">send_UVC_header</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/jpeg_data_in" type="array">
+         <obj_property name="ElementShortName">jpeg_data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/jpeg_afifo_finished" type="logic">
+         <obj_property name="ElementShortName">jpeg_afifo_finished</obj_property>
+         <obj_property name="ObjectShortName">jpeg_afifo_finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/frame_transmitted" type="logic">
+         <obj_property name="ElementShortName">frame_transmitted</obj_property>
+         <obj_property name="ObjectShortName">frame_transmitted</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/audio_mode" type="logic">
+         <obj_property name="ElementShortName">audio_mode</obj_property>
+         <obj_property name="ObjectShortName">audio_mode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/zlp_mode" type="logic">
+         <obj_property name="ElementShortName">zlp_mode</obj_property>
+         <obj_property name="ObjectShortName">zlp_mode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/bytes_in_fifo" type="array">
+         <obj_property name="ElementShortName">bytes_in_fifo[23:0]</obj_property>
+         <obj_property name="ObjectShortName">bytes_in_fifo[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/sending_footer" type="logic">
+         <obj_property name="ElementShortName">sending_footer</obj_property>
+         <obj_property name="ObjectShortName">sending_footer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/jpeg_send_data" type="logic">
+         <obj_property name="ElementShortName">jpeg_send_data</obj_property>
+         <obj_property name="ObjectShortName">jpeg_send_data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/debug_uvc_reader" type="array">
+         <obj_property name="ElementShortName">debug_uvc_reader[4:0]</obj_property>
+         <obj_property name="ObjectShortName">debug_uvc_reader[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/finished" type="logic">
+         <obj_property name="ElementShortName">finished</obj_property>
+         <obj_property name="ObjectShortName">finished</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/data_out" type="array">
+         <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/frame_complete" type="logic">
+         <obj_property name="ElementShortName">frame_complete</obj_property>
+         <obj_property name="ObjectShortName">frame_complete</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/jpeg_header" type="array">
+         <obj_property name="ElementShortName">jpeg_header[0:622][7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_header[0:622][7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/jpeg_footer" type="array">
+         <obj_property name="ElementShortName">jpeg_footer[0:1][7:0]</obj_property>
+         <obj_property name="ObjectShortName">jpeg_footer[0:1][7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/active" type="logic">
+         <obj_property name="ElementShortName">active</obj_property>
+         <obj_property name="ObjectShortName">active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/header_incr" type="logic">
+         <obj_property name="ElementShortName">header_incr</obj_property>
+         <obj_property name="ObjectShortName">header_incr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/footer_incr" type="logic">
+         <obj_property name="ElementShortName">footer_incr</obj_property>
+         <obj_property name="ObjectShortName">footer_incr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/current_state" type="array">
+         <obj_property name="ElementShortName">current_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/next_state" type="array">
+         <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/footer_ptr" type="array">
+         <obj_property name="ElementShortName">footer_ptr[1:0]</obj_property>
+         <obj_property name="ObjectShortName">footer_ptr[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/header_ptr" type="array">
+         <obj_property name="ElementShortName">header_ptr[9:0]</obj_property>
+         <obj_property name="ObjectShortName">header_ptr[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/data_from_mem" type="array">
+         <obj_property name="ElementShortName">data_from_mem[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_from_mem[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/global_ptr" type="array">
+         <obj_property name="ElementShortName">global_ptr[15:0]</obj_property>
+         <obj_property name="ObjectShortName">global_ptr[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/packet_byte_cnt" type="array">
+         <obj_property name="ElementShortName">packet_byte_cnt[10:0]</obj_property>
+         <obj_property name="ObjectShortName">packet_byte_cnt[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/is_eof" type="logic">
+         <obj_property name="ElementShortName">is_eof</obj_property>
+         <obj_property name="ObjectShortName">is_eof</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/uvc_bitfield" type="array">
+         <obj_property name="ElementShortName">uvc_bitfield[7:0]</obj_property>
+         <obj_property name="ObjectShortName">uvc_bitfield[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/frame_complete_singlecycle" type="logic">
+         <obj_property name="ElementShortName">frame_complete_singlecycle</obj_property>
+         <obj_property name="ObjectShortName">frame_complete_singlecycle</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/fid_bit" type="logic">
+         <obj_property name="ElementShortName">fid_bit</obj_property>
+         <obj_property name="ObjectShortName">fid_bit</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/next_byte" type="logic">
+         <obj_property name="ElementShortName">next_byte</obj_property>
+         <obj_property name="ObjectShortName">next_byte</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/ACTIVE_WIDTH" type="array">
+         <obj_property name="ElementShortName">ACTIVE_WIDTH[10:0]</obj_property>
+         <obj_property name="ObjectShortName">ACTIVE_WIDTH[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/ACTIVE_HEIGHT" type="array">
+         <obj_property name="ElementShortName">ACTIVE_HEIGHT[9:0]</obj_property>
+         <obj_property name="ObjectShortName">ACTIVE_HEIGHT[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/TOTAL_WIDTH" type="array">
+         <obj_property name="ElementShortName">TOTAL_WIDTH[10:0]</obj_property>
+         <obj_property name="ObjectShortName">TOTAL_WIDTH[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/TOTAL_HEIGHT" type="array">
+         <obj_property name="ElementShortName">TOTAL_HEIGHT[10:0]</obj_property>
+         <obj_property name="ObjectShortName">TOTAL_HEIGHT[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/JPEG_HEADER_LEN" type="array">
+         <obj_property name="ElementShortName">JPEG_HEADER_LEN[9:0]</obj_property>
+         <obj_property name="ObjectShortName">JPEG_HEADER_LEN[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/JPEG_FOOTER_LEN" type="array">
+         <obj_property name="ElementShortName">JPEG_FOOTER_LEN[1:0]</obj_property>
+         <obj_property name="ObjectShortName">JPEG_FOOTER_LEN[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/READ_HEADER" type="array">
+         <obj_property name="ElementShortName">READ_HEADER[2:0]</obj_property>
+         <obj_property name="ObjectShortName">READ_HEADER[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/READ_DATA" type="array">
+         <obj_property name="ElementShortName">READ_DATA[2:0]</obj_property>
+         <obj_property name="ObjectShortName">READ_DATA[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/READ_FOOTER" type="array">
+         <obj_property name="ElementShortName">READ_FOOTER[2:0]</obj_property>
+         <obj_property name="ObjectShortName">READ_FOOTER[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/FRAME_SENT" type="array">
+         <obj_property name="ElementShortName">FRAME_SENT[2:0]</obj_property>
+         <obj_property name="ObjectShortName">FRAME_SENT[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/IDLE" type="array">
+         <obj_property name="ElementShortName">IDLE[2:0]</obj_property>
+         <obj_property name="ObjectShortName">IDLE[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/WAIT_EOF_PACKET" type="array">
+         <obj_property name="ElementShortName">WAIT_EOF_PACKET[2:0]</obj_property>
+         <obj_property name="ObjectShortName">WAIT_EOF_PACKET[2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group1607" type="group">
+      <obj_property name="label">send_data_fsm</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/reset" type="logic">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/start_transmitting" type="logic">
+         <obj_property name="ElementShortName">start_transmitting</obj_property>
+         <obj_property name="ObjectShortName">start_transmitting</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/send_data_PID" type="array">
+         <obj_property name="ElementShortName">send_data_PID[3:0]</obj_property>
+         <obj_property name="ObjectShortName">send_data_PID[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/finished_transmitting" type="logic">
+         <obj_property name="ElementShortName">finished_transmitting</obj_property>
+         <obj_property name="ObjectShortName">finished_transmitting</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/data_in" type="array">
+         <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/data_out" type="array">
+         <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/zlp_mode" type="logic">
+         <obj_property name="ElementShortName">zlp_mode</obj_property>
+         <obj_property name="ObjectShortName">zlp_mode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/nxt" type="logic">
+         <obj_property name="ElementShortName">nxt</obj_property>
+         <obj_property name="ObjectShortName">nxt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/audio_mode" type="logic">
+         <obj_property name="ElementShortName">audio_mode</obj_property>
+         <obj_property name="ObjectShortName">audio_mode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/stp" type="logic">
+         <obj_property name="ElementShortName">stp</obj_property>
+         <obj_property name="ObjectShortName">stp</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/afifo_empty" type="logic">
+         <obj_property name="ElementShortName">afifo_empty</obj_property>
+         <obj_property name="ObjectShortName">afifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/sending_footer" type="logic">
+         <obj_property name="ElementShortName">sending_footer</obj_property>
+         <obj_property name="ObjectShortName">sending_footer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/send_zlp" type="logic">
+         <obj_property name="ElementShortName">send_zlp</obj_property>
+         <obj_property name="ObjectShortName">send_zlp</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/jpeg_send_data" type="logic">
+         <obj_property name="ElementShortName">jpeg_send_data</obj_property>
+         <obj_property name="ObjectShortName">jpeg_send_data</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/sending_crc" type="logic">
+         <obj_property name="ElementShortName">sending_crc</obj_property>
+         <obj_property name="ObjectShortName">sending_crc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/afifo_read" type="logic">
+         <obj_property name="ElementShortName">afifo_read</obj_property>
+         <obj_property name="ObjectShortName">afifo_read</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/current_state" type="array">
+         <obj_property name="ElementShortName">current_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/next_state" type="array">
+         <obj_property name="ElementShortName">next_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">next_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/current_crc" type="array">
+         <obj_property name="ElementShortName">current_crc[15:0]</obj_property>
+         <obj_property name="ObjectShortName">current_crc[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/crc_seed" type="array">
+         <obj_property name="ElementShortName">crc_seed[15:0]</obj_property>
+         <obj_property name="ObjectShortName">crc_seed[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/next_crc_val" type="array">
+         <obj_property name="ElementShortName">next_crc_val[15:0]</obj_property>
+         <obj_property name="ObjectShortName">next_crc_val[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/data_out_reg" type="array">
+         <obj_property name="ElementShortName">data_out_reg[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out_reg[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/stp_reg" type="logic">
+         <obj_property name="ElementShortName">stp_reg</obj_property>
+         <obj_property name="ObjectShortName">stp_reg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_OUT" type="array">
          <obj_property name="ElementShortName">PID_OUT[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_OUT[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_IN" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_IN" type="array">
          <obj_property name="ElementShortName">PID_IN[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_IN[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_SOF" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_SOF" type="array">
          <obj_property name="ElementShortName">PID_SOF[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_SOF[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_SETUP" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_SETUP" type="array">
          <obj_property name="ElementShortName">PID_SETUP[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_SETUP[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_DATA0" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_DATA0" type="array">
          <obj_property name="ElementShortName">PID_DATA0[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_DATA0[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_DATA1" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_DATA1" type="array">
          <obj_property name="ElementShortName">PID_DATA1[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_DATA1[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_DATA2" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_DATA2" type="array">
          <obj_property name="ElementShortName">PID_DATA2[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_DATA2[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_MDATA" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_MDATA" type="array">
          <obj_property name="ElementShortName">PID_MDATA[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_MDATA[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_ACK" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_ACK" type="array">
          <obj_property name="ElementShortName">PID_ACK[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_ACK[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_NAK" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_NAK" type="array">
          <obj_property name="ElementShortName">PID_NAK[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_NAK[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_STALL" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_STALL" type="array">
          <obj_property name="ElementShortName">PID_STALL[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_STALL[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_NYET" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_NYET" type="array">
          <obj_property name="ElementShortName">PID_NYET[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_NYET[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_PRE" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_PRE" type="array">
          <obj_property name="ElementShortName">PID_PRE[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_PRE[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_ERR" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_ERR" type="array">
          <obj_property name="ElementShortName">PID_ERR[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_ERR[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_SPLIT" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_SPLIT" type="array">
          <obj_property name="ElementShortName">PID_SPLIT[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_SPLIT[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_PING" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_PING" type="array">
          <obj_property name="ElementShortName">PID_PING[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_PING[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/usb_tb/usb_top_inst/PID_RESERVED" type="array">
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/PID_RESERVED" type="array">
          <obj_property name="ElementShortName">PID_RESERVED[7:0]</obj_property>
          <obj_property name="ObjectShortName">PID_RESERVED[7:0]</obj_property>
       </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/SEND_IDLE" type="array">
+         <obj_property name="ElementShortName">SEND_IDLE[2:0]</obj_property>
+         <obj_property name="ObjectShortName">SEND_IDLE[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/SEND_DATA_ACTIVE" type="array">
+         <obj_property name="ElementShortName">SEND_DATA_ACTIVE[2:0]</obj_property>
+         <obj_property name="ObjectShortName">SEND_DATA_ACTIVE[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/SEND_CRCLOW" type="array">
+         <obj_property name="ElementShortName">SEND_CRCLOW[2:0]</obj_property>
+         <obj_property name="ObjectShortName">SEND_CRCLOW[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/SEND_CRCHIGH" type="array">
+         <obj_property name="ElementShortName">SEND_CRCHIGH[2:0]</obj_property>
+         <obj_property name="ObjectShortName">SEND_CRCHIGH[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_inst/SEND_END" type="array">
+         <obj_property name="ElementShortName">SEND_END[2:0]</obj_property>
+         <obj_property name="ObjectShortName">SEND_END[2:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group391" type="group">
+      <obj_property name="label">signals_of_interest</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/jpeg_usb_tb/phyclk" type="logic">
+         <obj_property name="ElementShortName">phyclk</obj_property>
+         <obj_property name="ObjectShortName">phyclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/NXT" type="logic">
+         <obj_property name="ElementShortName">NXT</obj_property>
+         <obj_property name="ObjectShortName">NXT</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/send_data_fsm_active" type="logic">
+         <obj_property name="ElementShortName">send_data_fsm_active</obj_property>
+         <obj_property name="ObjectShortName">send_data_fsm_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/packet_byte_cnt" type="array">
+         <obj_property name="ElementShortName">packet_byte_cnt[10:0]</obj_property>
+         <obj_property name="ObjectShortName">packet_byte_cnt[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/current_state" type="array">
+         <obj_property name="ElementShortName">current_state[4:0]</obj_property>
+         <obj_property name="ObjectShortName">current_state[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/DATA" type="array">
+         <obj_property name="ElementShortName">DATA[7:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/jpeg_usb_tb/jpeg_usb_top_inst/usb_top_inst/fsm_transfer_data_inst/uvc_jpeg_reader_inst/send_UVC_header" type="logic">
+      <obj_property name="ElementShortName">send_UVC_header</obj_property>
+      <obj_property name="ObjectShortName">send_UVC_header</obj_property>
    </wvobject>
 </wave_config>
