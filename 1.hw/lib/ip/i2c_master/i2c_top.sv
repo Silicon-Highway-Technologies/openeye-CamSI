@@ -137,13 +137,24 @@ module i2c_top
       .T  ({ ~i2c_sda_oe, ~i2c_scl_oe })  //i: 3-state enable: 1=input, 0=output
    );
 
-   assign debug_pins = {
+  //  assign debug_pins = {
+  //     i2c_sda_di, 
+  //     i2c_scl_di, 
+  //     i2c_sda_oe, 
+  //     i2c_scl_oe, 
+  //     i2c_enable, 
+  //     areset_n,
+  //     i2c_reg_done,
+  //     strobe_400kHz
+  //  };
+
+    assign debug_pins = {
       i2c_sda_di, 
       i2c_scl_di, 
       i2c_sda_oe, 
       i2c_scl_oe, 
       i2c_enable, 
-      areset_n,
+      (i2c_reg_cnt > 0),
       i2c_reg_done,
       strobe_400kHz
    };

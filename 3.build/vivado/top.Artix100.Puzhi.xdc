@@ -15,19 +15,19 @@ set_property -dict {PACKAGE_PIN R4 IOSTANDARD DIFF_SSTL15} [get_ports sys_clk_p]
 set_property -dict {PACKAGE_PIN T4 IOSTANDARD DIFF_SSTL15} [get_ports sys_clk_n]
 
 set_property -dict {PACKAGE_PIN P16 IOSTANDARD LVCMOS33} [get_ports sys_rst_n]
-set_property -dict {PACKAGE_PIN R14 IOSTANDARD LVCMOS33} [get_ports button]
 
 set_property -dict {PACKAGE_PIN L13 IOSTANDARD LVCMOS25} [get_ports cam_en]
 
 #-------------------------------------------------------------------------
 # I2C
 
-set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
-set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
+#IMX219
+# set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
+# set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
 
 #OV2740
-# set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
-# set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
+set_property -dict {PACKAGE_PIN K13 IOSTANDARD LVCMOS25} [get_ports i2c_sda]
+set_property -dict {PACKAGE_PIN K14 IOSTANDARD LVCMOS25} [get_ports i2c_scl]
 
 #-------------------------------------------------------------------------
 #CSI 

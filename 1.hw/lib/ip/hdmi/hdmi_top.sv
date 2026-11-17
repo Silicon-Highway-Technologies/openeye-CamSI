@@ -137,7 +137,6 @@ module hdmi_top
         endcase
     end: test_screen
 */
-   
 
 //-----------------------------------------------------------
 // HDMI Backend: 1280x720P@60Hz (or 1920x1080P@30Hz or 1920x1080P@60Hz) 

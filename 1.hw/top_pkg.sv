@@ -44,8 +44,8 @@
 
 //----------------Select one of our three supported sensors
 //`define IMX283
-`define IMX219
-//`define OV2740
+// `define IMX219
+`define OV2740
 
 //----------------Include (or not) Ethernet?
 // `define ETHERNET
@@ -165,7 +165,11 @@ package top_pkg;
 `else 
    localparam bus7_t I2C_SLAVE_ADDR    = 7'd16;
    localparam int    NUM_REGISTERS     = 141;
-   localparam string I2C_INIT_MEM_FILE = "i2c_init_OV2740.mem";
+  `ifdef HDMI_720p60
+    localparam string I2C_INIT_MEM_FILE = "i2c_init_OV2740_720p60.mem";
+  `else // HDMI_1080p30
+    localparam string I2C_INIT_MEM_FILE = "i2c_init_OV2740_1080p30.mem";
+  `endif
 `endif
    
 

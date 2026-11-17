@@ -218,6 +218,7 @@ IBUFDS #(
    u_isp (
       .clk        (csi_byte_clk),   //i           
       .rst        (reset),          //i
+      .areset(areset),
 
       .data_valid (csi_word_valid), //i  
       .rgb_valid  (rgb_valid),      //i
@@ -270,6 +271,9 @@ IBUFDS #(
   logic jpeg_slow_clock;
   logic pixel_clock;
 
+  logic [15:0] debug_jpeg_usb;
+  logic debug_led_usb;
+
   jpeg_clkgen jpeg_clkgen_inst(
     .sysclk             (clk_ext),       //i
     .reset              (areset),        //i
@@ -283,8 +287,7 @@ IBUFDS #(
 // JPEG-USB-AUDIO module
 //--------------------------------
 
-  logic [15:0] debug_jpeg_usb;
-  logic debug_led_usb;
+
 
   jpeg_usb_top jpeg_usb_top_inst (
     .button               (sys_rst_n),        //i

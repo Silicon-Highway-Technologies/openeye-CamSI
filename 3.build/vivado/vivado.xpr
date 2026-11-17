@@ -277,11 +277,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../1.hw/lib/ip/i2c_master/i2c_init_OV2740.mem">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-        </FileInfo>
-      </File>
       <File Path="$PPRDIR/../../1.hw/lib/ip/i2c_master/i2c_init_IMX283_1080p.mem">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -1007,6 +1002,25 @@
       <File Path="$PPRDIR/../../1.hw/usb/mem/horses_1080p_qf100.mem">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../1.hw/lib/ip/i2c_master/i2c_init_OV2740_720p60.mem">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../1.hw/lib/ip/i2c_master/i2c_init_OV2740_1080p30.mem">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../1.hw/isp/rgb_gamma.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>

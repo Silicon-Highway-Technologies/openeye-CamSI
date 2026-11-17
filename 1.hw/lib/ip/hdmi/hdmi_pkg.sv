@@ -124,6 +124,20 @@ package hdmi_pkg;
       localparam int VSYNC_SIZE     = 45;
       localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
       localparam bit VSYNC_POLARITY = HI;    // '+'   
+   `elsif OV2740
+      localparam int HFRAME         = 2400; // complete frame X //1650 //1456 //1500 // change in i2c as well? //
+      localparam int HSCREEN        = 1920; // visible X
+      localparam int HSYNC_START    = HSCREEN; 
+      localparam int HSYNC_SIZE     = 480;
+      localparam int HSYNC_END      = HSYNC_START + HSYNC_SIZE;
+      localparam bit HSYNC_POLARITY = HI;    // '+'
+
+      localparam int VFRAME         = 1250;  // complete frame Y //750 //850
+      localparam int VSCREEN        = 1080;  // visible Y
+      localparam int VSYNC_START    = VSCREEN;
+      localparam int VSYNC_SIZE     = 170;
+      localparam int VSYNC_END      = VSYNC_START + VSYNC_SIZE;
+      localparam bit VSYNC_POLARITY = HI;    // '+'   
    `else
       localparam int HFRAME         = 2065;  // complete frame X
       localparam int HSCREEN        = 1920;  // visible X

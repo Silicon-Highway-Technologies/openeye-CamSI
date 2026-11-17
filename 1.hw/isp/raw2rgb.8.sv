@@ -153,13 +153,8 @@ module raw2rgb_8
             if (odd_pixel == 1'b1) begin
                temp_4lane <= ~temp_4lane;
             end
-           `ifdef MIPI_4_LANE 
-            if (temp_4lane == 1'b1 && odd_pixel == 1'b1)
-               read_count <= read_count_nxt;
-           `else
             if (odd_pixel == 1'b1)
                read_count <= read_count_nxt;
-           `endif
             odd_pixel     <= ~odd_pixel;
          end
       end
@@ -170,83 +165,145 @@ module raw2rgb_8
    logic [7:0] line2_green0, line2_blue0,  line2_green1, line2_blue1;
    logic [7:0] line3_red0,   line3_green0, line3_red1,   line3_green1;  
 
-   always_ff @(posedge clk) begin
-     `ifdef MIPI_4_LANE
+  always_ff @(posedge clk) begin
       if (reading == 1'b1) begin
-         //                           line                  lane
-         if (temp_4lane == 1'b0) begin
-            line0_green0 <= line0_mem[read_count][31:24]; //1
-            line0_blue0  <= line0_mem[read_count][23:16]; //0
-            line0_green1 <= line0_mem[read_count][15:8];
-            line0_blue1  <= line0_mem[read_count][ 7:0];
-            
-            line1_red0   <= line1_mem[read_count][31:24];
-            line1_green0 <= line1_mem[read_count][23:16];
-            line1_red1   <= line1_mem[read_count][15:8];
-            line1_green1 <= line1_mem[read_count][ 7:0];
-            
-            line2_green0 <= line2_mem[read_count][31:24];
-            line2_blue0  <= line2_mem[read_count][23:16];
-            line2_green1 <= line2_mem[read_count][15:8];
-            line2_blue1  <= line2_mem[read_count][7:0];
-            
-            line3_red0   <= line3_mem[read_count][31:24];
-            line3_green0 <= line3_mem[read_count][23:16]; 
-            line3_red1   <= line3_mem[read_count][15:8];
-            line3_green1 <= line3_mem[read_count][7:0];
-         end
-         else begin
-         //                           line                  lane
-         line0_green0 <= line0_mem[read_count]    [15:8]; //1
-         line0_blue0  <= line0_mem[read_count]    [ 7:0]; //0
-         line0_green1 <= line0_mem[read_count_nxt][31:24];
-         line0_blue1  <= line0_mem[read_count_nxt][23:16];
+         //                            line                 lane
+  `ifdef OV2740
+
+         line0_blue0  <= line0_mem[read_count]    [15:8]; //1
+         line0_green0 <= line0_mem[read_count]    [ 7:0]; //0
+         line0_blue1  <= line0_mem[read_count_nxt][15:8];
+         line0_green1 <= line0_mem[read_count_nxt][ 7:0];
          
-         line1_red0   <= line1_mem[read_count]    [15:8];
-         line1_green0 <= line1_mem[read_count]    [7:0];
-         line1_red1   <= line1_mem[read_count_nxt][31:24];
-         line1_green1 <= line1_mem[read_count_nxt][23:16];
+         line1_green0 <= line1_mem[read_count]    [15:8];
+         line1_red0   <= line1_mem[read_count]    [ 7:0];
+         line1_green1 <= line1_mem[read_count_nxt][15:8];
+         line1_red1   <= line1_mem[read_count_nxt][ 7:0];
          
-         line2_green0 <= line2_mem[read_count]    [15:8];
-         line2_blue0  <= line2_mem[read_count]    [7:0];
-         line2_green1 <= line2_mem[read_count_nxt][31:24];
-         line2_blue1  <= line2_mem[read_count_nxt][23:16];
+         line2_blue0  <= line2_mem[read_count]    [15:8];
+         line2_green0 <= line2_mem[read_count]    [ 7:0];
+         line2_blue1  <= line2_mem[read_count_nxt][15:8];
+         line2_green1 <= line2_mem[read_count_nxt][ 7:0];
          
-         line3_red0   <= line3_mem[read_count]    [15:8];
-         line3_green0 <= line3_mem[read_count]    [7:0];  
-         line3_red1   <= line3_mem[read_count_nxt][31:24];
-         line3_green1 <= line3_mem[read_count_nxt][23:16];
-         end
-      end
-     `else
-      if (reading == 1'b1) begin
-         //                           line                  lane
+         line3_green0 <= line3_mem[read_count]    [15:8];
+         line3_red0   <= line3_mem[read_count]    [ 7:0];  
+         line3_green1 <= line3_mem[read_count_nxt][15:8];
+         line3_red1   <= line3_mem[read_count_nxt][ 7:0];   
+
+  `else // IMX219 (Default)
+
          line0_green0 <= line0_mem[read_count]    [15:8]; //1
          line0_blue0  <= line0_mem[read_count]    [ 7:0]; //0
          line0_green1 <= line0_mem[read_count_nxt][15:8];
-         line0_blue1  <= line0_mem[read_count_nxt][7:0];
+         line0_blue1  <= line0_mem[read_count_nxt][ 7:0];
          
          line1_red0   <= line1_mem[read_count]    [15:8];
-         line1_green0 <= line1_mem[read_count]    [7:0];
+         line1_green0 <= line1_mem[read_count]    [ 7:0];
          line1_red1   <= line1_mem[read_count_nxt][15:8];
-         line1_green1 <= line1_mem[read_count_nxt][7:0];
+         line1_green1 <= line1_mem[read_count_nxt][ 7:0];
          
          line2_green0 <= line2_mem[read_count]    [15:8];
-         line2_blue0  <= line2_mem[read_count]    [7:0];
+         line2_blue0  <= line2_mem[read_count]    [ 7:0];
          line2_green1 <= line2_mem[read_count_nxt][15:8];
-         line2_blue1  <= line2_mem[read_count_nxt][7:0];
+         line2_blue1  <= line2_mem[read_count_nxt][ 7:0];
          
          line3_red0   <= line3_mem[read_count]    [15:8];
-         line3_green0 <= line3_mem[read_count]    [7:0];  
+         line3_green0 <= line3_mem[read_count]    [ 7:0];  
          line3_red1   <= line3_mem[read_count_nxt][15:8];
-         line3_green1 <= line3_mem[read_count_nxt][7:0];
+         line3_green1 <= line3_mem[read_count_nxt][ 7:0];
+
+`endif
+    end
+  end
+
+  logic [RGB_WIDTH-1:0] rgb_out1;         
+
+always_ff @(posedge clk) if (reading == 1'b1) begin 
+
+`ifdef OV2740
+    unique case (line_not_read) 
+      2'd3: begin //-----line0/1/2 (first three lines)
+         if (odd_pixel == 1'b0) begin
+            rgb_out1[23:16] <= line1_red0;
+
+            rgb_out1[15:8]  <= (line0_green0 >> 2) + (line1_green0 >> 2) 
+                             + (line1_green1 >> 2) + (line2_green0 >> 2);
+
+            rgb_out1[7:0]   <= (line0_blue0  >> 2) + (line0_blue1  >> 2)
+                             + (line2_blue0  >> 2) + (line2_blue1  >> 2);
+         end 
+         else begin
+            rgb_out1[23:16] <=  (line1_red0   >> 1) + (line1_red1   >> 1);
+
+            rgb_out1[15:8]  <= (line0_green0 >> 2) + (line0_green1 >> 2) 
+                             + (line2_green0 >> 2) + (line2_green1 >> 2);
+
+            rgb_out1[7:0]   <= (line0_blue1  >> 1) + (line2_blue1  >> 1);
+         end
+      end 
+
+      2'd0: begin //-----line1/2/3
+         if (odd_pixel == 1'b0) begin
+            rgb_out1[23:16] <= (line1_red0   >> 1) + (line3_red0   >> 1);
+
+            rgb_out1[15:8]  <= (line1_green0 >> 2) + (line1_green1 >> 2) 
+                             + (line3_green0 >> 2) + (line3_green1 >> 2);
+
+            rgb_out1[7:0]   <= (line2_blue0  >> 1) + (line2_blue1  >> 1);            
+         end 
+         else begin
+            rgb_out1[23:16] <= (line1_red0   >> 2) + (line1_red1   >> 2) 
+                             + (line3_red0   >> 2) + (line3_red1   >> 2);
+
+            rgb_out1[15:8]  <= (line1_green1 >> 2) + (line2_green0 >> 2) 
+                             + (line2_green1 >> 2) + (line3_green1 >> 2);
+
+            rgb_out1[7:0]   <= line2_blue1;            
+         end
+      end 
+
+      2'd1: begin //-----line0/2/3
+         if (odd_pixel == 1'b0) begin
+            rgb_out1[23:16] <= line3_red0;
+
+            rgb_out1[15:8]  <= (line2_green0 >> 2) + (line3_green0 >> 2) 
+                             + (line3_green1 >> 2) + (line0_green0 >> 2);
+
+            rgb_out1[7:0]   <= (line2_blue0  >> 2) + (line2_blue1  >> 2) 
+                             + (line0_blue0  >> 2) + (line0_blue1  >> 2);            
+         end 
+         else begin
+            rgb_out1[23:16] <= (line3_red0   >> 1) + (line3_red1   >> 1);
+
+            rgb_out1[15:8]  <= (line2_green0 >> 2) + (line2_green1 >> 2) 
+                             + (line0_green0 >> 2) + (line0_green1 >> 2);
+
+            rgb_out1[7:0]   <= (line2_blue1  >> 1) + (line0_blue1  >> 1);
+         end
+      end 
+
+      default: begin // 2'd2 -----line0/1/3
+         if (odd_pixel == 1'b0) begin
+            rgb_out1[23:16] <= (line3_red0   >> 1) + (line1_red0   >> 1);
+
+            rgb_out1[15:8]  <= (line3_green0 >> 2) + (line3_green1 >> 2) 
+                             + (line1_green0 >> 2) + (line1_green1 >> 2);
+
+            rgb_out1[7:0]   <= (line0_blue0  >> 1) + (line0_blue1  >> 1);                  
+         end 
+         else begin
+            rgb_out1[23:16] <= (line3_red0   >> 2) + (line3_red1   >> 2) 
+                             + (line1_red0   >> 2) + (line1_red1   >> 2);
+
+            rgb_out1[15:8]  <= (line3_green1 >> 2) + (line0_green0 >> 2) 
+                             + (line0_green1 >> 2) + (line1_green1 >> 2);
+
+            rgb_out1[7:0]   <= line0_blue1;      
+         end
       end
-     `endif
-   end  
+    endcase 
 
-   logic [RGB_WIDTH-1:0] rgb_out1;         
-
-   always_ff @(posedge clk) if (reading == 1'b1) begin 
+`else // IMX219 (Default)
 
     unique case (line_not_read) 
       2'd3: begin //-----line0/1/2 (first three lines)
@@ -328,7 +385,9 @@ module raw2rgb_8
             rgb_out1[7:0]   <= (line0_blue0  >> 1) + (line0_blue1  >> 1);
          end
       end
-    endcase // unique case (line_not_read)
+    endcase 
+
+`endif
    end // if (reading == 1'b1)
 
 /*
@@ -388,6 +447,7 @@ module raw2rgb_8
                      ~rgb_out1[15:8], 
                       rgb_out1[7:0]}; 
 `endif
+
 endmodule: raw2rgb_8
 
 /*

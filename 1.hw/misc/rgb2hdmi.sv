@@ -93,22 +93,34 @@ module rgb2hdmi
          rgb_valid       <= (csi_line_count >= 11'd3);
          
 `ifdef OV2740
-         if ({csi_in_frame_dly, csi_in_frame} == 2'b01) begin
-            if (csi_frame_count == 2'd1)
-                csi_frame_count <= 2'd0;
-            else
-                csi_frame_count <= 2'(csi_frame_count + 2'd1);
-                csi_line_count <= 11'd0; 
-         end         
-         else if ({csi_in_line_dly, csi_in_line} == 2'b01) begin
-            csi_line_count <= 11'(csi_line_count + 11'd1);
-         end 
+         // if ({csi_in_frame_dly, csi_in_frame} == 2'b01) begin
+         //    if (csi_frame_count == 2'd1)
+         //        csi_frame_count <= 2'd0;
+         //    else
+         //        csi_frame_count <= 2'(csi_frame_count + 2'd1);
+         //        csi_line_count <= 11'd0; 
+         // end         
+         // else if ({csi_in_line_dly, csi_in_line} == 2'b01) begin
+         //    csi_line_count <= 11'(csi_line_count + 11'd1);
+         // end 
          
-         if ((csi_frame_count == 2'd0) && (csi_line_count == 11'd0))
-            hdmi_reset_n <= 1'b0;  
-         else
-            hdmi_reset_n <= 1'b1;
-                     
+         // if ((csi_frame_count == 2'd0) && (csi_line_count == 11'd0))
+         //    hdmi_reset_n <= 1'b0;  
+         // else
+         //    hdmi_reset_n <= 1'b1;
+
+         // Keep HDMI in reset between start of CMOS frame and rising edge on first CMOS line  
+//         hdmi_reset_n    <= (csi_line_count >= 11'd1);
+         hdmi_reset_n    <= ({csi_in_frame_dl2, csi_in_frame} == 2'b01) ? 1'b0 : 1'b1;
+         
+         if ({csi_in_frame_dly, csi_in_frame} == 2'b01) begin //Rising edge of csi_in_frame
+            csi_line_count <= 11'd0;
+         end
+         else if ({csi_in_line_dly, csi_in_line} == 2'b01) begin  //Rising edge of csi_in_line
+            if (csi_line_count < 11'd1300) begin
+               csi_line_count <= 11'(csi_line_count + 11'd1);
+            end
+         end   
 `else
          // Keep HDMI in reset between start of CMOS frame and rising edge on first CMOS line  
 //         hdmi_reset_n    <= (csi_line_count >= 11'd1);
@@ -126,7 +138,6 @@ module rgb2hdmi
 
       end // else: !if(reset == 1'b1)
    end // always_ff @ (posedge csi_clk)
-   
 
 //--------------------------------
 // AsyncFIFO

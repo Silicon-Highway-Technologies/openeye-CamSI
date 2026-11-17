@@ -48,6 +48,8 @@ module isp_top
 )(
    input  logic            clk, // byte_clock      
    input  logic            rst,
+
+   input areset,
                         
    input  lane_raw_data_t  data_in,
    input  logic            data_valid,    
@@ -64,8 +66,10 @@ module isp_top
 // Debayer ISP function
 //---------------------------------
 
-logic [RGB_WIDTH - 1 : 0] rgb_out_temp;
-logic reading_temp;
+logic [RGB_WIDTH - 1 : 0] rgb_out_scb;
+logic [RGB_WIDTH - 1 : 0] rgb_gamma;
+logic reading_scb;
+logic reading_gamma;
 
 
 `ifdef RAW8
@@ -89,11 +93,11 @@ logic reading_temp;
       .rgb_valid  (rgb_valid),         //i
 
 `ifdef SCB
-      .reading    (reading_temp),           //o
-      .rgb_out    (rgb_out_temp)            //o[RGB_WIDTH-1:0]
+      .reading    (reading_scb),           //o
+      .rgb_out    (rgb_out_scb)            //o[RGB_WIDTH-1:0]
 `else
-      .reading    (reading),           //o
-      .rgb_out    (rgb_out)            //o[RGB_WIDTH-1:0]
+      .reading    (reading_gamma),           //o
+      .rgb_out    (rgb_gamma)            //o[RGB_WIDTH-1:0]
 `endif
    );
 
@@ -104,10 +108,10 @@ logic reading_temp;
 always @(posedge clk) begin
 
  if (rst) begin
-   reading <= 1'b0;
+   reading_gamma <= 1'b0;
  end
  else begin
-   reading <= reading_temp;
+   reading_gamma <= reading_scb;
  end
 
 end
@@ -121,7 +125,7 @@ logic [7:0] green_out;
 line_frame_signal_generator line_frame_signal_generator_inst(
    .clk(clk),
    .rst(rst),
-   .reading(reading),
+   .reading(reading_gamma),
    .csi_in_frame(csi_in_frame),
    .line_valid_in(line_valid_in),
    .frame_valid_in(frame_valid_in)
@@ -131,9 +135,9 @@ simplecolorbalance simplecolorbalance_inst(
    .clk(clk),
    .reset_async(rst),
 
-   .red_data_in(rgb_out_temp[23:16]),
-   .green_data_in(rgb_out_temp[15:8]),
-   .blue_data_in(rgb_out_temp[7:0]),
+   .red_data_in(rgb_out_scb[23:16]),
+   .green_data_in(rgb_out_scb[15:8]),
+   .blue_data_in(rgb_out_scb[7:0]),
 
    .line_valid_in(line_valid_in),
    .frame_valid_in(frame_valid_in),
@@ -146,9 +150,24 @@ simplecolorbalance simplecolorbalance_inst(
    .blue_data_out(blue_out)
 );
 
-assign rgb_out = {red_out, green_out, blue_out};
+assign rgb_gamma = {red_out, green_out, blue_out};
 
 `endif
+
+// module for gamma correction //
+
+rgb_gamma rgb_gamma_inst(
+  .clk(clk),
+  .rst(areset),
+
+  .rgb_in(rgb_gamma),
+  .rgb_valid_in(reading_gamma),
+
+  .shadow_boost_en(1'b0),
+
+  .rgb_out(rgb_out),
+  .rgb_valid_out(reading)
+);
 
    
 endmodule: isp_top
