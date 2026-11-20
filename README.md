@@ -578,6 +578,99 @@ For `60FPS` to be supported, each frame has to occupy less than **24.75 / 60 = ~
 
 ---
 
+## Objective V
+### Put Together a working MIPI-JPEG-USB FPGA System
+
+After constructing each module and testing it separately, **we have assembled the complete MIPI-ISP-JPEG-USB system together**.
+
+In summary:
+- **Sensor**: Most of the experiments so far have been performed with `IMX219`. However, **the target sensor of this project is the 
+`OmniVision OV2740 sensor`**. Due to a difference in PLL architecture, the previously implemented `86.11MHz` pixel clock is not 
+feasible for this sensor, and so **a pixel clock of `90MHz` is deployed**. After experiments, we have verified that this frequency
+**does not cause issues in any part of the flow.**
+- **JPEG Compression**: A `50%` Quality Factor is used. Based on the experiments this factor manages to both save bandwidth and provide a 
+**clear output with no visible artifacts**.
+- **USB**: The FPGA is successfully recognised b**oth as a Video and as an Audio device** and depicted as such in the Device Manager 
+of a Windows host.
+- **ISP**: In addition to the already implemented [Simple Color Balance module](1.hw\isp\simplecolorbalance\simple-color-balance.v), 
+**a simple [Gamma Correction LUT](1.hw\isp\rgb_gamma.sv)** is employed to
+further boost the video quality.
+- **AFIFO**: Two **asynchronous FIFOs** are used, to bridge the USB module both with the JPEG block and with the Audio block. 
+  - The **JPEG-USB AFIFO** operates with a write clock of `90MHz` and a read clock of `60MHz`.
+  - The **AUDIO-USB AFIFO** operates with a write clock of `24MHz` and a read clock of `60MHz`.
+
+A **block diagram** describing our implemented flow, in high-level, is shown below:
+
+<p align="center">
+  <img src="0.doc\pictures_sihi\top_level_diagram_drawio.png" width="80%">
+</p>
+
+
+A **picture of the final setup** of our `Puzhi A7-100T` board is shown below. It is similar to the setup displayed in the [USB setup picture](0.doc/pictures_sihi/usb_fpga_setup.jpg) included in an earlier section, but with the addition of the MIPI cable which
+is connected to the `OV2740` board. As shown, only two peripherals are required:
+- The **USB board** (connected via FMC)
+- The **OV2740 & MIC board** (connected via jumper wires and Flat-Flex cable)
+
+<p align="center">
+  <img src="0.doc\pictures_sihi\final_setup.jpeg" width="30%">
+</p>
+
+A **demonstration of a functional video capture** using `OV2740`, for a resolution of `1080p, 30fps`, is shown below. You can observe 
+that the video captured with the
+sensor is accurately converted to JPEG and transmitted through USB without loss of detail or frame, and that colors are accurate
+as a result of the ISP module application. Additionally, the device is recognised as a camera and so the output is visible inside
+any application in which a camera can be activated (MS Teams, in this example).
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=g39qkDEv8eo">
+    <img width="70%" img src="0.doc\pictures_sihi\ov2470_demo_thumbnail.jpg" alt="ov2740_demo">
+  </a>
+</p>
+
+For **behavioral simulation**, a [testbench](2.sim\jpeg_usb_audio\jpeg_usb_tb.sv) was written and tested in multiple runs.
+This testbench combines the separate JPEG and USB testbenches into one, so the user, using external Python functions, can verify
+that the image that enters the flow from the JPEG pipeline and the image that is transmitted via USB are identical.
+
+### FPGA Resource Analysis
+
+As shown in the images below, the whole design **fits comfortably inside the FPGA**. It is entirely feasible for more features to be 
+added to the design, or for an FPGA of less size to be used. Some comments:
+- Less than 20% of the `I/O` pins are required. If the debug pins are removed, the number is further reduced.
+- Only 20 of the 240 `DSP` slices are utilized, mainly for JPEG operations such as `DCT` transform.
+- The `LUT`, `LUTRAM` and `FF` count is very low.
+- 52 `BRAM` units are used, most of which are required for the JPEG block, and some are used for Asynchronous FIFOs. The usage is 
+moderately low for this FPGA.
+- Out of the 6 `MMCM` units, 4 were utilized. However many of them only produce one or two outputs, while an `MMCM` unit can produce 
+up to six output clocks. Therefore, a smarter resource utilisation is possible.
+- In general, **around 70% of the total resources are used for the JPEG module**. This makes sense, as this is a computationally
+intense unit which consists of multiple pipeline levels and requires a high amount of both combinational and sequential cells.
+
+<p align="center">
+  <img src="0.doc\pictures_sihi\resources1.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="0.doc\pictures_sihi\resource2.png" width="45.3%">
+</p>
+
+
+### Issues with OV2740 Lens
+
+In contrast to `IMX219`, which had its own lens embedded on the board, the `OV2740` board did not. We performed multiple experiments
+with [the lens](https://aico-lens.com/product/2-54mm-m5-mount-cctv-board-lens-with-ir650-filter-achd16f2510m5/) provided to us
+by the PCB engineer who made the board, but very little detail was observable. We tried configuring the 
+[sensor registers](1.hw\lib\ip\i2c_master\i2c_init_OV2740_720p60.mem) in many different ways, but no register tweak had a large 
+impact. What made the difference in the end was ditching this lens and using a different, general purpose lens. Even though we 
+had to manually hold it on the board, and be very precise with the manual adjustment, we managed to observe great detail. We
+are still unsure why the initial lens did not yield decent results.
+
+
+### Limitations - Future Work
+- **ISP**: In this project, only basic ISP functions were implemented, however advanced features such as smoothing or face 
+recognition could be added in the future.
+- **Audio**: The addition of audio-enhancing features such as Noise Cancellation is possible.
+- **JPEG**: Dynamic JPEG compression could be implemented, to reduce USB 2.0 Bandwidth. Additionally, more QF values could be explored, for example `70%` or `80%`.
+- **USB**: The USB 2.0 connection is only verified for direct connection to a host PC. Routing the high-bandwidth UVC stream 
+through a USB 2.0 hub requires further development.
+
 ## Setup Guide
 
 To use the camera and microphone, you need:
